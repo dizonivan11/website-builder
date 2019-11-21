@@ -13,6 +13,12 @@
 			--menu-height: 50px;
 			--toolbox-width: 100px;
 		}
+		.f-right {
+			float: right;
+		}
+		.v-full {
+			height: 100%;
+		}
 		.v-center {
 			position: relative;
 			top: 50%;
@@ -21,7 +27,6 @@
 		#menu {
 			background-color: var(--secondary-color);
 			color: white;
-			padding: 8px;
 			height: var(--menu-height);
 		}
 		#toolbox {
@@ -40,15 +45,36 @@
 			height: 100%;
 			border: none;
 		}
+		#message-box {
+			padding: 4px;
+			border: 1px solid #ccc;
+			width: 100%;
+			text-align: center;
+			background-color: #efefef;
+			color: black;
+			box-shadow: 0px 0px 8px #aaa inset;
+		}
 	</style>
 </head>
 <body>
-	<div id="menu">
-		<h3 class="v-center">WB</h3>
+	<div id="menu" class="container-fluid">
+		<div class="row v-full">
+			<div class="col-1">
+				<h3 class="v-center">WB</h3>
+			</div>
+			<div class="col-6">
+				<div id="message-box" class="v-center">Feedbacks here....</div>
+			</div>
+			<div class="col-5">
+				<button class="f-right v-center">Publish</button>
+				<button class="f-right v-center">Preview</button>
+				<button class="f-right v-center">Load Custom Widgets</button>
+			</div>
+		</div>
 	</div>
 	<div id="toolbox"></div>
 	<div id="workspace-container">
-		<iframe id="workspace" src="templates/blank/blank.php"></iframe>
+		<iframe id="workspace" src="templates/blank"></iframe>
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {

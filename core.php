@@ -1,5 +1,5 @@
 <?php
 	function createDropZone() {
-		echo '<button class="drop-zone">Click To Add Selected Element</button>';
+		echo '<button class="drop-zone">Add Selected Element</button>';
 	}
 ?>
