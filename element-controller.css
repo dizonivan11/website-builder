@@ -1,0 +1,15 @@
+.drop-zone {
+	border: 1px solid #ccc;
+	background-color: #efefef;
+	width: 100%;
+	height: 100px;
+	color: #747474;
+	font-family: 'quicksand';
+	font-size: 16px;
+	font-weight: bold;
+	box-shadow: 0px 0px 8px #aaa inset;
+}
+.drop-zone:hover {
+	background-color: #8dca23;
+	color: white;
+}
