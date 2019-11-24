@@ -13,3 +13,7 @@
 	background-color: #8dca23;
 	color: white;
 }
+#selected-element {
+	position: absolute;
+	pointer-events: none;
+}

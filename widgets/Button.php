@@ -1,0 +1,1 @@
+<button id="$eid" widget-name="button">Button Text</button>

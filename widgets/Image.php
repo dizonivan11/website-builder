@@ -1,0 +1,1 @@
+<img id="$eid" src="#" widget-name="image" />
