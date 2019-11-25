@@ -88,6 +88,14 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <label class="widget-properties-subtitle">Font Color</label>
+            <input name="font-color" class="jscolor" value="ffffff">
+        </div>
+    </div>
+</div>
 <?php
     include_once('../core.php');
     $wid = $_POST['wid'];
