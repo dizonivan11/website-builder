@@ -1,4 +1,4 @@
-<div id="$eid" widget-name="navbar">
+<div class="inner-wrapper">
     <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#">About Us</a></li>

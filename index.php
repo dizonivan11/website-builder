@@ -11,9 +11,11 @@
 			--primary-color: #8dca23;
 			--secondary-color: #282828;
 			--tertiary-color: #282828e6;
+			--fourth-color: #efefefe6;
 			--menu-height: 50px;
 			--toolbox-width: 100px;
 			--toolbox-widgets-width: 200px;
+			--widget-properties-width: 250px;
 		}
 		.f-right {
 			float: right;
@@ -53,8 +55,19 @@
 			width: var(--toolbox-widgets-width);
 			height: calc(100vh - var(--menu-height));
 			margin-left: var(--toolbox-width);
-			padding: 8px;
+			padding: 15px;
 			position: absolute;
+			box-shadow: 4px 0px 8px var(--secondary-color);
+		}
+		#widget-properties {
+			background-color: var(--fourth-color);
+			float: right;
+			width: var(--widget-properties-width);
+			height: calc(100vh - var(--menu-height));
+			padding: 15px 0px 15px 0px;
+			position: absolute;
+			right: 0;
+			box-shadow: -4px 0px 8px var(--secondary-color);
 		}
 		#workspace-container {
 			margin-left: var(--toolbox-width);
@@ -75,6 +88,43 @@
 			color: black;
 			box-shadow: 0px 0px 8px #aaa inset;
 		}
+		.widget-properties-title {
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.widget-properties-subtitle {
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.widget-properties-label {
+			font-size: 12px;
+			font-weight: bold;
+		}
+		#spacing-border {
+			width: 100%;
+			text-align: center;
+			border: 1px solid #ccc;
+		}
+		#spacing-border tr td {
+			border: none !important;
+			padding: 4px;
+		}
+		#spacing-border tr td input {
+			width: 100%;
+			border: 1px solid #ccc;
+		}
+		#spacing-border tr td.margin {
+			background-color: var(--primary-color);
+		}
+		#spacing-border tr td.border {
+			background-color: var(--secondary-color);
+		}
+		#spacing-border tr td.padding {
+			background-color: var(--tertiary-color);
+		}
+		#spacing-border tr td.inner {
+			background-color: var(--tertiary-color);
+		}
 	</style>
 </head>
 <body>
@@ -93,26 +143,32 @@
 		</div>
 	</div>
 	<div id="toolbox">
-		<button class="tool" onclick="DisplayMessage('Coming Soon!');">Global Settings</button>
-		<button class="tool" onclick="DisplayMessage('Coming Soon!');">Site Map</button>
+		<button class="tool" onclick="DisplayMessage('Under construction');">Global Settings</button>
+		<button class="tool" onclick="DisplayMessage('Under construction');">Site Map</button>
 		<button class="tool" onclick="ToggleWidgetsMenu();">Widgets</button>
 	</div>
+
+	<!-- Floating Windows -->
 	<!-- 'display: none;' style applied inline to fix first event not firing -->
 	<div id="toolbox-widgets" style="display: none;"></div>
+	<div id="widget-properties" style="display: none;"></div>
+
 	<div id="workspace-container">
 		<iframe id="workspace" src="templates/blank"></iframe>
 	</div>
 	<script type="text/javascript">
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
+		var widgetProperties = document.getElementById('widget-properties');
 		var messageBox = document.getElementById('message-box');
 		var workspace = document.getElementById('workspace');
 
 		window.onload = function() {
-			// Load widgets
 <?php
+			// Load all widgets
 			$dir = "widgets/";
 			$files = scandir($dir);
 
+			// Select all widget filepaths
 			// Offsets to two (2)
 			// First element refers to the directory itself (./)
 			// Second element refers to the parent directory (../)
@@ -123,6 +179,18 @@
 			}
 			echo("];\n");
 ?>
+			// Create widget deselector first
+			var widgetTool = document.createElement('button');
+			widgetTool.className = "tool";
+			widgetTool.innerHTML = "None";
+			widgetTool.onclick = function() {
+				// Inform workspace to clear selected-element's innerHTML
+				workspace.contentWindow.postMessage({ header: "selectWidget", message: "" });
+				ToggleWidgetsMenu();
+				DisplayMessage("Widget deselected");
+			};
+			toolboxWidgets.appendChild(widgetTool);
+
 			for (var i = 0; i < widgetFiles.length; i++) {
 				// Create widget tool with filepath value
 				var widgetTool = document.createElement('button');
@@ -139,14 +207,13 @@
 					widgetRequester.onreadystatechange = function() {
             			if (this.readyState == 4 && this.status == 200) {
 							workspace.contentWindow.postMessage({
-								header: "selectWidget",
-								message: this.responseText
+								header: "selectWidget", message: this.responseText
 							});
             			}
         			};
 					widgetRequester.send("fp=" + filepath);
 					ToggleWidgetsMenu();
-					DisplayMessage(this.value.split('.')[0] + " selected.");
+					DisplayMessage(this.value.split('.')[0] + " selected");
 				};
 				toolboxWidgets.appendChild(widgetTool);
 			}
@@ -157,11 +224,27 @@
 		// Process messages coming from workspace
 		window.onmessage = function (e) {
 			var header = e.data.header;
-			var message = e.data.message;
-
+			
 			switch (header) {
 				case "feedback":
-					DisplayMessage(message);
+					DisplayMessage(e.data.message);
+					break;
+				case "open-widget-properties":
+					var wid = e.data.widgetID;
+					var wpp = e.data.widgetPropertiesPath + ".php";
+
+					// Clear window first to populate new widget property fields
+					widgetProperties.innerHTML = "";
+					var widgetRequester = new XMLHttpRequest();
+					widgetRequester.open("POST", "widget-properties/default-menu.php", true);
+					widgetRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					widgetRequester.onreadystatechange = function() {
+            			if (this.readyState == 4 && this.status == 200) {
+							widgetProperties.innerHTML = this.responseText;
+							widgetProperties.style.display = "block";
+            			}
+        			};
+					widgetRequester.send("wid=" + wid + "&wpp=" + wpp);
 					break;
 			}
 		}
@@ -174,8 +257,3 @@
 	</script>
 </body>
 </html>
-
-<!-- PROGRESS -->
-<!-- Next: Element Menus -->
-<!-- Next: Site Map -->
-<!-- Next: Global Settings -->

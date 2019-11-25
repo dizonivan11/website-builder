@@ -1,1 +1,3 @@
-<button id="$eid" widget-name="button">Button Text</button>
+<div class="inner-wrapper">
+    <button>Button Text</button>
+</div>

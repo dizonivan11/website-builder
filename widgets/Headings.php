@@ -1,3 +1,3 @@
 <div class="inner-wrapper">
-    <img src="#" />
+    <h3>Headings Text</h3>
 </div>

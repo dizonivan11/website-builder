@@ -1,1 +1,3 @@
-<p id="$eid" widget-name="text">Add Text</p>
+<div class="inner-wrapper">
+    <p>Add Text</p>
+</div>
