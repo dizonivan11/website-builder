@@ -1,8 +1,7 @@
 # website-builder
+## Technologies Used: PHP, MYSQL, Medoo
 
-Technologies Used: PHP, MYSQL, Medoo
-
-## TODO List:
+### TODO List:
 <ol>
 <li>Color Picker</li>
 <li>Widget Background</li>
