@@ -28,18 +28,18 @@
         <div class="col-12">
         <table id="spacing-border">
             <tr>
+                <td class="radius"><input type="text" name="top-left-border-radius" autocomplete="off"></td>
                 <td class="margin"></td>
                 <td class="margin"></td>
-                <td class="margin"></td>
-                <td class="margin"><input type="text" name="margin-top"></td>
-                <td class="margin"></td>
+                <td class="margin"><input type="text" name="margin-top" autocomplete="off"></td>
                 <td class="margin"></td>
                 <td class="margin"></td>
+                <td class="radius"><input type="text" name="top-right-border-radius" autocomplete="off"></td>
             </tr><tr>
                 <td class="margin"></td>
                 <td class="border"></td>
                 <td class="border"></td>
-                <td class="border"><input type="text" name="border-top"></td>
+                <td class="border"><input type="text" name="border-top" autocomplete="off"></td>
                 <td class="border"></td>
                 <td class="border"></td>
                 <td class="margin"></td>
@@ -47,23 +47,23 @@
                 <td class="margin"></td>
                 <td class="border"></td>
                 <td class="padding"></td>
-                <td class="padding"><input type="text" name="padding-top"></td>
+                <td class="padding"><input type="text" name="padding-top" autocomplete="off"></td>
                 <td class="padding"></td>
                 <td class="border"></td>
                 <td class="margin"></td>
             </tr><tr>
-                <td class="margin"><input type="text" name="margin-left"></td>
-                <td class="border"><input type="text" name="border-left"></td>
-                <td class="padding"><input type="text" name="padding-left"></td>
+                <td class="margin"><input type="text" name="margin-left" autocomplete="off"></td>
+                <td class="border"><input type="text" name="border-left" autocomplete="off"></td>
+                <td class="padding"><input type="text" name="padding-left" autocomplete="off"></td>
                 <td class="inner"></td>
-                <td class="padding"><input type="text" name="padding-right"></td>
-                <td class="border"><input type="text" name="border-right"></td>
-                <td class="margin"><input type="text" name="margin-right"></td>
+                <td class="padding"><input type="text" name="padding-right" autocomplete="off"></td>
+                <td class="border"><input type="text" name="border-right" autocomplete="off"></td>
+                <td class="margin"><input type="text" name="margin-right" autocomplete="off"></td>
             </tr><tr>
                 <td class="margin"></td>
                 <td class="border"></td>
                 <td class="padding"></td>
-                <td class="padding"><input type="text" name="padding-bottom"></td>
+                <td class="padding"><input type="text" name="padding-bottom" autocomplete="off"></td>
                 <td class="padding"></td>
                 <td class="border"></td>
                 <td class="margin"></td>
@@ -71,18 +71,18 @@
                 <td class="margin"></td>
                 <td class="border"></td>
                 <td class="border"></td>
-                <td class="border"><input type="text" name="border-bottom"></td>
+                <td class="border"><input type="text" name="border-bottom" autocomplete="off"></td>
                 <td class="border"></td>
                 <td class="border"></td>
                 <td class="margin"></td>
             </tr><tr>
+                <td class="radius"><input type="text" name="bottom-left-border-radius" autocomplete="off"></td>
                 <td class="margin"></td>
                 <td class="margin"></td>
-                <td class="margin"></td>
-                <td class="margin"><input type="text" name="margin-bottom"></td>
-                <td class="margin"></td>
+                <td class="margin"><input type="text" name="margin-bottom" autocomplete="off"></td>
                 <td class="margin"></td>
                 <td class="margin"></td>
+                <td class="radius"><input type="text" name="bottom-right-border-radius" autocomplete="off"></td>
             </tr>
         </table>
         </div>
@@ -99,7 +99,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <label class="widget-properties-subtitle">Other Properties</label>
+            <label class="widget-properties-subtitle">Primary Properties</label>
         </div>
     </div>
 </div>

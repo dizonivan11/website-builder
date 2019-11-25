@@ -68,6 +68,7 @@
 			position: absolute;
 			right: 0;
 			box-shadow: -4px 0px 8px var(--secondary-color);
+			overflow-y: auto;
 		}
 		#workspace-container {
 			margin-left: var(--toolbox-width);
@@ -107,11 +108,17 @@
 		}
 		#spacing-border tr td {
 			border: none !important;
-			padding: 4px;
+			padding: 2px;
 		}
 		#spacing-border tr td input {
 			width: 100%;
-			border: 1px solid #ccc;
+			border: 1px solid white;
+			font-size: 11px;
+			background-color: transparent;
+			color: white;
+			font-weight: bold;
+			box-shadow: 0px 0px 4px #aaa inset;
+			text-align: center;
 		}
 		#spacing-border tr td.margin {
 			background-color: var(--primary-color);
@@ -124,6 +131,9 @@
 		}
 		#spacing-border tr td.inner {
 			background-color: var(--tertiary-color);
+		}
+		#spacing-border tr td.radius {
+			background-color: var(--primary-color);
 		}
 	</style>
 </head>
