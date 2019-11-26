@@ -6,6 +6,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="html5kellycolorpicker.min.js"></script>
 	<style type="text/css">
 		* {
 			--primary-color: #8dca23;
@@ -135,6 +136,9 @@
 		#spacing-border tr td.radius {
 			background-color: var(--primary-color);
 		}
+		#wpw-color-picker {
+			width: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -169,6 +173,7 @@
 	<script type="text/javascript">
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
 		var widgetProperties = document.getElementById('widget-properties');
+		var widgetPrimaryProperties; // Load only after initializing default properties in widget properties window
 		var messageBox = document.getElementById('message-box');
 		var workspace = document.getElementById('workspace');
 
@@ -227,6 +232,24 @@
 				};
 				toolboxWidgets.appendChild(widgetTool);
 			}
+			
+			// Load Default Properties Layout in Widget Properties Window
+			var widgetRequester = new XMLHttpRequest();
+			widgetRequester.open("POST", "widget-properties/default-menu.php", true);
+			widgetRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			widgetRequester.onreadystatechange = function() {
+            	if (this.readyState == 4 && this.status == 200) {
+					widgetProperties.innerHTML = this.responseText;
+					widgetPrimaryProperties = document.getElementById('wpw-primary-property');
+            	}
+        	};
+			widgetRequester.send();
+
+			// Initialize HTML5Kelly Color Picker in Widget Properties Window
+			new KellyColorPicker({
+    			place : 'wpw-color-picker', 
+    		 	input : 'wpw-color-picker-input'
+			});
 		}
 
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
@@ -243,14 +266,16 @@
 					var wid = e.data.widgetID;
 					var wpp = e.data.widgetPropertiesPath + ".php";
 
-					// Clear window first to populate new widget property fields
-					widgetProperties.innerHTML = "";
+					// Clear primary properties section first to populate new widget property fields
+					// Server will populate values in the primary properties section using the POST data
+					widgetPrimaryProperties.innerHTML = "";
 					var widgetRequester = new XMLHttpRequest();
-					widgetRequester.open("POST", "widget-properties/default-menu.php", true);
+					widgetRequester.open("POST", "widget-properties/primary-properties-loader.php", true);
 					widgetRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 					widgetRequester.onreadystatechange = function() {
             			if (this.readyState == 4 && this.status == 200) {
-							widgetProperties.innerHTML = this.responseText;
+							// File found, load property values then open widget properties window
+							widgetPrimaryProperties.innerHTML = this.responseText;
 							widgetProperties.style.display = "block";
             			}
         			};

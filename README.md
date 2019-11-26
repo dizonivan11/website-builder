@@ -3,7 +3,7 @@
 ***
 **TODO List:**
 <ol>
-<li>Color Picker</li>
+<li>Color Picker (In Progress)</li>
 <li>Widget Background</li>
 <li>Applying Widget Property changes</li>
 <li>Global Settings</li>

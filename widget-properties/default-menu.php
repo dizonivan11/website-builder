@@ -88,38 +88,22 @@
         </div>
     </div>
 </div>
+<hr />
 <div class="container">
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-subtitle">Font Color</label>
-            <input name="font-color" class="jscolor" value="ffffff">
+            <canvas id="wpw-color-picker"></canvas>
+            <input id="wpw-color-picker-input" value="#ffffff">
         </div>
     </div>
 </div>
-<?php
-    include_once('../core.php');
-    $wid = $_POST['wid'];
-    $wpp = $_POST['wpp'];
-
-    if (file_exists($wpp)) {
-?>
+<div id="wpw-primary-property"></div>
 <hr />
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <label class="widget-properties-subtitle">Primary Properties</label>
-        </div>
-    </div>
-</div>
-<?php
-        include_once($wpp);
-    }
-?>
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <?php echo("<button onclick='$wid'>Apply Changes</button>"); ?>
+            <button onclick="widgetProperties.style.display = 'none';">Apply Changes</button>
         </div>
     </div>
 </div>
