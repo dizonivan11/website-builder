@@ -17,17 +17,13 @@
 	}
 
 	function getEID($autoincrement = true) {
-		$data = db()->select("meta_data", [ "meta_value" ], [ "meta_id" => "current_eid" ]);
-
-		foreach($data as $currentEID) {
-			if ($autoincrement) incrementEID();
-			return (int)$currentEID["meta_value"];
-		}
+		$current_eid = db()->get("meta_data", "meta_value", [ "meta_id" => "current_eid" ]);
+        if ($autoincrement) incrementEID($current_eid + 1);
+		return $current_eid;
 	}
 
-	function incrementEID() {
-		$newEID = (int)getEID(false) + 1;
-		db()->update("meta_data", [ "meta_value" => "$newEID" ], [ "meta_id" => "current_eid" ]);
+	function incrementEID($incremented_eid) {
+		db()->update("meta_data", [ "meta_value" => "$incremented_eid" ], [ "meta_id" => "current_eid" ]);
 	}
 
 	function createDropZone() {
