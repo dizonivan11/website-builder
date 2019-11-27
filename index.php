@@ -263,7 +263,7 @@
 					break;
 				case "open-widget-properties":
 					var wid = e.data.widgetID;
-					var wpp = e.data.widgetPropertiesPath;
+					var wpp = e.data.widgetPropertiesPath; // without extension (for loading both layout and script)
 
 					// Clear primary properties section first to populate new widget property fields
 					// Server will populate values in the primary properties section using the POST data
