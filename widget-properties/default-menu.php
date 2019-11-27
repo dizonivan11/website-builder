@@ -93,8 +93,7 @@
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-subtitle">Font Color</label>
-            <canvas id="wpw-color-picker"></canvas>
-            <input id="wpw-color-picker-input" value="#ffffff">
+            <input id="wpw-default-font-color" value="#ffffff">
         </div>
     </div>
 </div>
