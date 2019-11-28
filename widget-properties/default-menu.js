@@ -4,3 +4,8 @@ new KellyColorPicker({
     alpha_slider: true,
     size: 150
 });
+new KellyColorPicker({
+    input : "wpw-default-border-color",
+    alpha_slider: true,
+    size: 150
+});

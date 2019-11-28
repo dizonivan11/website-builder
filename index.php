@@ -124,12 +124,15 @@
 		}
 		#spacing-border tr td.margin {
 			background-color: var(--primary-color);
+			color: white;
 		}
 		#spacing-border tr td.border {
 			background-color: var(--secondary-color);
+			color: white;
 		}
 		#spacing-border tr td.padding {
 			background-color: var(--tertiary-color);
+			color: white;
 		}
 		#spacing-border tr td.inner {
 			background-color: var(--tertiary-color);
@@ -263,6 +266,8 @@
 					DisplayMessage(e.data.message);
 					break;
 				case "open-widget-properties":
+					// Reset Primary Properties Paramaters
+					primaryApplyParameters = [];
 					widgetPropertiesSelectedId = e.data.widgetID;
 					var wpp = e.data.widgetPropertiesPath; // without extension (for loading both layout and script)
 
@@ -283,6 +288,53 @@
         			};
 					widgetRequester.send("wpp=" + wpp);
 					break;
+				case "clearCSS":
+					// Continue applying properties after clearing inline css
+					for (var i = 0; i < applyParameters.length; i++) {
+						switch(applyParameters[i][0]) {
+							case "css":
+								workspace.contentWindow.postMessage({
+									header: "applyCSS",
+		    		    		    wid: "#" + widgetPropertiesSelectedId,
+		    		    		    propertyName: applyParameters[i][2],
+		    		    		    propertyValue: document.getElementById(applyParameters[i][1]).value,
+									propertyFormat: applyParameters[i][3]
+								});
+								break;
+							case "html":
+								workspace.contentWindow.postMessage({
+									header: "applyHTML",
+		    		    		    wid: "#" + widgetPropertiesSelectedId,
+		    		    		    propertyValue: document.getElementById(applyParameters[i][1]).value,
+									propertyFormat: applyParameters[i][2]
+								});
+								break;
+						}
+					}
+					for (var i = 0; i < primaryApplyParameters.length; i++) {
+		    		    switch(primaryApplyParameters[i][0]) {
+							case "css":
+								workspace.contentWindow.postMessage({
+									header: "applyCSS",
+		    		    		    wid: "#" + widgetPropertiesSelectedId,
+		    		    		    propertyName: primaryApplyParameters[i][2],
+		    		    		    propertyValue: document.getElementById(primaryApplyParameters[i][1]).value,
+									propertyFormat: primaryApplyParameters[i][3]
+								});
+								break;
+							case "html":
+								workspace.contentWindow.postMessage({
+									header: "applyHTML",
+		    		    		    wid: "#" + widgetPropertiesSelectedId,
+		    		    		    propertyValue: document.getElementById(primaryApplyParameters[i][1]).value,
+									propertyFormat: primaryApplyParameters[i][2]
+								});
+								break;
+						}
+					}
+					widgetProperties.style.display = "none";
+					DisplayMessage("Changes were applied to widget #" + widgetPropertiesSelectedId);
+					break;
 			}
 		}
 
@@ -293,41 +345,43 @@
 		}
 
 		// Stores parameters to be process after clicking Apply Changes button
-		// Primary Properties can add its parameters here via its own script
+		// [ css mode, widget property id, property name in css, format ]
+		// [ html mode, widget property id, format ]
+
 		var applyParameters = [
 		    // Load functions for default properties
-		    // [ widget property id, property name in css ], postfix
-		    [ "wpw-default-margin-top", "margin-top", "px" ],
-		    [ "wpw-default-margin-right", "margin-right", "px" ],
-		    [ "wpw-default-margin-bottom", "margin-bottom", "px" ],
-		    [ "wpw-default-margin-left", "margin-left", "px" ],
-		
-		    [ "wpw-default-border-top-width", "border-top-width", "px" ],
-		    [ "wpw-default-border-right-width", "border-right-width", "px" ],
-		    [ "wpw-default-border-bottom-width", "border-bottom-width", "px" ],
-		    [ "wpw-default-border-left-width", "border-left-width", "px" ],
-		
-		    [ "wpw-default-padding-top", "padding-top", "px" ],
-		    [ "wpw-default-padding-right", "padding-right", "px" ],
-		    [ "wpw-default-padding-bottom", "padding-bottom", "px" ],
-		    [ "wpw-default-padding-left", "padding-left", "px" ],
-		
-		    [ "wpw-default-top-left-border-radius", "border-top-left-radius", "px" ],
-		    [ "wpw-default-top-right-border-radius", "border-top-right-radius", "px" ],
-		    [ "wpw-default-bottom-right-border-radius", "border-bottom-right-radius", "px" ],
-		    [ "wpw-default-bottom-left-border-radius", "border-bottom-left-radius", "px" ]
+		    [ "css", "wpw-default-margin-top", "margin-top", "{0}px" ],
+		    [ "css", "wpw-default-margin-right", "margin-right", "{0}px" ],
+		    [ "css", "wpw-default-margin-bottom", "margin-bottom", "{0}px" ],
+		    [ "css", "wpw-default-margin-left", "margin-left", "{0}px" ],
+			
+		    [ "css", "wpw-default-border-top-width", "border-top-width", "{0}px" ],
+		    [ "css", "wpw-default-border-right-width", "border-right-width", "{0}px" ],
+		    [ "css", "wpw-default-border-bottom-width", "border-bottom-width", "{0}px" ],
+			[ "css", "wpw-default-border-left-width", "border-left-width", "{0}px" ],
+			
+			[ "css", "wpw-default-border-color", "border-color", "{0}" ],
+			[ "css", "wpw-default-border-style", "border-style", "{0}" ],
+			
+		    [ "css", "wpw-default-padding-top", "padding-top", "{0}px" ],
+		    [ "css", "wpw-default-padding-right", "padding-right", "{0}px" ],
+		    [ "css", "wpw-default-padding-bottom", "padding-bottom", "{0}px" ],
+		    [ "css", "wpw-default-padding-left", "padding-left", "{0}px" ],
+			
+		    [ "css", "wpw-default-top-left-border-radius", "border-top-left-radius", "{0}px" ],
+		    [ "css", "wpw-default-top-right-border-radius", "border-top-right-radius", "{0}px" ],
+		    [ "css", "wpw-default-bottom-right-border-radius", "border-bottom-right-radius", "{0}px" ],
+			[ "css", "wpw-default-bottom-left-border-radius", "border-bottom-left-radius", "{0}px" ],
+
+			[ "css", "wpw-default-font-color", "color", "{0}" ]
 		];
+		// Primary Properties can add its parameters here
+		var primaryApplyParameters = [];
 		
 		function ApplyChanges() {
-		    // These changes needs to be imformed inside workspace via postMessage
-		    for (var i = 0; i < applyParameters.length; i++) {
-		        workspace.contentWindow.postMessage({
-		            header: "applyCSS",
-		            wid: "#" + widgetPropertiesSelectedId,
-		            propertyName: applyParameters[i][1],
-		            propertyValue: document.getElementById(applyParameters[i][0]).value + applyParameters[i][2]
-		        });
-		    }
+			// These changes needs to be imformed inside workspace via postMessage
+			// Remove any inline style previously applied first before applying css for cleaner result
+			workspace.contentWindow.postMessage({ header: "clearCSS", wid: "#" + widgetPropertiesSelectedId });
 		}
 	</script>
 </body>

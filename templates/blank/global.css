@@ -21,3 +21,6 @@ footer .container {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
+.text-content {
+	white-space: pre-wrap;
+}

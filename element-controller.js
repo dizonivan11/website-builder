@@ -13,15 +13,30 @@ window.onload = function() {
 	};
 }
 
+String.prototype.format = function() {
+	a = this;
+	for (k in arguments) {
+		a = a.replace("{" + k + "}", arguments[k])
+	}
+	return a;
+}
+
 // Process messages coming from builder
 window.onmessage = function (e) {
 	switch (e.data.header) {
 		case "selectWidget":
 			selectedElement.innerHTML = e.data.message;
 			break;
+		case "clearCSS":
+			$(e.data.wid).removeAttr("style");
+			// Inform builder that the inline css is now cleared and ready for 'applyCSS' and 'applyHTML'
+			window.top.postMessage({ header: "clearCSS" });
+			break;
 		case "applyCSS":
-			$(e.data.wid).css(e.data.propertyName, e.data.propertyValue);
-			window.top.postMessage({ header: "feedback", message: "Changes were applied to widget " + e.data.wid });
+			$(e.data.wid).css(e.data.propertyName, e.data.propertyFormat.format(e.data.propertyValue));
+			break;
+		case "applyHTML":
+			$(e.data.wid).html(e.data.propertyFormat.format(e.data.propertyValue));
 			break;
 	}
 }

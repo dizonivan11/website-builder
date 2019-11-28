@@ -30,7 +30,7 @@
             <tr>
                 <td class="radius"><input type="text" id="wpw-default-top-left-border-radius" autocomplete="off"></td>
                 <td class="margin"></td>
-                <td class="margin"></td>
+                <td class="margin">M</td>
                 <td class="margin"><input type="text" id="wpw-default-margin-top" autocomplete="off"></td>
                 <td class="margin"></td>
                 <td class="margin"></td>
@@ -38,7 +38,7 @@
             </tr><tr>
                 <td class="margin"></td>
                 <td class="border"></td>
-                <td class="border"></td>
+                <td class="border">B</td>
                 <td class="border"><input type="text" id="wpw-default-border-top-width" autocomplete="off"></td>
                 <td class="border"></td>
                 <td class="border"></td>
@@ -46,7 +46,7 @@
             </tr><tr>
                 <td class="margin"></td>
                 <td class="border"></td>
-                <td class="padding"></td>
+                <td class="padding">P</td>
                 <td class="padding"><input type="text" id="wpw-default-padding-top" autocomplete="off"></td>
                 <td class="padding"></td>
                 <td class="border"></td>
@@ -92,8 +92,25 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <label class="widget-properties-subtitle">Border Properties</label><br>
+            <label class="widget-properties-label">Border Color</label><br>
+            <input id="wpw-default-border-color" value="">
+            <label class="widget-properties-label">Border Style</label><br>
+            <select id="wpw-default-border-style">
+                <option value="" selected>None</option>
+                <option value="solid">Solid</option>
+                <option value="dotted">Dotted</option>
+                <option value="dashed">Dashed</option>
+            </select>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
             <label class="widget-properties-subtitle">Font Color</label>
-            <input id="wpw-default-font-color" value="#ffffff">
+            <input id="wpw-default-font-color" value="#242424">
         </div>
     </div>
 </div>
@@ -102,7 +119,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <button onclick="ApplyChanges(); widgetProperties.style.display = 'none';">Apply Changes</button>
+            <button onclick="ApplyChanges();">Apply Changes</button>
         </div>
     </div>
 </div>

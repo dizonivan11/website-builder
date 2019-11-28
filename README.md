@@ -1,6 +1,13 @@
 # website-builder
 **Technologies Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker**
 ***
+**Current TODO:**
+<ol>
+<li>Revise code for applying css and html changes</li>
+<li>Applying Widget Property changes</li>
+<li>Global Settings</li>
+</ol>
+
 **TODO List:**
 <ol>
 <li>Color Pallete</li>
