@@ -1,6 +1,5 @@
 var selectedElement = document.createElement("div");
 var selectedElementOffset = 15;
-var selectedElementYOffset = 0;
 
 window.onload = function() {
 	// Create and add selected element controller
@@ -10,22 +9,19 @@ window.onload = function() {
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
 		selectedElement.style.left = (e.clientX + selectedElementOffset) + "px";
-		selectedElement.style.top = (selectedElementYOffset + e.clientY + selectedElementOffset) + "px";
+		selectedElement.style.top = (e.clientY + selectedElementOffset) + "px";
 	};
 }
 
 // Process messages coming from builder
 window.onmessage = function (e) {
-	var header = e.data.header;
-	var message = e.data.message;
-
-	switch (header) {
+	switch (e.data.header) {
 		case "selectWidget":
-			selectedElement.innerHTML = message;
+			selectedElement.innerHTML = e.data.message;
 			break;
-		case "workspace-scrolled":
-			// not yet fixed
-			selectedElementYOffset = message;
+		case "applyCSS":
+			$(e.data.wid).css(e.data.propertyName, e.data.propertyValue);
+			window.top.postMessage({ header: "feedback", message: "Changes were applied to widget " + e.data.wid });
 			break;
 	}
 }
@@ -56,7 +52,7 @@ function DropElement(e) {
 				// Else, open properties window
 				window.top.postMessage({
 					header: "open-widget-properties",
-					id: this.id,
+					widgetID: this.id,
 					widgetPropertiesPath: this.getAttribute("widget-name")
 				});
 			}

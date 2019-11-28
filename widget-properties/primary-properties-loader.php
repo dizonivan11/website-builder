@@ -2,7 +2,6 @@
     // Load the widget properties layout
     // After loading this layout, load its script in javascript's success callback
     include_once('../core.php');
-    $wid = $_POST['wid'];
     $wpp = $_POST['wpp'] . ".php";
 
     if (file_exists($wpp)) {

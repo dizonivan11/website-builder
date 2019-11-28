@@ -1,5 +1,5 @@
 # website-builder
-**Technologies Used: PHP, MYSQL, Medoo, HTMLKelly Color Picker**
+**Technologies Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker**
 ***
 **TODO List:**
 <ol>

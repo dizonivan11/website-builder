@@ -176,6 +176,7 @@
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
 		var widgetProperties = document.getElementById('widget-properties');
 		var widgetPrimaryProperties; // Load only after initializing default properties in widget properties window
+		var widgetPropertiesSelectedId = "-1";
 		var messageBox = document.getElementById('message-box');
 		var workspace = document.getElementById('workspace');
 
@@ -262,7 +263,7 @@
 					DisplayMessage(e.data.message);
 					break;
 				case "open-widget-properties":
-					var wid = e.data.widgetID;
+					widgetPropertiesSelectedId = e.data.widgetID;
 					var wpp = e.data.widgetPropertiesPath; // without extension (for loading both layout and script)
 
 					// Clear primary properties section first to populate new widget property fields
@@ -280,7 +281,7 @@
 							widgetProperties.style.display = "block";
             			}
         			};
-					widgetRequester.send("wid=" + wid + "&wpp=" + wpp);
+					widgetRequester.send("wpp=" + wpp);
 					break;
 			}
 		}
@@ -289,6 +290,44 @@
 			if (toolboxWidgets.style.display == "none")
 				toolboxWidgets.style.display = "block";
 			else toolboxWidgets.style.display = "none";
+		}
+
+		// Stores parameters to be process after clicking Apply Changes button
+		// Primary Properties can add its parameters here via its own script
+		var applyParameters = [
+		    // Load functions for default properties
+		    // [ widget property id, property name in css ], postfix
+		    [ "wpw-default-margin-top", "margin-top", "px" ],
+		    [ "wpw-default-margin-right", "margin-right", "px" ],
+		    [ "wpw-default-margin-bottom", "margin-bottom", "px" ],
+		    [ "wpw-default-margin-left", "margin-left", "px" ],
+		
+		    [ "wpw-default-border-top-width", "border-top-width", "px" ],
+		    [ "wpw-default-border-right-width", "border-right-width", "px" ],
+		    [ "wpw-default-border-bottom-width", "border-bottom-width", "px" ],
+		    [ "wpw-default-border-left-width", "border-left-width", "px" ],
+		
+		    [ "wpw-default-padding-top", "padding-top", "px" ],
+		    [ "wpw-default-padding-right", "padding-right", "px" ],
+		    [ "wpw-default-padding-bottom", "padding-bottom", "px" ],
+		    [ "wpw-default-padding-left", "padding-left", "px" ],
+		
+		    [ "wpw-default-top-left-border-radius", "border-top-left-radius", "px" ],
+		    [ "wpw-default-top-right-border-radius", "border-top-right-radius", "px" ],
+		    [ "wpw-default-bottom-right-border-radius", "border-bottom-right-radius", "px" ],
+		    [ "wpw-default-bottom-left-border-radius", "border-bottom-left-radius", "px" ]
+		];
+		
+		function ApplyChanges() {
+		    // These changes needs to be imformed inside workspace via postMessage
+		    for (var i = 0; i < applyParameters.length; i++) {
+		        workspace.contentWindow.postMessage({
+		            header: "applyCSS",
+		            wid: "#" + widgetPropertiesSelectedId,
+		            propertyName: applyParameters[i][1],
+		            propertyValue: document.getElementById(applyParameters[i][0]).value + applyParameters[i][2]
+		        });
+		    }
 		}
 	</script>
 </body>
