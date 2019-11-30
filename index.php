@@ -193,10 +193,11 @@
 							widgetPrimaryProperties.innerHTML = this.responseText;
 							// Load its script (if it exists)
 							$.getScript("widget-properties/" + wpp + ".js", function(script, textStatus) {
-								// Binds all property inputs currently in applyParameters
-								BindProperties(applyParameters);
+								// Binds all property inputs currently in primaryApplyParameters after loading its script
 								BindProperties(primaryApplyParameters);
 							});
+							// Binds all property inputs currently in applyParameters
+							BindProperties(applyParameters);
 							widgetProperties.style.display = "block";
             			}
         			};
