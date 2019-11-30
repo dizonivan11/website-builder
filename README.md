@@ -3,8 +3,9 @@
 ***
 **Current TODO:**
 <ol>
-<li>Toggle override widget property</li>
+<li>Binding of CSS in widget property fields</li>
 <li>Load current widget property values on input fields before opening widget properties window</li>
+<li>Toggle override widget property</li>
 <li>Global Settings</li>
 </ol>
 
