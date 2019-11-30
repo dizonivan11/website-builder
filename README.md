@@ -3,8 +3,8 @@
 ***
 **Current TODO:**
 <ol>
+<li>Toggle override widget property</li>
 <li>Load current widget property values on input fields before opening widget properties window</li>
-<li>Applying Widget Property changes</li>
 <li>Global Settings</li>
 </ol>
 
@@ -30,4 +30,5 @@
 **Done TODO**
 <ol>
 <li>Revise code for applying css and html changes</li>
+<li>Applying Widget Property changes</li>
 </ol>
