@@ -3,7 +3,7 @@
 ***
 **Current TODO:**
 <ol>
-<li>Revise code for applying css and html changes</li>
+<li>Load current widget property values on input fields before opening widget properties window</li>
 <li>Applying Widget Property changes</li>
 <li>Global Settings</li>
 </ol>
@@ -25,4 +25,9 @@
 <li>Uploading Images</li>
 <li>Previewing</li>
 <li>Publishing</li>
+</ol>
+
+**Done TODO**
+<ol>
+<li>Revise code for applying css and html changes</li>
 </ol>
