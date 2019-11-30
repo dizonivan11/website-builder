@@ -256,6 +256,23 @@
 		}
 
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
+		function ApplyCSS(parameters) {
+			workspace.contentWindow.postMessage({
+				header: "applyCSS",
+		        wid: "#" + widgetPropertiesSelectedId,
+		        propertyName: parameters[i][2],
+		        propertyValue: document.getElementById(parameters[i][1]).value,
+				propertyFormat: parameters[i][3]
+			});
+		}
+		function ApplyHTML(parameters) {
+			workspace.contentWindow.postMessage({
+				header: "applyHTML",
+		        wid: "#" + widgetPropertiesSelectedId,
+		        propertyValue: document.getElementById(parameters[i][1]).value,
+				propertyFormat: parameters[i][2]
+			});
+		}
 
 		// Process messages coming from workspace
 		window.onmessage = function (e) {
@@ -293,42 +310,20 @@
 					for (var i = 0; i < applyParameters.length; i++) {
 						switch(applyParameters[i][0]) {
 							case "css":
-								workspace.contentWindow.postMessage({
-									header: "applyCSS",
-		    		    		    wid: "#" + widgetPropertiesSelectedId,
-		    		    		    propertyName: applyParameters[i][2],
-		    		    		    propertyValue: document.getElementById(applyParameters[i][1]).value,
-									propertyFormat: applyParameters[i][3]
-								});
+								ApplyCSS(applyParameters);
 								break;
 							case "html":
-								workspace.contentWindow.postMessage({
-									header: "applyHTML",
-		    		    		    wid: "#" + widgetPropertiesSelectedId,
-		    		    		    propertyValue: document.getElementById(applyParameters[i][1]).value,
-									propertyFormat: applyParameters[i][2]
-								});
+								ApplyHTML(applyParameters);
 								break;
 						}
 					}
 					for (var i = 0; i < primaryApplyParameters.length; i++) {
 		    		    switch(primaryApplyParameters[i][0]) {
 							case "css":
-								workspace.contentWindow.postMessage({
-									header: "applyCSS",
-		    		    		    wid: "#" + widgetPropertiesSelectedId,
-		    		    		    propertyName: primaryApplyParameters[i][2],
-		    		    		    propertyValue: document.getElementById(primaryApplyParameters[i][1]).value,
-									propertyFormat: primaryApplyParameters[i][3]
-								});
+								ApplyCSS(primaryApplyParameters);
 								break;
 							case "html":
-								workspace.contentWindow.postMessage({
-									header: "applyHTML",
-		    		    		    wid: "#" + widgetPropertiesSelectedId,
-		    		    		    propertyValue: document.getElementById(primaryApplyParameters[i][1]).value,
-									propertyFormat: primaryApplyParameters[i][2]
-								});
+								ApplyHTML(primaryApplyParameters);
 								break;
 						}
 					}
