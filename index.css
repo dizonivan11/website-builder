@@ -1,0 +1,135 @@
+* {
+    --primary-color: #8dca23;
+    --secondary-color: #282828;
+    --tertiary-color: #282828e6;
+    --fourth-color: #efefefe6;
+    --menu-height: 50px;
+    --toolbox-width: 100px;
+    --toolbox-widgets-width: 200px;
+    --widget-properties-width: 250px;
+}
+.f-right {
+    float: right;
+}
+.v-full {
+    height: 100%;
+}
+.v-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#menu {
+    background-color: var(--secondary-color);
+    color: white;
+    height: var(--menu-height);
+}
+#toolbox {
+    background-color: var(--primary-color);
+    float: left;
+    width: var(--toolbox-width);
+    height: calc(100vh - var(--menu-height));
+    padding: 8px;
+}
+.tool {
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+    background-color: #efefef;
+    border: 2px solid #ccc;
+    min-height: 32px;
+    margin-bottom: 8px;
+}
+#toolbox-widgets {
+    background-color: var(--tertiary-color);
+    float: left;
+    width: var(--toolbox-widgets-width);
+    height: calc(100vh - var(--menu-height));
+    margin-left: var(--toolbox-width);
+    padding: 15px;
+    position: absolute;
+    box-shadow: 4px 0px 8px var(--secondary-color);
+}
+#widget-properties {
+    background-color: var(--fourth-color);
+    float: right;
+    width: var(--widget-properties-width);
+    height: calc(100vh - var(--menu-height));
+    padding: 15px 0px 15px 0px;
+    position: absolute;
+    right: 0;
+    box-shadow: -4px 0px 8px var(--secondary-color);
+    overflow-y: auto;
+}
+#workspace-container {
+    margin-left: var(--toolbox-width);
+    width: calc(100vw - var(--toolbox-width));
+    height: calc(100vh - var(--menu-height));
+}
+#workspace {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+#message-box {
+    padding: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    text-align: center;
+    background-color: #efefef;
+    color: black;
+    box-shadow: 0px 0px 8px #aaa inset;
+}
+.widget-properties-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.widget-properties-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+}
+.widget-properties-label {
+    font-size: 12px;
+    font-weight: bold;
+}
+#spacing-border {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+#spacing-border tr td {
+    border: none !important;
+    padding: 2px;
+}
+#spacing-border tr td input {
+    width: 100%;
+    border: 1px solid white;
+    font-size: 11px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 0px 4px #aaa inset;
+    text-align: center;
+}
+#spacing-border tr td.margin {
+    background-color: var(--primary-color);
+    color: white;
+}
+#spacing-border tr td.border {
+    background-color: var(--secondary-color);
+    color: white;
+}
+#spacing-border tr td.padding {
+    background-color: var(--tertiary-color);
+    color: white;
+}
+#spacing-border tr td.inner {
+    background-color: var(--tertiary-color);
+}
+#spacing-border tr td.radius {
+    background-color: var(--primary-color);
+}
+#wpw-color-picker {
+    width: 100% !important;
+    height: auto !important;
+}
