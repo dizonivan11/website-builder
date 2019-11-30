@@ -38,6 +38,13 @@ window.onmessage = function (e) {
 		case "applyHTML":
 			$(e.data.wid).html(e.data.propertyFormat.format(e.data.propertyValue));
 			break;
+		case "getInnerHTML":
+				window.top.postMessage({
+					header: "bindInnerHTMLToInput",
+					innerHtml: $(e.data.selector).html(),
+					input: e.data.input
+				});
+			break;
 	}
 }
 

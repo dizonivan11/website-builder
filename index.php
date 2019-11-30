@@ -182,6 +182,10 @@
 					widgetProperties.style.display = "none";
 					DisplayMessage("Changes were applied to widget #" + widgetPropertiesSelectedId);
 					break;
+				case "bindInnerHTMLToInput":
+					// Get the Inner HTML result of selected widget then apply to target input
+					$(e.data.input).val(e.data.innerHtml);
+					break;
 			}
 		}
 
