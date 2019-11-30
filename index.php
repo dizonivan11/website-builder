@@ -127,6 +127,23 @@
 			return a;
 		}
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
+		function BindProperties(parameters) {
+			for (var i = 0; i < parameters.length; i++) {
+				switch(parameters[i].mode) {
+					case "css":
+						
+						break;
+					case "html":
+						// Request to bind innerHTML of widget inside workspace to the input
+						workspace.contentWindow.postMessage({
+						    header: "getHTML",
+						    selector: parameters[i].selectorFormat.format(parameters[i].selectorParameters),
+						    input: "#" + parameters[i].input
+						});
+						break;
+				}
+			}
+		}
 		function SendApplyCommandsToWorkspace(parameters) {
 			for (var i = 0; i < parameters.length; i++) {
 				switch(parameters[i].mode) {
@@ -142,7 +159,7 @@
 					case "html":
 						workspace.contentWindow.postMessage({
 							header: "applyHTML",
-		    			    selector: parameters[i].selectorFormat.format(widgetPropertiesSelectedId),
+		    			    selector: parameters[i].selectorFormat.format(parameters[i].selectorParameters),
 		    			    propertyValue: document.getElementById(parameters[i].input).value
 						});
 						break;
@@ -175,7 +192,11 @@
 							// File found, load primary property values then open widget properties window
 							widgetPrimaryProperties.innerHTML = this.responseText;
 							// Load its script (if it exists)
-							$.getScript("widget-properties/" + wpp + ".js");
+							$.getScript("widget-properties/" + wpp + ".js", function(script, textStatus) {
+								// Binds all property inputs currently in applyParameters
+								BindProperties(applyParameters);
+								BindProperties(primaryApplyParameters);
+							});
 							widgetProperties.style.display = "block";
             			}
         			};
@@ -236,15 +257,6 @@
 			// These changes needs to be imformed inside workspace via postMessage
 			// Remove any inline style previously applied first before applying css for cleaner result
 			workspace.contentWindow.postMessage({ header: "clearCSS", wid: "#" + widgetPropertiesSelectedId });
-		}
-
-		function BindHTML(inputId) {
-			// Request to bind innerHTML of widget inside workspace to the input
-			workspace.contentWindow.postMessage({
-			    header: "getHTML",
-			    selector: "#" + widgetPropertiesSelectedId + " > div.inner-wrapper > p.text-content",
-			    input: inputId
-			});
 		}
 	</script>
 </body>
