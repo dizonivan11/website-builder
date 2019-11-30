@@ -131,7 +131,7 @@
 			for (var i = 0; i < parameters.length; i++) {
 				switch(parameters[i].mode) {
 					case "css":
-						
+						// TODO: Binding CSS
 						break;
 					case "html":
 						// Request to bind innerHTML of widget inside workspace to the input

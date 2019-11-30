@@ -5,9 +5,9 @@
             <textarea id="wpw-text-content" style="width: 100%; height: 200px; resize: none;"></textarea>
             <hr />
             <label class="widget-properties-label">Text Style</label><br>
-            <input type="checkbox" id="wpw-text-bold" value="Bold">Bold<br>  
-            <input type="checkbox" id="wpw-text-italicized" value="Italicized">Italicized<br>
-            <input type="checkbox" id="wpw-text-underlined" value="Underlined">Underlined<br>
+            <input type="checkbox" id="wpw-text-bold" value="bold">Bold<br>  
+            <input type="checkbox" id="wpw-text-italic" value="italic">Italicized<br>
+            <input type="checkbox" id="wpw-text-underline" value="underline">Underlined<br>
         </div>
     </div>
 </div>
