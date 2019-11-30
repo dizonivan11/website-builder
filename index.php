@@ -148,6 +148,10 @@
 			for (var i = 0; i < parameters.length; i++) {
 				switch(parameters[i].mode) {
 					case "css":
+						if (parameters[i].toggle != undefined && !$("#" + parameters[i].toggle).is(":checked")) {
+							// Property has toggle and its unchecked, fully disregard this property
+							break;
+						}
 						workspace.contentWindow.postMessage({
 							header: "applyCSS",
 		    			    wid: "#" + widgetPropertiesSelectedId,
