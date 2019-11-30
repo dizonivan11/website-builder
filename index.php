@@ -118,24 +118,30 @@
         	};
 			widgetRequester.send();
 		}
-
+		
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
-		function ApplyCSS(parameter) {
-			workspace.contentWindow.postMessage({
-				header: "applyCSS",
-		        wid: "#" + widgetPropertiesSelectedId,
-		        propertyName: parameter.propertyName,
-		        propertyValue: document.getElementById(parameter.input).value,
-				propertyFormat: parameter.format
-			});
-		}
-		function ApplyHTML(parameter) {
-			workspace.contentWindow.postMessage({
-				header: "applyHTML",
-		        wid: "#" + widgetPropertiesSelectedId,
-		        propertyValue: document.getElementById(parameter.input).value,
-				propertyFormat: parameter.format
-			});
+		function SendApplyCommandsToWorkspace(parameters) {
+			for (var i = 0; i < parameters.length; i++) {
+				switch(parameters[i].mode) {
+					case "css":
+						workspace.contentWindow.postMessage({
+							header: "applyCSS",
+		    			    wid: "#" + widgetPropertiesSelectedId,
+		    			    propertyName: parameters[i].propertyName,
+		    			    propertyValue: document.getElementById(parameters[i].input).value,
+							propertyFormat: parameters[i].format
+						});
+						break;
+					case "html":
+						workspace.contentWindow.postMessage({
+							header: "applyHTML",
+		    			    wid: "#" + widgetPropertiesSelectedId,
+		    			    propertyValue: document.getElementById(parameters[i].input).value,
+							propertyFormat: parameters[i].format
+						});
+						break;
+				}
+			}
 		}
 
 		// Process messages coming from workspace
@@ -171,26 +177,8 @@
 					break;
 				case "clearCSS":
 					// Continue applying properties after clearing inline css
-					for (var i = 0; i < applyParameters.length; i++) {
-						switch(applyParameters[i].mode) {
-							case "css":
-								ApplyCSS(applyParameters[i]);
-								break;
-							case "html":
-								ApplyHTML(applyParameters[i]);
-								break;
-						}
-					}
-					for (var i = 0; i < primaryApplyParameters.length; i++) {
-		    		    switch(primaryApplyParameters[i][0]) {
-							case "css":
-								ApplyCSS(primaryApplyParameters[i]);
-								break;
-							case "html":
-								ApplyHTML(primaryApplyParameters[i]);
-								break;
-						}
-					}
+					SendApplyCommandsToWorkspace(applyParameters);
+					SendApplyCommandsToWorkspace(primaryApplyParameters);
 					widgetProperties.style.display = "none";
 					DisplayMessage("Changes were applied to widget #" + widgetPropertiesSelectedId);
 					break;
