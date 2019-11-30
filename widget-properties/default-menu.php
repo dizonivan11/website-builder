@@ -82,11 +82,11 @@
             <hr />
             <input type="checkbox" id="wpw-toggle-border-color">
             <label class="widget-properties-label">Border Color</label><br>
-            <input id="wpw-default-border-color" disabled><br>
+            <input id="wpw-default-border-color"><br>
             <hr />
             <input type="checkbox" id="wpw-toggle-border-style">
             <label class="widget-properties-label">Border Style</label><br>
-            <select id="wpw-default-border-style" disabled>
+            <select id="wpw-default-border-style">
                 <option value="solid" selected>Solid</option>
                 <option value="dotted">Dotted</option>
                 <option value="dashed">Dashed</option>
@@ -94,7 +94,7 @@
             <hr />
             <input type="checkbox" id="wpw-toggle-font-color">
             <label class="widget-properties-label">Font Color</label>
-            <input id="wpw-default-font-color" disabled>
+            <input id="wpw-default-font-color">
         </div>
     </div>
 </div>

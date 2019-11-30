@@ -1,4 +1,8 @@
-primaryApplyParameters.push({ mode: "html", input: "wpw-text-content", format: "<div class='inner-wrapper'><p class='text-content'>{0}</p></div>" });
+primaryApplyParameters.push({
+    mode: "html",
+    input: "wpw-text-content",
+    selectorFormat: "#{0} > div.inner-wrapper > p.text-content"
+});
 
 // Request to bind innerHTML of widget inside workspace to the input
 workspace.contentWindow.postMessage({

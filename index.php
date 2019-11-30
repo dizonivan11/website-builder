@@ -119,6 +119,13 @@
 			widgetRequester.send();
 		}
 		
+		String.prototype.format = function() {
+			a = this;
+			for (k in arguments) {
+				a = a.replace("{" + k + "}", arguments[k])
+			}
+			return a;
+		}
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
 		function SendApplyCommandsToWorkspace(parameters) {
 			for (var i = 0; i < parameters.length; i++) {
@@ -135,9 +142,8 @@
 					case "html":
 						workspace.contentWindow.postMessage({
 							header: "applyHTML",
-		    			    wid: "#" + widgetPropertiesSelectedId,
-		    			    propertyValue: document.getElementById(parameters[i].input).value,
-							propertyFormat: parameters[i].format
+		    			    selector: parameters[i].selectorFormat.format(widgetPropertiesSelectedId),
+		    			    propertyValue: document.getElementById(parameters[i].input).value
 						});
 						break;
 				}
@@ -196,9 +202,6 @@
 		}
 
 		// Stores parameters to be process after clicking Apply Changes button
-		// [ css mode, widget property id, property name in css, format ]
-		// [ html mode, widget property id, format ]
-
 		var applyParameters = [
 		    // Load functions for default properties
 		    { mode: "css", input: "wpw-default-margin-top", propertyName: "margin-top", format: "{0}px" },
@@ -211,8 +214,8 @@
 		    { mode: "css", input: "wpw-default-border-bottom-width", propertyName: "border-bottom-width", format: "{0}px" },
 			{ mode: "css", input: "wpw-default-border-left-width", propertyName: "border-left-width", format: "{0}px" },
 			
-			{ mode: "css", input: "wpw-default-border-color", propertyName: "border-color", format: "{0}" },
-			{ mode: "css", input: "wpw-default-border-style", propertyName: "border-style", format: "{0}" },
+			{ mode: "css", input: "wpw-default-border-color", propertyName: "border-color", format: "{0}", toggle: "wpw-toggle-border-color" },
+			{ mode: "css", input: "wpw-default-border-style", propertyName: "border-style", format: "{0}", toggle: "wpw-toggle-border-style" },
 			
 		    { mode: "css", input: "wpw-default-padding-top", propertyName: "padding-top", format: "{0}px" },
 		    { mode: "css", input: "wpw-default-padding-right", propertyName: "padding-right", format: "{0}px" },
@@ -224,7 +227,7 @@
 		    { mode: "css", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", format: "{0}px" },
 			{ mode: "css", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", format: "{0}px" },
 
-			{ mode: "css", input: "wpw-default-font-color", propertyName: "color", format: "{0}" }
+			{ mode: "css", input: "wpw-default-font-color", propertyName: "color", format: "{0}", toggle: "wpw-toggle-font-color" }
 		];
 		// Primary Properties can add its parameters here
 		var primaryApplyParameters = [];

@@ -36,7 +36,7 @@ window.onmessage = function (e) {
 			$(e.data.wid).css(e.data.propertyName, e.data.propertyFormat.format(e.data.propertyValue));
 			break;
 		case "applyHTML":
-			$(e.data.wid).html(e.data.propertyFormat.format(e.data.propertyValue));
+			$(e.data.selector).html(e.data.propertyValue);
 			break;
 		case "getInnerHTML":
 				window.top.postMessage({
