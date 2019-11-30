@@ -8,143 +8,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="html5kellycolorpicker.min.js"></script>
-	<style type="text/css">
-		* {
-			--primary-color: #8dca23;
-			--secondary-color: #282828;
-			--tertiary-color: #282828e6;
-			--fourth-color: #efefefe6;
-			--menu-height: 50px;
-			--toolbox-width: 100px;
-			--toolbox-widgets-width: 200px;
-			--widget-properties-width: 250px;
-		}
-		.f-right {
-			float: right;
-		}
-		.v-full {
-			height: 100%;
-		}
-		.v-center {
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		#menu {
-			background-color: var(--secondary-color);
-			color: white;
-			height: var(--menu-height);
-		}
-		#toolbox {
-			background-color: var(--primary-color);
-			float: left;
-			width: var(--toolbox-width);
-			height: calc(100vh - var(--menu-height));
-			padding: 8px;
-		}
-		.tool {
-			font-size: 12px;
-			font-weight: bold;
-			width: 100%;
-			background-color: #efefef;
-			border: 2px solid #ccc;
-			min-height: 32px;
-			margin-bottom: 8px;
-		}
-		#toolbox-widgets {
-			background-color: var(--tertiary-color);
-			float: left;
-			width: var(--toolbox-widgets-width);
-			height: calc(100vh - var(--menu-height));
-			margin-left: var(--toolbox-width);
-			padding: 15px;
-			position: absolute;
-			box-shadow: 4px 0px 8px var(--secondary-color);
-		}
-		#widget-properties {
-			background-color: var(--fourth-color);
-			float: right;
-			width: var(--widget-properties-width);
-			height: calc(100vh - var(--menu-height));
-			padding: 15px 0px 15px 0px;
-			position: absolute;
-			right: 0;
-			box-shadow: -4px 0px 8px var(--secondary-color);
-			overflow-y: auto;
-		}
-		#workspace-container {
-			margin-left: var(--toolbox-width);
-			width: calc(100vw - var(--toolbox-width));
-			height: calc(100vh - var(--menu-height));
-		}
-		#workspace {
-			width: 100%;
-			height: 100%;
-			border: none;
-		}
-		#message-box {
-			padding: 4px;
-			border: 1px solid #ccc;
-			width: 100%;
-			text-align: center;
-			background-color: #efefef;
-			color: black;
-			box-shadow: 0px 0px 8px #aaa inset;
-		}
-		.widget-properties-title {
-			font-size: 18px;
-			font-weight: bold;
-		}
-		.widget-properties-subtitle {
-			font-size: 16px;
-			font-weight: bold;
-		}
-		.widget-properties-label {
-			font-size: 12px;
-			font-weight: bold;
-		}
-		#spacing-border {
-			width: 100%;
-			text-align: center;
-			border: 1px solid #ccc;
-		}
-		#spacing-border tr td {
-			border: none !important;
-			padding: 2px;
-		}
-		#spacing-border tr td input {
-			width: 100%;
-			border: 1px solid white;
-			font-size: 11px;
-			background-color: transparent;
-			color: white;
-			font-weight: bold;
-			box-shadow: 0px 0px 4px #aaa inset;
-			text-align: center;
-		}
-		#spacing-border tr td.margin {
-			background-color: var(--primary-color);
-			color: white;
-		}
-		#spacing-border tr td.border {
-			background-color: var(--secondary-color);
-			color: white;
-		}
-		#spacing-border tr td.padding {
-			background-color: var(--tertiary-color);
-			color: white;
-		}
-		#spacing-border tr td.inner {
-			background-color: var(--tertiary-color);
-		}
-		#spacing-border tr td.radius {
-			background-color: var(--primary-color);
-		}
-		#wpw-color-picker {
-			width: 100% !important;
-			height: auto !important;
-		}
-	</style>
+	<link rel="stylesheet" href="index.css">
 </head>
 <body>
 	<div id="menu" class="container-fluid">
@@ -256,21 +120,21 @@
 		}
 
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
-		function ApplyCSS(parameters) {
+		function ApplyCSS(parameter) {
 			workspace.contentWindow.postMessage({
 				header: "applyCSS",
 		        wid: "#" + widgetPropertiesSelectedId,
-		        propertyName: parameters[i][2],
-		        propertyValue: document.getElementById(parameters[i][1]).value,
-				propertyFormat: parameters[i][3]
+		        propertyName: parameter.propertyName,
+		        propertyValue: document.getElementById(parameter.input).value,
+				propertyFormat: parameter.format
 			});
 		}
-		function ApplyHTML(parameters) {
+		function ApplyHTML(parameter) {
 			workspace.contentWindow.postMessage({
 				header: "applyHTML",
 		        wid: "#" + widgetPropertiesSelectedId,
-		        propertyValue: document.getElementById(parameters[i][1]).value,
-				propertyFormat: parameters[i][2]
+		        propertyValue: document.getElementById(parameter.input).value,
+				propertyFormat: parameter.format
 			});
 		}
 
@@ -308,22 +172,22 @@
 				case "clearCSS":
 					// Continue applying properties after clearing inline css
 					for (var i = 0; i < applyParameters.length; i++) {
-						switch(applyParameters[i][0]) {
+						switch(applyParameters[i].mode) {
 							case "css":
-								ApplyCSS(applyParameters);
+								ApplyCSS(applyParameters[i]);
 								break;
 							case "html":
-								ApplyHTML(applyParameters);
+								ApplyHTML(applyParameters[i]);
 								break;
 						}
 					}
 					for (var i = 0; i < primaryApplyParameters.length; i++) {
 		    		    switch(primaryApplyParameters[i][0]) {
 							case "css":
-								ApplyCSS(primaryApplyParameters);
+								ApplyCSS(primaryApplyParameters[i]);
 								break;
 							case "html":
-								ApplyHTML(primaryApplyParameters);
+								ApplyHTML(primaryApplyParameters[i]);
 								break;
 						}
 					}
@@ -345,30 +209,30 @@
 
 		var applyParameters = [
 		    // Load functions for default properties
-		    [ "css", "wpw-default-margin-top", "margin-top", "{0}px" ],
-		    [ "css", "wpw-default-margin-right", "margin-right", "{0}px" ],
-		    [ "css", "wpw-default-margin-bottom", "margin-bottom", "{0}px" ],
-		    [ "css", "wpw-default-margin-left", "margin-left", "{0}px" ],
+		    { mode: "css", input: "wpw-default-margin-top", propertyName: "margin-top", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-margin-right", propertyName: "margin-right", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-margin-bottom", propertyName: "margin-bottom", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-margin-left", propertyName: "margin-left", format: "{0}px" },
 			
-		    [ "css", "wpw-default-border-top-width", "border-top-width", "{0}px" ],
-		    [ "css", "wpw-default-border-right-width", "border-right-width", "{0}px" ],
-		    [ "css", "wpw-default-border-bottom-width", "border-bottom-width", "{0}px" ],
-			[ "css", "wpw-default-border-left-width", "border-left-width", "{0}px" ],
+		    { mode: "css", input: "wpw-default-border-top-width", propertyName: "border-top-width", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-border-right-width", propertyName: "border-right-width", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-border-bottom-width", propertyName: "border-bottom-width", format: "{0}px" },
+			{ mode: "css", input: "wpw-default-border-left-width", propertyName: "border-left-width", format: "{0}px" },
 			
-			[ "css", "wpw-default-border-color", "border-color", "{0}" ],
-			[ "css", "wpw-default-border-style", "border-style", "{0}" ],
+			{ mode: "css", input: "wpw-default-border-color", propertyName: "border-color", format: "{0}" },
+			{ mode: "css", input: "wpw-default-border-style", propertyName: "border-style", format: "{0}" },
 			
-		    [ "css", "wpw-default-padding-top", "padding-top", "{0}px" ],
-		    [ "css", "wpw-default-padding-right", "padding-right", "{0}px" ],
-		    [ "css", "wpw-default-padding-bottom", "padding-bottom", "{0}px" ],
-		    [ "css", "wpw-default-padding-left", "padding-left", "{0}px" ],
+		    { mode: "css", input: "wpw-default-padding-top", propertyName: "padding-top", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-padding-right", propertyName: "padding-right", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-padding-bottom", propertyName: "padding-bottom", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-padding-left", propertyName: "padding-left", format: "{0}px" },
 			
-		    [ "css", "wpw-default-top-left-border-radius", "border-top-left-radius", "{0}px" ],
-		    [ "css", "wpw-default-top-right-border-radius", "border-top-right-radius", "{0}px" ],
-		    [ "css", "wpw-default-bottom-right-border-radius", "border-bottom-right-radius", "{0}px" ],
-			[ "css", "wpw-default-bottom-left-border-radius", "border-bottom-left-radius", "{0}px" ],
+		    { mode: "css", input: "wpw-default-top-left-border-radius", propertyName: "border-top-left-radius", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-top-right-border-radius", propertyName: "border-top-right-radius", format: "{0}px" },
+		    { mode: "css", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", format: "{0}px" },
+			{ mode: "css", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", format: "{0}px" },
 
-			[ "css", "wpw-default-font-color", "color", "{0}" ]
+			{ mode: "css", input: "wpw-default-font-color", propertyName: "color", format: "{0}" }
 		];
 		// Primary Properties can add its parameters here
 		var primaryApplyParameters = [];
