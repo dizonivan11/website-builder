@@ -38,9 +38,9 @@ window.onmessage = function (e) {
 		case "applyHTML":
 			$(e.data.selector).html(e.data.propertyValue);
 			break;
-		case "getInnerHTML":
+		case "getHTML":
 				window.top.postMessage({
-					header: "bindInnerHTMLToInput",
+					header: "bindHTML",
 					innerHtml: $(e.data.selector).html(),
 					input: e.data.input
 				});

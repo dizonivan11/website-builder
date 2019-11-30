@@ -188,7 +188,7 @@
 					widgetProperties.style.display = "none";
 					DisplayMessage("Changes were applied to widget #" + widgetPropertiesSelectedId);
 					break;
-				case "bindInnerHTMLToInput":
+				case "bindHTML":
 					// Get the Inner HTML result of selected widget then apply to target input
 					$(e.data.input).val(e.data.innerHtml);
 					break;
@@ -236,6 +236,15 @@
 			// These changes needs to be imformed inside workspace via postMessage
 			// Remove any inline style previously applied first before applying css for cleaner result
 			workspace.contentWindow.postMessage({ header: "clearCSS", wid: "#" + widgetPropertiesSelectedId });
+		}
+
+		function BindHTML(inputId) {
+			// Request to bind innerHTML of widget inside workspace to the input
+			workspace.contentWindow.postMessage({
+			    header: "getHTML",
+			    selector: "#" + widgetPropertiesSelectedId + " > div.inner-wrapper > p.text-content",
+			    input: inputId
+			});
 		}
 	</script>
 </body>
