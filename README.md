@@ -3,6 +3,7 @@
 ***
 **Current TODO:**
 <ol>
+<li>Create Modules for Widget Properties Window</li>
 <li>Global Settings</li>
 </ol>
 
