@@ -23,4 +23,5 @@ primaryApplyParameters.push({
     input: "wpw-text-underline",
     toggle: "wpw-text-underline",
     propertyName: "text-decoration",
-    format: "{0}" });
+    format: "{0}"
+});

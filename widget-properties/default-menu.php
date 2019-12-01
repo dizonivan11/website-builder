@@ -82,7 +82,7 @@
             <hr />
             <input type="checkbox" id="wpw-toggle-border-color">
             <label class="widget-properties-label">Border Color</label><br>
-            <input id="wpw-default-border-color"><br>
+            <input id="wpw-default-border-color" value="#000000"><br>
             <hr />
             <input type="checkbox" id="wpw-toggle-border-style">
             <label class="widget-properties-label">Border Style</label><br>
@@ -94,7 +94,7 @@
             <hr />
             <input type="checkbox" id="wpw-toggle-font-color">
             <label class="widget-properties-label">Font Color</label>
-            <input id="wpw-default-font-color">
+            <input id="wpw-default-font-color" value="#000000">
         </div>
     </div>
 </div>
