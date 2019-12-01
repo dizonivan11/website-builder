@@ -25,9 +25,12 @@
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-label">Text Style</label><br>
-            <input type="checkbox" id="wpw-text-text-style-bold" value="bold">Bold<br>  
-            <input type="checkbox" id="wpw-text-text-style-italic" value="italic">Italicized<br>
-            <input type="checkbox" id="wpw-text-text-style-underline" value="underline">Underlined<br>
+            <input type="checkbox" id="wpw-text-text-style-bold" value="700">
+            <label for="wpw-text-text-style-bold">Bold</label><br>
+            <input type="checkbox" id="wpw-text-text-style-italic" value="italic">
+            <label for="wpw-text-text-style-italic">Italic</label><br>
+            <input type="checkbox" id="wpw-text-text-style-underline" value="underline">
+            <label for="wpw-text-text-style-underline">Underline</label>
         </div>
     </div>
 </div>

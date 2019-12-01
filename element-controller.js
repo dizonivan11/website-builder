@@ -31,8 +31,14 @@ window.onmessage = function (e) {
 			$(e.data.selector).html(e.data.propertyValue);
 			break;
 		case "getCSS":
-			// TODO: Binding CSS
-			
+			var globalCSS  = $(e.data.selector).css(e.data.propertyName);
+			var inlineCSS = document.querySelector(e.data.selector).style[e.data.propertyName];
+			window.top.postMessage({
+				header: "bindCSS",
+				inlineValue: inlineCSS, // overriding value
+				defaultValue: globalCSS, // default value (placeholder)
+				input: e.data.input
+			});
 			break;
 		case "getHTML":
 			window.top.postMessage({

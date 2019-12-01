@@ -136,17 +136,24 @@
 		}
 		function BindProperties(parameters) {
 			for (var i = 0; i < parameters.length; i++) {
-				switch(parameters[i].mode) {
+				var parameter = parameters[i];
+				switch(parameter.mode) {
 					case "css":
-						// TODO: Binding CSS
-
+						// Request to bind inline CSS of widget inside workspace to the input
+						// CSS escape needed for function [querySelector]
+						workspace.contentWindow.postMessage({
+						    header: "getCSS",
+							selector: parameter.selectorFormat.format(CSS.escape(widgetPropertiesSelectedId)),
+							propertyName: parameter.propertyName,
+						    input: "#" + parameter.input
+						});
 						break;
 					case "html":
 						// Request to bind innerHTML of widget inside workspace to the input
 						workspace.contentWindow.postMessage({
 						    header: "getHTML",
-						    selector: parameters[i].selectorFormat.format(widgetPropertiesSelectedId),
-						    input: "#" + parameters[i].input
+						    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
+						    input: "#" + parameter.input
 						});
 						break;
 				}
@@ -222,6 +229,31 @@
 					widgetProperties.style.display = "none";
 					DisplayMessage("Changes were applied to widget #" + widgetPropertiesSelectedId);
 					break;
+				case "bindCSS":
+					// Get the inline CSS result of selected widget then apply to target input
+					var inlineValue = e.data.inlineValue;
+					var defaultValue = e.data.defaultValue;
+					switch ($(e.data.input).prop("tagName")) {
+						case "SELECT":
+							$(e.data.input).val(e.data.inlineValue);
+							$(e.data.input).attr("placeholder", e.data.defaultValue);
+							break;
+						case "INPUT":
+							// Avoid replacing value of checkbox
+							if ($(e.data.input).attr("type") == "checkbox") {
+								// Make value reflects checkbox
+								if (defaultValue == inlineValue) $(e.data.input).attr("checked", "checked");
+							} else if ($(e.data.input).attr("type") == "number") {
+								var numberRegex = /-?(\d+|\d+\.\d+|\.\d+)([eE][-+]?\d+)?/g;
+								$(e.data.input).val(e.data.inlineValue.match(numberRegex));
+								$(e.data.input).attr("placeholder", e.data.defaultValue.match(numberRegex));
+							} else {
+								$(e.data.input).val(e.data.inlineValue);
+								$(e.data.input).attr("placeholder", e.data.defaultValue);
+							}
+							break;
+					}
+					break;
 				case "bindHTML":
 					// Get the Inner HTML result of selected widget then apply to target input
 					$(e.data.input).val(e.data.innerHtml);
@@ -258,10 +290,10 @@
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", valueFormat: "{0}px" },
 			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", valueFormat: "{0}px" },
 
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-color", propertyName: "border-color", valueFormat: "{0}", toggle: "wpw-toggle-default-border" },
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-style", propertyName: "border-style", valueFormat: "{0}", toggle: "wpw-toggle-default-border" },
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-background-color", propertyName: "background-color", valueFormat: "{0}", toggle: "wpw-toggle-default-background-color" },
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-foreground-color", propertyName: "color", valueFormat: "{0}", toggle: "wpw-toggle-default-foreground-color" }
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-color", propertyName: "border-color", valueFormat: "{0}" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-style", propertyName: "border-style", valueFormat: "{0}" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-background-color", propertyName: "background-color", valueFormat: "{0}" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-foreground-color", propertyName: "color", valueFormat: "{0}" }
 		];
 		// Primary Properties can add its parameters here
 		var primaryApplyParameters = [];

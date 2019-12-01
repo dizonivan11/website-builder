@@ -30,7 +30,7 @@ primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",
     input: "wpw-text-text-style-underline",
-    propertyName: "text-decoration",
+    propertyName: "text-decoration-line",
     valueFormat: "{0}",
     toggle: "wpw-text-text-style-underline"
 });

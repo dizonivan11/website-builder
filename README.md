@@ -3,14 +3,12 @@
 ***
 **Current TODO:**
 <ol>
-<li>Binding of CSS in widget property fields</li>
-<li>Load current widget property values on input fields before opening widget properties window</li>
-<li>Toggle override widget property</li>
 <li>Global Settings</li>
 </ol>
 
 **TODO List:**
 <ol>
+<li>Remove [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Color Pallete</li>
 <li>Widget Background</li>
 <li>Applying Widget Property changes</li>
@@ -30,6 +28,8 @@
 
 **Done TODO**
 <ol>
+<li>Binding of CSS in widget property fields</li>
+<li>Load current widget property values on input fields before opening widget properties window</li>
 <li>Revise code for applying css and html changes</li>
 <li>Applying Widget Property changes</li>
 </ol>
