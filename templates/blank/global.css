@@ -25,3 +25,10 @@ footer .container {
 	white-space: pre-wrap;
 	word-break: break-word;
 }
+nav > ul {
+	list-style: none;
+	padding-left: 0px;
+}
+nav > ul > li {
+	margin-bottom: 5px;
+}

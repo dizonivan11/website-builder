@@ -2,8 +2,14 @@
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-label">Content</label>
-            <textarea id="wpw-text-content" style="width: 100%; height: 200px; resize: none;"></textarea>
-            <hr />
+            <textarea id="wpw-text-content"></textarea>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
             <label class="widget-properties-label">Text Style</label><br>
             <input type="checkbox" id="wpw-text-bold" value="bold">Bold<br>  
             <input type="checkbox" id="wpw-text-italic" value="italic">Italicized<br>

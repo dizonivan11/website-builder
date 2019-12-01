@@ -139,6 +139,7 @@
 				switch(parameters[i].mode) {
 					case "css":
 						// TODO: Binding CSS
+
 						break;
 					case "html":
 						// Request to bind innerHTML of widget inside workspace to the input
@@ -247,8 +248,8 @@
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-bottom-width", propertyName: "border-bottom-width", valueFormat: "{0}px" },
 			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-left-width", propertyName: "border-left-width", valueFormat: "{0}px" },
 			
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-color", propertyName: "border-color", valueFormat: "{0}", toggle: "wpw-toggle-border-color" },
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-style", propertyName: "border-style", valueFormat: "{0}", toggle: "wpw-toggle-border-style" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-color", propertyName: "border-color", valueFormat: "{0}", toggle: "wpw-toggle-default-border" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-style", propertyName: "border-style", valueFormat: "{0}", toggle: "wpw-toggle-default-border" },
 			
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-top", propertyName: "padding-top", valueFormat: "{0}px" },
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-right", propertyName: "padding-right", valueFormat: "{0}px" },
@@ -260,7 +261,7 @@
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", valueFormat: "{0}px" },
 			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", valueFormat: "{0}px" },
 
-			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-font-color", propertyName: "color", valueFormat: "{0}", toggle: "wpw-toggle-font-color" }
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-font-color", propertyName: "color", valueFormat: "{0}", toggle: "wpw-toggle-default-font-color" }
 		];
 		// Primary Properties can add its parameters here
 		var primaryApplyParameters = [];

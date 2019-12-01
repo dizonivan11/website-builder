@@ -30,6 +30,10 @@ window.onmessage = function (e) {
 		case "applyHTML":
 			$(e.data.selector).html(e.data.propertyValue);
 			break;
+		case "getCSS":
+			// TODO: Binding CSS
+			
+			break;
 		case "getHTML":
 			window.top.postMessage({
 				header: "bindHTML",

@@ -61,6 +61,18 @@
     box-shadow: -4px 0px 8px var(--secondary-color);
     overflow-y: auto;
 }
+#widget-properties input:not([type=checkbox]) {
+    width: 100%;
+}
+#widget-properties button {
+    width: 100%;
+}
+#widget-properties textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    font-size: 10px;
+}
 #workspace-container {
     margin-left: var(--toolbox-width);
     width: calc(100vw - var(--toolbox-width));

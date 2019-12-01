@@ -8,10 +8,10 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <button onclick="widgetProperties.style.display = 'none';" style="width: 100%">Close</button>
+            <button onclick="widgetProperties.style.display = 'none';">Close</button>
         </div>
         <div class="col-6">
-            <button style="width: 100%">Delete</button>
+            <button>Delete</button>
         </div>
     </div>
 </div>
@@ -79,20 +79,37 @@
                     <td class="radius"><input type="text" id="wpw-default-bottom-right-border-radius" autocomplete="off"></td>
                 </tr>
             </table>
-            <hr />
-            <input type="checkbox" id="wpw-toggle-border-color">
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <input type="checkbox" id="wpw-toggle-default-border">
+            <label class="widget-properties-subtitle">Border</label><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
             <label class="widget-properties-label">Border Color</label><br>
-            <input id="wpw-default-border-color" value="#000000"><br>
-            <hr />
-            <input type="checkbox" id="wpw-toggle-border-style">
+            <input id="wpw-default-border-color" value="#000000">
+        </div>
+        <div class="col-6">
             <label class="widget-properties-label">Border Style</label><br>
             <select id="wpw-default-border-style">
                 <option value="solid" selected>Solid</option>
                 <option value="dotted">Dotted</option>
                 <option value="dashed">Dashed</option>
-            </select><br>
-            <hr />
-            <input type="checkbox" id="wpw-toggle-font-color">
+            </select>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <input type="checkbox" id="wpw-toggle-default-font-color">
             <label class="widget-properties-label">Font Color</label>
             <input id="wpw-default-font-color" value="#000000">
         </div>
