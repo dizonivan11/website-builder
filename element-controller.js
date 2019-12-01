@@ -13,14 +13,6 @@ window.onload = function() {
 	};
 }
 
-String.prototype.format = function() {
-	a = this;
-	for (k in arguments) {
-		a = a.replace("{" + k + "}", arguments[k])
-	}
-	return a;
-}
-
 // Process messages coming from builder
 window.onmessage = function (e) {
 	switch (e.data.header) {
@@ -28,22 +20,22 @@ window.onmessage = function (e) {
 			selectedElement.innerHTML = e.data.message;
 			break;
 		case "clearCSS":
-			$(e.data.wid).removeAttr("style");
-			// Inform builder that the inline css is now cleared and ready for 'applyCSS' and 'applyHTML'
+			var l = e.data.elementSelectors.length;
+			for (var i = 0; i < l; i++) $(e.data.elementSelectors[i]).removeAttr("style");
 			window.top.postMessage({ header: "clearCSS" });
 			break;
 		case "applyCSS":
-			$(e.data.wid).css(e.data.propertyName, e.data.propertyFormat.format(e.data.propertyValue));
+			$(e.data.selector).css(e.data.propertyName, e.data.propertyValue);
 			break;
 		case "applyHTML":
 			$(e.data.selector).html(e.data.propertyValue);
 			break;
 		case "getHTML":
-				window.top.postMessage({
-					header: "bindHTML",
-					innerHtml: $(e.data.selector).html(),
-					input: e.data.input
-				});
+			window.top.postMessage({
+				header: "bindHTML",
+				innerHtml: $(e.data.selector).html(),
+				input: e.data.input
+			});
 			break;
 	}
 }

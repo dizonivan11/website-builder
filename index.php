@@ -127,6 +127,13 @@
 			return a;
 		}
 		function DisplayMessage(message) { messageBox.innerHTML = message; }
+		function AddSelectorsTo(parameters, selectors) {
+			for (var i = 0; i < parameters.length; i++) {
+				var parameter = parameters[i];
+				var selector = parameter.selectorFormat.format(widgetPropertiesSelectedId);
+				if (parameter.mode === "css" && !selectors.includes(selector)) selectors.push(selector);
+			}
+		}
 		function BindProperties(parameters) {
 			for (var i = 0; i < parameters.length; i++) {
 				switch(parameters[i].mode) {
@@ -137,7 +144,7 @@
 						// Request to bind innerHTML of widget inside workspace to the input
 						workspace.contentWindow.postMessage({
 						    header: "getHTML",
-						    selector: parameters[i].selectorFormat.format(parameters[i].selectorParameters),
+						    selector: parameters[i].selectorFormat.format(widgetPropertiesSelectedId),
 						    input: "#" + parameters[i].input
 						});
 						break;
@@ -146,25 +153,25 @@
 		}
 		function SendApplyCommandsToWorkspace(parameters) {
 			for (var i = 0; i < parameters.length; i++) {
-				switch(parameters[i].mode) {
+				var parameter = parameters[i];
+				switch(parameter.mode) {
 					case "css":
-						if (parameters[i].toggle != undefined && !$("#" + parameters[i].toggle).is(":checked")) {
+						if (parameter.toggle != undefined && !$("#" + parameter.toggle).is(":checked")) {
 							// Property has toggle and its unchecked, fully disregard this property
 							break;
 						}
 						workspace.contentWindow.postMessage({
 							header: "applyCSS",
-		    			    wid: "#" + widgetPropertiesSelectedId,
-		    			    propertyName: parameters[i].propertyName,
-		    			    propertyValue: document.getElementById(parameters[i].input).value,
-							propertyFormat: parameters[i].format
+		    			    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
+		    			    propertyName: parameter.propertyName,
+		    			    propertyValue: parameter.valueFormat.format(document.getElementById(parameter.input).value)
 						});
 						break;
 					case "html":
 						workspace.contentWindow.postMessage({
 							header: "applyHTML",
-		    			    selector: parameters[i].selectorFormat.format(parameters[i].selectorParameters),
-		    			    propertyValue: document.getElementById(parameters[i].input).value
+		    			    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
+		    			    propertyValue: document.getElementById(parameter.input).value
 						});
 						break;
 				}
@@ -208,7 +215,7 @@
 					widgetRequester.send("wpp=" + wpp);
 					break;
 				case "clearCSS":
-					// Continue applying properties after clearing inline css
+					// Continue applying properties after clearing any inline css inside the widget
 					SendApplyCommandsToWorkspace(applyParameters);
 					SendApplyCommandsToWorkspace(primaryApplyParameters);
 					widgetProperties.style.display = "none";
@@ -230,38 +237,43 @@
 		// Stores parameters to be process after clicking Apply Changes button
 		var applyParameters = [
 		    // Load functions for default properties
-		    { mode: "css", input: "wpw-default-margin-top", propertyName: "margin-top", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-margin-right", propertyName: "margin-right", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-margin-bottom", propertyName: "margin-bottom", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-margin-left", propertyName: "margin-left", format: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-margin-top", propertyName: "margin-top", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-margin-right", propertyName: "margin-right", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-margin-bottom", propertyName: "margin-bottom", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-margin-left", propertyName: "margin-left", valueFormat: "{0}px" },
 			
-		    { mode: "css", input: "wpw-default-border-top-width", propertyName: "border-top-width", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-border-right-width", propertyName: "border-right-width", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-border-bottom-width", propertyName: "border-bottom-width", format: "{0}px" },
-			{ mode: "css", input: "wpw-default-border-left-width", propertyName: "border-left-width", format: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-top-width", propertyName: "border-top-width", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-right-width", propertyName: "border-right-width", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-bottom-width", propertyName: "border-bottom-width", valueFormat: "{0}px" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-left-width", propertyName: "border-left-width", valueFormat: "{0}px" },
 			
-			{ mode: "css", input: "wpw-default-border-color", propertyName: "border-color", format: "{0}", toggle: "wpw-toggle-border-color" },
-			{ mode: "css", input: "wpw-default-border-style", propertyName: "border-style", format: "{0}", toggle: "wpw-toggle-border-style" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-color", propertyName: "border-color", valueFormat: "{0}", toggle: "wpw-toggle-border-color" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-border-style", propertyName: "border-style", valueFormat: "{0}", toggle: "wpw-toggle-border-style" },
 			
-		    { mode: "css", input: "wpw-default-padding-top", propertyName: "padding-top", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-padding-right", propertyName: "padding-right", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-padding-bottom", propertyName: "padding-bottom", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-padding-left", propertyName: "padding-left", format: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-top", propertyName: "padding-top", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-right", propertyName: "padding-right", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-bottom", propertyName: "padding-bottom", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-padding-left", propertyName: "padding-left", valueFormat: "{0}px" },
 			
-		    { mode: "css", input: "wpw-default-top-left-border-radius", propertyName: "border-top-left-radius", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-top-right-border-radius", propertyName: "border-top-right-radius", format: "{0}px" },
-		    { mode: "css", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", format: "{0}px" },
-			{ mode: "css", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", format: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-top-left-border-radius", propertyName: "border-top-left-radius", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-top-right-border-radius", propertyName: "border-top-right-radius", valueFormat: "{0}px" },
+		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-right-border-radius", propertyName: "border-bottom-right-radius", valueFormat: "{0}px" },
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-bottom-left-border-radius", propertyName: "border-bottom-left-radius", valueFormat: "{0}px" },
 
-			{ mode: "css", input: "wpw-default-font-color", propertyName: "color", format: "{0}", toggle: "wpw-toggle-font-color" }
+			{ mode: "css", selectorFormat: "#{0}", input: "wpw-default-font-color", propertyName: "color", valueFormat: "{0}", toggle: "wpw-toggle-font-color" }
 		];
 		// Primary Properties can add its parameters here
 		var primaryApplyParameters = [];
 		
 		function ApplyChanges() {
 			// These changes needs to be imformed inside workspace via postMessage
-			// Remove any inline style previously applied first before applying css for cleaner result
-			workspace.contentWindow.postMessage({ header: "clearCSS", wid: "#" + widgetPropertiesSelectedId });
+			// Remove any inline style previously applied inside the widget first before applying css for cleaner result
+			var selectors = [];
+			AddSelectorsTo(applyParameters, selectors);
+			AddSelectorsTo(primaryApplyParameters, selectors);
+			workspace.contentWindow.postMessage({ header: "clearCSS", elementSelectors: selectors });
+			console.log("Apply Changes Selectors: ");
+			console.log(selectors);
 		}
 	</script>
 </body>

@@ -1,27 +1,29 @@
 primaryApplyParameters.push({
     mode: "html",
-    input: "wpw-text-content",
     selectorFormat: "#{0} > div.inner-wrapper > p.text-content",
-    selectorParameters: [ widgetPropertiesSelectedId ]
+    input: "wpw-text-content"
 });
 primaryApplyParameters.push({
     mode: "css",
+    selectorFormat: "#{0}",
     input: "wpw-text-bold",
-    toggle: "wpw-text-bold",
     propertyName: "font-weight",
-    format: "{0}"
+    valueFormat: "{0}",
+    toggle: "wpw-text-bold"
 });
 primaryApplyParameters.push({
     mode: "css",
+    selectorFormat: "#{0}",
     input: "wpw-text-italic",
-    toggle: "wpw-text-italic",
     propertyName: "font-style",
-    format: "{0}"
+    valueFormat: "{0}",
+    toggle: "wpw-text-italic"
 });
 primaryApplyParameters.push({
     mode: "css",
+    selectorFormat: "#{0}",
     input: "wpw-text-underline",
-    toggle: "wpw-text-underline",
     propertyName: "text-decoration",
-    format: "{0}"
+    valueFormat: "{0}",
+    toggle: "wpw-text-underline"
 });
