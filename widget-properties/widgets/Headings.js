@@ -1,36 +1,36 @@
 primaryApplyParameters.push({
     mode: "html",
-    selectorFormat: "#{0} > div.inner-wrapper > p.text-content",
-    input: "wpw-text-content"
+    selectorFormat: "#{0} > div.inner-wrapper > *.main-headings",
+    input: "wpw-headings-content"
 });
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",
-    input: "wpw-text-text-align",
+    input: "wpw-headings-text-align",
     propertyName: "text-align",
     valueFormat: "{0}"
 });
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",
-    input: "wpw-text-text-style-bold",
+    input: "wpw-headings-text-style-bold",
     propertyName: "font-weight",
     valueFormat: "{0}",
-    toggle: "wpw-text-text-style-bold"
+    toggle: "wpw-headings-text-style-bold"
 });
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",
-    input: "wpw-text-text-style-italic",
+    input: "wpw-headings-text-style-italic",
     propertyName: "font-style",
     valueFormat: "{0}",
-    toggle: "wpw-text-text-style-italic"
+    toggle: "wpw-headings-text-style-italic"
 });
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",
-    input: "wpw-text-text-style-underline",
+    input: "wpw-headings-text-style-underline",
     propertyName: "text-decoration",
     valueFormat: "{0}",
-    toggle: "wpw-text-text-style-underline"
+    toggle: "wpw-headings-text-style-underline"
 });

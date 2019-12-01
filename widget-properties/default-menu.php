@@ -109,9 +109,19 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <input type="checkbox" id="wpw-toggle-default-font-color">
-            <label class="widget-properties-label">Font Color</label>
-            <input id="wpw-default-font-color" value="#000000">
+            <input type="checkbox" id="wpw-toggle-default-background-color">
+            <label class="widget-properties-label">Background Color</label>
+            <input id="wpw-default-background-color" value="#000000">
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <input type="checkbox" id="wpw-toggle-default-foreground-color">
+            <label class="widget-properties-label">Foreground Color</label>
+            <input id="wpw-default-foreground-color" value="#000000">
         </div>
     </div>
 </div>

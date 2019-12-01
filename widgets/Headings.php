@@ -1,3 +1,3 @@
 <div class="inner-wrapper">
-    <h3>Headings Text</h3>
+    <h3 class="main-headings">Headings Text</h3>
 </div>

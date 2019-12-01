@@ -67,6 +67,9 @@
 #widget-properties button {
     width: 100%;
 }
+#widget-properties select {
+    width: 100%;
+}
 #widget-properties textarea {
     width: 100%;
     height: 150px;
