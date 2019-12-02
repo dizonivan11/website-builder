@@ -108,16 +108,11 @@
 <hr />
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <label class="widget-properties-label">Background Color</label>
             <input id="wpw-default-background-color">
         </div>
-    </div>
-</div>
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <label class="widget-properties-label">Foreground Color</label>
             <input id="wpw-default-foreground-color">
         </div>

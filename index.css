@@ -6,7 +6,7 @@
     --menu-height: 50px;
     --toolbox-width: 100px;
     --toolbox-widgets-width: 200px;
-    --widget-properties-width: 250px;
+    --widget-properties-width: 300px;
 }
 .f-right {
     float: right;

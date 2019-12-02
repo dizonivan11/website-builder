@@ -9,7 +9,7 @@
 <hr />
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-4">
             <label class="widget-properties-label">Text Align</label><br>
             <select id="wpw-headings-text-align">
                 <option value="" selected>Left</option>
@@ -18,19 +18,14 @@
                 <option value="justify">Justify</option>
             </select>
         </div>
-    </div>
-</div>
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             <label class="widget-properties-label">Text Style</label><br>
             <input type="checkbox" id="wpw-headings-text-style-bold" value="700">
-            <label for="wpw-headings-text-style-bold">Bold</label><br>
+            <label for="wpw-headings-text-style-bold"><b>Bold</b></label>
             <input type="checkbox" id="wpw-headings-text-style-italic" value="italic">
-            <label for="wpw-headings-text-style-italic">Italic</label><br>
+            <label for="wpw-headings-text-style-italic"><i>Italic</i></label>
             <input type="checkbox" id="wpw-headings-text-style-underline" value="underline">
-            <label for="wpw-headings-text-style-underline">Underline</label>
+            <label for="wpw-headings-text-style-underline"><u>Underline</u></label>
         </div>
     </div>
 </div>
