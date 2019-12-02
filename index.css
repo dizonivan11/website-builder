@@ -1,12 +1,14 @@
 * {
     --primary-color: #8dca23;
     --secondary-color: #282828;
-    --tertiary-color: #282828ef;
-    --fourth-color: #efefef;
+    --tertiary-color: #efefef;
+    --fourth-color: #282828c8;
+    --primary-color-darker: #73a122;
     --menu-height: 50px;
     --toolbox-width: 100px;
     --toolbox-widgets-width: 200px;
     --widget-properties-width: 300px;
+    font-family: 'Changa';
 }
 .f-right {
     float: right;
@@ -31,17 +33,26 @@
     height: calc(100vh - var(--menu-height));
     padding: 8px;
 }
-.tool {
-    font-size: 12px;
-    font-weight: bold;
-    width: 100%;
-    background-color: #efefef;
-    border: 2px solid #ccc;
+button {
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px var(--secondary-color);
+    border: none;
     min-height: 32px;
+    background-color: var(--primary-color-darker);
+    font-size: 14px;
+    color: white;
+}
+.menu-button {
+    margin-right: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.tool {
+    width: 100%;
     margin-bottom: 8px;
 }
 #toolbox-widgets {
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-color);
     float: left;
     width: var(--toolbox-widgets-width);
     height: calc(100vh - var(--menu-height));
@@ -55,7 +66,7 @@ hr {
     border-color: #777;
 }
 #widget-properties {
-    background-color: var(--fourth-color);
+    background-color: var(--tertiary-color);
     float: right;
     width: var(--widget-properties-width);
     height: calc(100vh - var(--menu-height));
@@ -66,17 +77,13 @@ hr {
     overflow-y: auto;
     font-size: 12px;
 }
-#widget-properties input:not([type=checkbox]) {
-    width: 100%;
-}
-#widget-properties button {
-    width: 100%;
-}
-#widget-properties select {
+#widget-properties input:not([type=checkbox]),
+#widget-properties button,
+#widget-properties select,
+#widget-properties textarea {
     width: 100%;
 }
 #widget-properties textarea {
-    width: 100%;
     height: 150px;
     resize: none;
 }
@@ -149,11 +156,11 @@ hr {
     color: white;
 }
 #spacing-border tr td.padding {
-    background-color: var(--tertiary-color);
+    background-color: var(--fourth-color);
     color: white;
 }
 #spacing-border tr td.inner {
-    background-color: var(--tertiary-color);
+    background-color: var(--fourth-color);
 }
 #spacing-border tr td.radius {
     background-color: var(--primary-color);

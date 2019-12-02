@@ -1,3 +1,7 @@
+<?php
+	$siteID = "sites/";
+	if (isset($_GET["sid"])) $siteID .= $_GET["sid"];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Changa&display=swap" rel="stylesheet">
 	<script src="html5kellycolorpicker.min.js"></script>
 	<link rel="stylesheet" href="index.css">
 </head>
@@ -20,8 +25,8 @@
 				<div id="message-box" class="v-center">Feedbacks here....</div>
 			</div>
 			<div class="col-5">
-				<button class="f-right v-center">Publish</button>
-				<button class="f-right v-center">Preview</button>
+				<button class="f-right v-center menu-button">Publish</button>
+				<button class="f-right v-center menu-button">Preview</button>
 			</div>
 		</div>
 	</div>
@@ -37,7 +42,9 @@
 	<div id="widget-properties" style="display: none;"></div>
 
 	<div id="workspace-container">
-		<iframe id="workspace" src="templates/blank"></iframe>
+<?php
+		echo("<iframe id='workspace' src='$siteID'></iframe>");
+?>
 	</div>
 	<script type="text/javascript">
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
