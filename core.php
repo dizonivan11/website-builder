@@ -29,4 +29,13 @@
 	function createDropZone() {
 		echo('<button class="drop-zone" onclick="DropElement(this);">Add Selected Element</button>');
 	}
+
+	function deleteFiles($target) {
+		if(is_dir($target)){
+			// GLOB_MARK adds a slash to directories returned
+			$files = glob($target . '*', GLOB_MARK);
+			foreach($files as $file) deleteFiles($file);
+			rmdir($target);
+		} else if (is_file($target)) unlink($target);
+	}
 ?>

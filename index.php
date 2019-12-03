@@ -1,6 +1,9 @@
 <?php
-	$siteID = "sites/";
-	if (isset($_GET["sid"])) $siteID .= $_GET["sid"];
+	$siteID = "";
+	if (isset($_GET["sid"])) {
+		$siteID = $_GET["sid"];
+		if (substr($siteID, strlen($siteID) - 1, 1) != '/') $siteID .= '/';
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +29,7 @@
 			</div>
 			<div class="col-5">
 				<button class="f-right v-center menu-button">Publish</button>
-				<button class="f-right v-center menu-button">Preview</button>
+				<button class="f-right v-center menu-button" onclick="PreviewWebsite()">Preview</button>
 			</div>
 		</div>
 	</div>
@@ -43,7 +46,7 @@
 
 	<div id="workspace-container">
 <?php
-		echo("<iframe id='workspace' src='$siteID'></iframe>");
+		echo("<iframe id='workspace' src='sites/$siteID'></iframe>");
 ?>
 	</div>
 	<script type="text/javascript">
@@ -58,15 +61,13 @@
 <?php
 			// Load all widgets
 			$dir = "widgets/";
-			$files = scandir($dir);
+			$files = glob($dir . "*");
 
-			// Select all widget filepaths
-			// Offsets to two (2)
-			// First element refers to the directory itself (./)
-			// Second element refers to the parent directory (../)
+			// Selects all widget filepaths
+			echo("var widgetDir = '$dir';\n");
 			echo("var widgetFiles = [");
-			for ($i = 2; $i < count($files); $i++) {
-				if ($i > 2) echo ", ";
+			for ($i = 0; $i < count($files); $i++) {
+				if ($i > 0) echo ", ";
 				echo('"' . $files[$i] . '"');
 			}
 			echo("];\n");
@@ -87,8 +88,8 @@
 				// Create widget tool with filepath value
 				var widgetTool = document.createElement('button');
 				widgetTool.className = "tool";
-				widgetTool.innerHTML = widgetFiles[i].split('.')[0];
-				widgetTool.value = "widgets/" + widgetFiles[i];
+				widgetTool.innerHTML = widgetFiles[i].substr(widgetFiles[i].indexOf(widgetDir) + widgetDir.length).split('.')[0];
+				widgetTool.value = widgetFiles[i];
 				widgetTool.onclick = function() {
 					// Send the widget content to workspace's selected-element innerHTML
 					// Using the tool's filepath value
@@ -314,6 +315,21 @@
 			workspace.contentWindow.postMessage({ header: "clearCSS", elementSelectors: selectors });
 			console.log("Apply Changes Selectors: ");
 			console.log(selectors);
+		}
+
+		function PreviewWebsite() {
+			var previewRequester = new XMLHttpRequest();
+			previewRequester.open("POST", "preview-loader.php", true);
+			previewRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			previewRequester.onreadystatechange = function() {
+            	if (this.readyState == 4 && this.status == 200) {
+					// For debugging purpose only
+					console.log(this.responseText);
+            	}
+        	};
+<?php
+			echo("previewRequester.send('pp=' + 'previews/$siteID');");
+?>
 		}
 	</script>
 </body>
