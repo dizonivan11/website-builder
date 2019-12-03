@@ -1,8 +1,9 @@
 <?php
-	$siteID = "";
 	if (isset($_GET["sid"])) {
 		$siteID = $_GET["sid"];
 		if (substr($siteID, strlen($siteID) - 1, 1) != '/') $siteID .= '/';
+	} else {
+		$siteID = "empty.php";
 	}
 ?>
 <!DOCTYPE html>
@@ -328,7 +329,7 @@
             	}
         	};
 <?php
-			echo("previewRequester.send('pp=' + 'previews/$siteID');");
+			echo("previewRequester.send('sid=' + '$siteID');");
 ?>
 		}
 	</script>
