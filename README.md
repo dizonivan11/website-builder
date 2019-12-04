@@ -3,7 +3,7 @@
 ***
 **Current TODO:**
 <ol>
-<li>Previewing (In Progress)</li>
+<li>Saving website progress (Hard Save first, not Realtime) when clicking either publish or preview</li>
 <li>Global Settings</li>
 </ol>
 
@@ -29,6 +29,7 @@
 
 **Done TODO**
 <ol>
+<li>Previewing Site</li>
 <li>Site ID GET parameter</li>
 <li>Binding of CSS in widget property fields</li>
 <li>Load current widget property values on input fields before opening widget properties window</li>
