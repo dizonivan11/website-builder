@@ -4,6 +4,7 @@ var selectedElementOffset = 15;
 window.onload = function() {
 	// Create and add selected element controller
 	selectedElement.id = "selected-element";
+	selectedElement.setAttribute("data-flag", "builder-element");
 	document.body.appendChild(selectedElement);
 
 	// selected element follows cursor
@@ -46,6 +47,18 @@ window.onmessage = function (e) {
 				innerHtml: $(e.data.selector).html(),
 				input: e.data.input
 			});
+			break;
+		case "savePage":
+				$.ajax({
+					url: '../../../page-saver.php',
+					type: 'POST',
+					// Pass array of 512 bytes string chunks containing whole HTML to file to server
+					// data: { fileContent: document.documentElement.outerHTML.match(/(.|[\r\n]){1,512}/g) }
+					data: { fileContent: document.documentElement.outerHTML, filePath: e.data.webPagePath },
+					success: function(result) {
+						window.top.postMessage({ header: "pageSaved", callback: e.data.successCallback, debug: result });
+					}
+				});
 			break;
 	}
 }

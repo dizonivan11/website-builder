@@ -4,7 +4,6 @@
 **Current TODO:**
 <ol>
 <li>Saving website progress (Hard Save first, not Realtime) when clicking either publish or preview</li>
-<li>Global Settings</li>
 </ol>
 
 **TODO List:**

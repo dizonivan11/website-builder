@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="../global.css">
 </head>
 <body>
-	<div id="site-header">
+	<header>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</header>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="site-footer">
+	<footer>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -52,6 +52,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>

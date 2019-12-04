@@ -29,8 +29,8 @@
 				<div id="message-box" class="v-center">Feedbacks here....</div>
 			</div>
 			<div class="col-5">
-				<button class="f-right v-center menu-button">Publish</button>
-				<button class="f-right v-center menu-button" onclick="SaveWebsite(PreviewWebsite)">Preview</button>
+				<button class="f-right v-center menu-button" onclick="#">Publish</button>
+				<button class="f-right v-center menu-button" onclick="SaveWebpage('preview')">Preview</button>
 			</div>
 		</div>
 	</div>
@@ -47,7 +47,7 @@
 
 	<div id="workspace-container">
 <?php
-		echo("<iframe id='workspace' src='sites/$siteID'></iframe>");
+		echo("<iframe id='workspace' src='sites/" . $siteID . "home/index.php'></iframe>");
 ?>
 	</div>
 	<script type="text/javascript">
@@ -267,6 +267,17 @@
 					// Get the Inner HTML result of selected widget then apply to target input
 					$(e.data.input).val(e.data.innerHtml);
 					break;
+				case "pageSaved":
+					DisplayMessage("Webpage saved");
+					switch (e.data.callback) {
+						case "preview":
+							PreviewWebsite();
+							break;
+						case "publish":
+							break;
+					}
+					// console.log(e.data.debug);
+					break;
 			}
 		}
 
@@ -318,19 +329,12 @@
 			console.log(selectors);
 		}
 
-		function SaveWebsite(callback) {
-			var saveRequester = new XMLHttpRequest();
-			saveRequester.open("POST", "site-saver.php", true);
-			saveRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-			saveRequester.onreadystatechange = function() {
-            	if (this.readyState == 4 && this.status == 200) {
-					DisplayMessage("Website saved");
-					callback();
-            	}
-        	};
-<?php
-			echo("saveRequester.send('sid=' + '$siteID');");
-?>
+		function SaveWebpage(callback) {
+			workspace.contentWindow.postMessage({
+				header: "savePage",
+				webPagePath: workspace.getAttribute("src"),
+				successCallback: callback
+			});
 		}
 
 		function PreviewWebsite() {
@@ -345,7 +349,7 @@
             	}
         	};
 <?php
-			echo("previewRequester.send('sid=' + '$siteID');");
+			echo("previewRequester.send('sid=$siteID');");
 ?>
 		}
 	</script>

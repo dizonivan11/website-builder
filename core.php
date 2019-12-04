@@ -45,8 +45,8 @@
 				RemoveBuilderOnlyElements($file);
 			} else if (is_file($file)) {
 				if (pathinfo($file, PATHINFO_EXTENSION) == "php") {
-					$doc = new DomDocument();
-					$doc->loadHTMLFile($file);
+					$doc = new DomDocument;
+					$doc->loadHTMLFile($file, LIBXML_NOERROR);
 					$xpath = new DOMXpath($doc);
 					$elements = $xpath->query("//*[contains(@data-flag, 'builder-element')]");
 					if (!is_null($elements)) {

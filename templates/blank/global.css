@@ -4,20 +4,20 @@
 .container-fluid {
 	padding: 80px 40px 80px 40px;
 }
-#site-header {
+header {
 	background-color: #efefef;
 	box-shadow: 0px 4px 8px #aaa;
 }
-#site-header .container {
+header .container {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
-#site-footer {
+footer {
 	color: white;
 	background-color: #242424;
 	box-shadow: 0px -4px 8px #aaa;
 }
-#site-footer .container {
+footer .container {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
