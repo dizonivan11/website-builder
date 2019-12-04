@@ -1,4 +1,3 @@
-<?php include_once('../../../core.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,49 +9,49 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<!-- Custom Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Changa&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Changa&amp;display=swap" rel="stylesheet">
 
 	<!-- Inject Builder Element Controller Style & Script -->
-	<link rel="stylesheet" type="text/css" href="../../../element-controller.css">
-	<script type="text/javascript" src="../../../element-controller.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../element-controller.css" data-flag="builder-element">
+	<script type="text/javascript" src="../../../element-controller.js" data-flag="builder-element"></script>
 	
 	<!-- Global Style -->
 	<link rel="stylesheet" type="text/css" href="../global.css">
 </head>
 <body>
-	<header>
+	<div id="site-header">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<?php createDropZone(); ?>
+					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
 				</div>
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<?php createDropZone(); ?>
+					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
 				</div>
-			</div>
-		</div>
-	</header>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<?php createDropZone(); ?>
 			</div>
 		</div>
 	</div>
-	<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+			</div>
+		</div>
+	</div>
+	<div id="site-footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<?php createDropZone(); ?>
+					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<?php createDropZone(); ?>
+					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<?php createDropZone(); ?>
+					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
 				</div>
 			</div>
 		</div>
-	</footer>
+	</div>
 </body>
 </html>

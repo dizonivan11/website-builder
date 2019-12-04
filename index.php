@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-5">
 				<button class="f-right v-center menu-button">Publish</button>
-				<button class="f-right v-center menu-button" onclick="PreviewWebsite()">Preview</button>
+				<button class="f-right v-center menu-button" onclick="SaveWebsite(PreviewWebsite)">Preview</button>
 			</div>
 		</div>
 	</div>
@@ -318,14 +318,30 @@
 			console.log(selectors);
 		}
 
+		function SaveWebsite(callback) {
+			var saveRequester = new XMLHttpRequest();
+			saveRequester.open("POST", "site-saver.php", true);
+			saveRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			saveRequester.onreadystatechange = function() {
+            	if (this.readyState == 4 && this.status == 200) {
+					DisplayMessage("Website saved");
+					callback();
+            	}
+        	};
+<?php
+			echo("saveRequester.send('sid=' + '$siteID');");
+?>
+		}
+
 		function PreviewWebsite() {
 			var previewRequester = new XMLHttpRequest();
 			previewRequester.open("POST", "preview-loader.php", true);
 			previewRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			previewRequester.onreadystatechange = function() {
             	if (this.readyState == 4 && this.status == 200) {
-					// For debugging purpose only
-					console.log(this.responseText);
+					// Open preview link when generating preview completed
+					// Preview Link: this.responseText
+					window.open(this.responseText, '_blank');
             	}
         	};
 <?php

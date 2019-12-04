@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Home Page</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -12,8 +12,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Changa&amp;display=swap" rel="stylesheet">
 
 	<!-- Inject Builder Element Controller Style & Script -->
-	<link rel="stylesheet" type="text/css" href="../../../element-controller.css" data-flag="builder-element">
-	<script type="text/javascript" src="../../../element-controller.js" data-flag="builder-element"></script>
+	
+	
 	
 	<!-- Global Style -->
 	<link rel="stylesheet" type="text/css" href="../global.css">
@@ -23,10 +23,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+					
 				</div>
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+					
 				</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+				
 			</div>
 		</div>
 	</div>
@@ -42,13 +42,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+					
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+					
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+					
 				</div>
 			</div>
 		</div>
