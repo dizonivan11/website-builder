@@ -11,8 +11,7 @@
 <li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
 <li>Remove [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Color Pallete</li>
-<li>Widget Background</li>
-<li>Applying Widget Property changes</li>
+<li>Widget Background Image</li>
 <li>Global Settings</li>
 <li>Adding Rows</li>
 <li>Deleting Rows</li>
@@ -34,6 +33,7 @@
 <li>Load current widget property values on input fields before opening widget properties window</li>
 <li>Revise code for applying css and html changes</li>
 <li>Applying Widget Property changes</li>
+<li>Widget Background Color</li>
 </ol>
 
 **Dropped TODO**
