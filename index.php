@@ -29,8 +29,8 @@
 				<div id="message-box" class="v-center">Feedbacks here....</div>
 			</div>
 			<div class="col-5">
-				<button class="f-right v-center menu-button" onclick="#">Publish</button>
-				<button class="f-right v-center menu-button" onclick="SaveWebpage('preview')">Preview</button>
+				<button class="f-right v-center menu-button" onclick="SaveWebpage('publish');">Publish</button>
+				<button class="f-right v-center menu-button" onclick="SaveWebpage('preview');">Preview</button>
 			</div>
 		</div>
 	</div>
@@ -274,6 +274,7 @@
 							PreviewWebsite();
 							break;
 						case "publish":
+							// TODO: publishing site here
 							break;
 					}
 					// console.log(e.data.debug);

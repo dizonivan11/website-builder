@@ -3,7 +3,7 @@
 ***
 **Current TODO:**
 <ol>
-<li>Saving website progress (Hard Save first, not Realtime) when clicking either publish or preview</li>
+<li>Deleting Widgets</li>
 </ol>
 
 **TODO List:**
@@ -27,6 +27,7 @@
 
 **Done TODO**
 <ol>
+<li>Saving website progress (Hard Save first, not Realtime yet) when clicking either publish or preview</li>
 <li>Previewing Site</li>
 <li>Site ID GET parameter</li>
 <li>Binding of CSS in widget property fields</li>

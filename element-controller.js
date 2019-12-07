@@ -1,11 +1,28 @@
 var selectedElement = document.createElement("div");
 var selectedElementOffset = 15;
 
+function DropFunction() {
+	if (selectedElement.innerHTML != "") {
+		// If there is selected widget, function as drop zone
+		DropElement(this);
+	} else {
+		// Else, open properties window
+		window.top.postMessage({
+			header: "open-widget-properties",
+			widgetID: this.id,
+			widgetPropertiesPath: this.getAttribute("widget-name")
+		});
+	}
+}
+
 window.onload = function() {
 	// Create and add selected element controller
 	selectedElement.id = "selected-element";
 	selectedElement.setAttribute("data-flag", "builder-element");
 	document.body.appendChild(selectedElement);
+
+	// Add Drop click events in all widget-wrapper elements
+	$(".widget-wrapper").click(function() { DropFunction.call(this); });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
