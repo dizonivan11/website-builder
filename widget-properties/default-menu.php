@@ -8,10 +8,10 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <button onclick="widgetProperties.style.display = 'none';">Close</button>
+            <button onclick="CloseWidgetPropertiesWindow();">Close</button>
         </div>
         <div class="col-6">
-            <button>Delete</button>
+            <button onclick="DeleteSelectedWidget();">Delete</button>
         </div>
     </div>
 </div>

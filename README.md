@@ -1,14 +1,16 @@
 # website-builder
-**Technologies Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker**
+**Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker**
 ***
 **Current TODO:**
 <ol>
-<li>Deleting Widgets</li>
+<li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
+<li>[Realtime Saving] Save to webpage file upon value change in Widget Properties Window</li>
+<li>[Realtime Saving] Save to webpage file upon dropping new widget to column</li>
+<li>[Realtime Saving] Save to webpage file upon deleting widget</li>
 </ol>
 
 **TODO List:**
 <ol>
-<li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
 <li>Remove [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Color Pallete</li>
 <li>Widget Background Image</li>
@@ -27,6 +29,7 @@
 
 **Done TODO**
 <ol>
+<li>Deleting Widgets</li>
 <li>Saving website progress (Hard Save first, not Realtime yet) when clicking either publish or preview</li>
 <li>Previewing Site</li>
 <li>Site ID GET parameter</li>

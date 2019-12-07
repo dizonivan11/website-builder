@@ -231,6 +231,10 @@
         			};
 					widgetRequester.send("wpp=" + wpp);
 					break;
+				case "deleteWidget":
+					DisplayMessage("Widget " + e.data.selector + " removed");
+					CloseWidgetPropertiesWindow();
+					break;
 				case "clearCSS":
 					// Continue applying properties after clearing any inline css inside the widget
 					SendApplyCommandsToWorkspace(applyParameters);
@@ -328,6 +332,15 @@
 			workspace.contentWindow.postMessage({ header: "clearCSS", elementSelectors: selectors });
 			console.log("Apply Changes Selectors: ");
 			console.log(selectors);
+		}
+
+		function CloseWidgetPropertiesWindow() {
+			widgetPropertiesSelectedId = "-1";
+			widgetProperties.style.display = "none";
+		}
+
+		function DeleteSelectedWidget() {
+			workspace.contentWindow.postMessage({ header: "deleteWidget", selector: "#" + widgetPropertiesSelectedId });
 		}
 
 		function SaveWebpage(callback) {

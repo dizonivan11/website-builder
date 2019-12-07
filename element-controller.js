@@ -1,7 +1,7 @@
 var selectedElement = document.createElement("div");
 var selectedElementOffset = 15;
 
-function DropFunction() {
+function ApplyDropAndOpenEvent() {
 	if (selectedElement.innerHTML != "") {
 		// If there is selected widget, function as drop zone
 		DropElement(this);
@@ -22,7 +22,7 @@ window.onload = function() {
 	document.body.appendChild(selectedElement);
 
 	// Add Drop click events in all widget-wrapper elements
-	$(".widget-wrapper").click(function() { DropFunction.call(this); });
+	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent.call(this); });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
@@ -36,6 +36,13 @@ window.onmessage = function (e) {
 	switch (e.data.header) {
 		case "selectWidget":
 			selectedElement.innerHTML = e.data.message;
+			break;
+		case "deleteWidget":
+			var parent = $(e.data.selector).parent();
+			$(e.data.selector).remove();
+			// Maximize drop zone if the deleted widget was the last widget in column
+			if (parent.children().length == 1) MaximizeDropZone(parent.children()[0]);
+			window.top.postMessage({ header: "deleteWidget", selector: e.data.selector });
 			break;
 		case "clearCSS":
 			var l = e.data.elementSelectors.length;
@@ -93,24 +100,9 @@ function DropElement(e) {
 		// Also, inner-wrapper is used to disable pointer events inside it so that we can select the -
 		// widget-wrapper for opening menus not the elements of the widget.
 		// ----------
-		if (isEmpty) {
-			e.className = "drop-zone-min";
-			e.innerHTML = "+";
-		}
+		if (isEmpty) MinimizeDropZone(e);
 		var widgetWrapper = selectedElement.childNodes[0];
-		widgetWrapper.onclick = function() {
-			if (selectedElement.innerHTML != "") {
-				// If there is selected widget, function as drop zone
-				DropElement(this);
-			} else {
-				// Else, open properties window
-				window.top.postMessage({
-					header: "open-widget-properties",
-					widgetID: this.id,
-					widgetPropertiesPath: this.getAttribute("widget-name")
-				});
-			}
-		}
+		$(widgetWrapper).click(function() { ApplyDropAndOpenEvent.call(this); });
 		parent.insertBefore(widgetWrapper, e);
 		selectedElement.innerHTML = "";
 		
@@ -120,4 +112,14 @@ function DropElement(e) {
 		// Inform builder to display a message in feedback box
 		window.top.postMessage({ header: "feedback", message: "No selected widget" });
 	}
+}
+
+function MinimizeDropZone(dz) {
+	dz.className = "drop-zone-min";
+	dz.innerHTML = "+";
+}
+
+function MaximizeDropZone(dz) {
+	dz.className = "drop-zone";
+	dz.innerHTML = "Add Selected Element";
 }
