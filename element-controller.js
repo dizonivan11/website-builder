@@ -25,12 +25,24 @@ window.onload = function() {
 
 	// TODOS:
 	// Validate if all widget wrappers have id, add id to widgets without id
+	// Async request turned off to avoid requesting the same id at the same time
 	// Add click events to display rows properties window excusively for rows
 	// Row Properties Window to be added later
-	var wws = $(".row-wrapper");
-	for (var w = 0; w < wws.length; w++) {
-		var row = wws[w];
-		row.onclick = function() { window.top.postMessage({ header: "open-row-properties", rid: row.id }); };
+	var rws = $(".row-wrapper");
+	for (var r = 0; r < rws.length; r++) {
+		var row = rws[r];
+		if (row.id == "") {
+			$.ajax({
+				url: "../../../request-current-eid.php",
+				method: "POST",
+				async: false,
+				success: function(result) {
+					console.log(result);
+					row.id = result;
+					row.onclick = function() { window.top.postMessage({ header: "open-row-properties", rid: result }); };
+				}
+			});
+		}
 	}
 
 	// Add Drop click events in all widget-wrapper elements

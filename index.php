@@ -231,6 +231,11 @@
         			};
 					widgetRequester.send("wpp=" + wpp);
 					break;
+				case "open-row-properties":
+					// TODO: Open Row Properties Window
+					var rid = e.data.rid;
+					console.log(rid);
+					break;
 				case "deleteWidget":
 					DisplayMessage("Widget " + e.data.selector + " removed");
 					CloseWidgetPropertiesWindow();
