@@ -232,7 +232,7 @@
 					widgetRequester.send("wpp=" + wpp);
 					break;
 				case "open-row-properties":
-					// TODO: Open Row Properties Window
+					// Open Row Properties Window
 					var rid = e.data.rid;
 					console.log(rid);
 					break;

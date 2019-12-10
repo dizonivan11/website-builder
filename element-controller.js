@@ -23,7 +23,6 @@ window.onload = function() {
 	selectedElement.setAttribute("data-flag", "builder-element");
 	document.body.appendChild(selectedElement);
 
-	// TODOS:
 	// Validate if all widget wrappers have id, add id to widgets without id
 	// Async request turned off to avoid requesting the same id at the same time
 	// Add click events to display rows properties window excusively for rows
