@@ -37,7 +37,6 @@ window.onload = function() {
 				method: "POST",
 				async: false,
 				success: function(result) {
-					console.log(result);
 					row.id = result;
 					row.onclick = function() { window.top.postMessage({ header: "open-row-properties", rid: result }); };
 				}
