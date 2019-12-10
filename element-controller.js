@@ -1,18 +1,20 @@
 var selectedElement = document.createElement("div");
 var selectedElementOffset = 15;
 
-function ApplyDropAndOpenEvent() {
+function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
 		// If there is selected widget, function as drop zone
-		DropElement(this);
+		DropElement(e, ev);
 	} else {
 		// Else, open properties window
 		window.top.postMessage({
 			header: "open-widget-properties",
-			widgetID: this.id,
-			widgetPropertiesPath: this.getAttribute("widget-name")
+			widgetID: e.id,
+			widgetPropertiesPath: e.getAttribute("widget-name")
 		});
 	}
+	// Avoid firing events to elements under this element (eg. parent of this element)
+	ev.stopPropagation();
 }
 
 window.onload = function() {
@@ -21,8 +23,18 @@ window.onload = function() {
 	selectedElement.setAttribute("data-flag", "builder-element");
 	document.body.appendChild(selectedElement);
 
+	// TODOS:
+	// Validate if all widget wrappers have id, add id to widgets without id
+	// Add click events to display rows properties window excusively for rows
+	// Row Properties Window to be added later
+	var wws = $(".row-wrapper");
+	for (var w = 0; w < wws.length; w++) {
+		var row = wws[w];
+		row.onclick = function() { window.top.postMessage({ header: "open-row-properties", rid: row.id }); };
+	}
+
 	// Add Drop click events in all widget-wrapper elements
-	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent.call(this); });
+	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent(this, event); });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
@@ -87,7 +99,7 @@ window.onmessage = function (e) {
 	}
 }
 
-function DropElement(e) {
+function DropElement(e, ev) {
 	var isEmpty = e.className == "drop-zone";
 	var parent = e.parentElement;
 	if (selectedElement.innerHTML != "") {
@@ -102,7 +114,7 @@ function DropElement(e) {
 		// ----------
 		if (isEmpty) MinimizeDropZone(e);
 		var widgetWrapper = selectedElement.childNodes[0];
-		$(widgetWrapper).click(function() { ApplyDropAndOpenEvent.call(this); });
+		$(widgetWrapper).click(function() { ApplyDropAndOpenEvent(this, event); });
 		parent.insertBefore(widgetWrapper, e);
 		selectedElement.innerHTML = "";
 		
@@ -112,6 +124,8 @@ function DropElement(e) {
 		// Inform builder to display a message in feedback box
 		window.top.postMessage({ header: "feedback", message: "No selected widget" });
 	}
+	// Avoid firing events to elements under this element (eg. parent of this element)
+	ev.stopPropagation();
 }
 
 function MinimizeDropZone(dz) {

@@ -3,19 +3,19 @@
 ***
 **Current TODO:**
 <ol>
-<li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
-<li>[Realtime Saving] Save to webpage file upon value change in Widget Properties Window</li>
-<li>[Realtime Saving] Save to webpage file upon dropping new widget to column</li>
-<li>[Realtime Saving] Save to webpage file upon deleting widget</li>
+<li>Adding Rows</li>
 </ol>
 
 **TODO List:**
 <ol>
+<li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
+<li>[Realtime Saving] Save to webpage file upon value change in Widget Properties Window</li>
+<li>[Realtime Saving] Save to webpage file upon dropping new widget to column</li>
+<li>[Realtime Saving] Save to webpage file upon deleting widget</li>
 <li>Remove [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Color Pallete</li>
 <li>Widget Background Image</li>
 <li>Global Settings</li>
-<li>Adding Rows</li>
 <li>Deleting Rows</li>
 <li>Sorting Rows</li>
 <li>Adding Columns</li>

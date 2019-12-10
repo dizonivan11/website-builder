@@ -20,35 +20,41 @@
 </head>
 <body>
 	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
-				</div>
-				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+		<div class="row-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</header>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+	<div class="row-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+				</div>
 			</div>
 		</div>
 	</div>
 	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
-				</div>
-				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
-				</div>
-				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<button class="drop-zone" onclick="DropElement(this);" data-flag="builder-element">Add Selected Element</button>
+		<div class="row-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div>
+					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div>
+					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div>
 				</div>
 			</div>
 		</div>

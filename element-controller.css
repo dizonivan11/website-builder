@@ -23,6 +23,9 @@
 .widget-wrapper:hover {
 	outline: 2px solid #8dca23;
 }
+.row-wrapper:hover {
+	outline: 2px dashed #8dca23;
+}
 #selected-element {
 	position: fixed;
 	pointer-events: none;
