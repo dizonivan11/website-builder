@@ -80,12 +80,22 @@ hr {
 #widget-properties input:not([type=checkbox]),
 #widget-properties button,
 #widget-properties select,
-#widget-properties textarea {
+#widget-properties div.richTextEditor {
     width: 100%;
 }
-#widget-properties textarea {
-    height: 150px;
-    resize: none;
+#widget-properties button.richTextButton {
+    width: 32px;
+    box-shadow: none;
+    border-radius: 5px 5px 0px 0px ;
+    border-width: 1px 1px 0px 1px;
+    border-style: solid;
+    border-color: #777;
+}
+#widget-properties div.richTextEditor {
+    min-height: 200px;
+    padding: 8px;
+    border: 1px solid #777;
+    background-color: white;
 }
 #widget-properties input[type=number]::-webkit-inner-spin-button, 
 #widget-properties input[type=number]::-webkit-outer-spin-button { 
@@ -131,7 +141,7 @@ hr {
 #spacing-border {
     width: 100%;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #777;
 }
 #spacing-border tr td {
     border: none !important;
@@ -168,4 +178,34 @@ hr {
 #wpw-color-picker {
     width: 100% !important;
     height: auto !important;
+}
+#dialog-canceller {
+    background-color: #00000020;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+#builder-dialog {
+	background-color: var(--secondary-color);
+    color: white;
+    position: fixed;
+    box-shadow: 0px 0px 4px var(--secondary-color);
+}
+.dialog-top {
+    background-color: var(--primary-color-darker);
+    padding-left: 5px;
+}
+.dialog-top div {
+    display: inline;
+}
+.dialog-title {
+    user-select: none;
+}
+.dialog-content {
+	padding: 15px;
+}
+.icon-button {
+    width: 18px;
 }

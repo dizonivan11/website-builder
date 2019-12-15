@@ -3,6 +3,7 @@ primaryApplyParameters.push({
     selectorFormat: "#{0} > div.inner-wrapper > *.main-headings",
     input: "wpw-headings-content"
 });
+PreventHTMLPaste("#wpw-headings-content");
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",

@@ -3,6 +3,7 @@ primaryApplyParameters.push({
     selectorFormat: "#{0} > div.inner-wrapper > p.text-content",
     input: "wpw-text-content"
 });
+PreventHTMLPaste("#wpw-text-content");
 primaryApplyParameters.push({
     mode: "css",
     selectorFormat: "#{0}",

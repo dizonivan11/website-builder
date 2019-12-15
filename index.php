@@ -17,6 +17,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Changa&display=swap" rel="stylesheet">
 	<script src="html5kellycolorpicker.min.js"></script>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -44,6 +45,14 @@
 	<!-- 'display: none;' style applied inline to fix first event not firing -->
 	<div id="toolbox-widgets" style="display: none;"></div>
 	<div id="widget-properties" style="display: none;"></div>
+	<div id="dialog-canceller" style="display: none;" onclick="CloseDialog()"></div>
+	<div id="builder-dialog" style="display: none;">
+		<div class="dialog-top">
+			<div class="dialog-title">Dialog Title</div>
+			<div class="f-right"><span class="fa fa-close icon-button" onclick="CloseDialog()"></span></div>
+		</div>
+		<div class="dialog-content"></div>
+	</div>
 
 	<div id="workspace-container">
 <?php
@@ -53,6 +62,7 @@
 	<script type="text/javascript">
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
 		var widgetProperties = document.getElementById('widget-properties');
+		var savedSelectionRange;
 		var widgetPrimaryProperties; // Load only after initializing default properties in widget properties window
 		var widgetPropertiesSelectedId = "-1";
 		var messageBox = document.getElementById('message-box');
@@ -188,7 +198,7 @@
 						workspace.contentWindow.postMessage({
 							header: "applyHTML",
 		    			    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
-		    			    propertyValue: document.getElementById(parameter.input).value
+		    			    propertyValue: document.getElementById(parameter.input).innerHTML
 						});
 						break;
 				}
@@ -274,7 +284,7 @@
 					break;
 				case "bindHTML":
 					// Get the Inner HTML result of selected widget then apply to target input
-					$(e.data.input).val(e.data.innerHtml);
+					$(e.data.input).html(e.data.innerHtml);
 					break;
 				case "pageSaved":
 					DisplayMessage("Webpage saved");
@@ -295,6 +305,18 @@
 			if (toolboxWidgets.style.display == "none")
 				toolboxWidgets.style.display = "block";
 			else toolboxWidgets.style.display = "none";
+		}
+
+		// Prevent pasting selected html and get only its plain text representation to the editor
+		function PreventHTMLPaste(eid) {
+			$(eid).on("paste", function(e) {
+		    	// cancel paste
+		    	e.preventDefault();
+		    	// get text representation of clipboard
+		    	var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+		    	// insert text manually
+		    	document.execCommand("inserttext", false, text);
+			});
 		}
 
 		// Stores parameters to be process after clicking Apply Changes button
@@ -348,6 +370,95 @@
 			workspace.contentWindow.postMessage({ header: "deleteWidget", selector: "#" + widgetPropertiesSelectedId });
 		}
 
+		// Open dialog on mouse position and check if this dialog overflows the screen and adjust accordingly
+		// This dialog can perform small task that requires input, a message, a confirmation, etc.
+		function OpenDialog(e, title, html) {
+			var element = $(e);
+			var elementX = element.offset().left - $(window).scrollLeft();
+			var elementY = element.offset().top - $(window).scrollTop();
+			var diagY = elementY + element.height();
+			$("#dialog-canceller").css("display", "block");
+			$("#builder-dialog").children(".dialog-top").children(".dialog-title").html(title);
+			$("#builder-dialog").children(".dialog-content").html(html);
+			var diagWidth = $("#builder-dialog").width();
+			var diagHeight = $("#builder-dialog").height();
+			var overflowX = elementX + diagWidth - $(window).width();
+			var overflowY = diagY + diagHeight - $(window).height();
+			if (overflowX < 0) overflowX = 0;
+			if (overflowY < 0) overflowY = 0;
+			$("#builder-dialog").css("left", elementX - overflowX + "px");
+			$("#builder-dialog").css("top", diagY - overflowY + "px");
+			$("#builder-dialog").css("display", "block");
+		}
+
+		function CloseDialog() {
+			$("#dialog-canceller").css("display", "none");
+			$("#builder-dialog").children(".dialog-top").children(".dialog-title").html("");
+			$("#builder-dialog").children(".dialog-content").html("");
+			$("#builder-dialog").css("display", "none");
+
+			// All saved selection range
+			RestoreSelection();
+		}
+
+		function SaveSelection() {
+		    if (window.getSelection().type == "Range") {
+		        var sel = window.getSelection();
+		        if (sel.getRangeAt && sel.rangeCount) {
+		            return sel.getRangeAt(0);
+		        }
+		    } else if (document.selection && document.selection.createRange) {
+		        return document.selection.createRange();
+		    }
+		    return null;
+		}
+
+		function RestoreSelection() {
+		    if (savedSelectionRange) {
+		        if (window.getSelection) {
+		            var sel = window.getSelection();
+		            sel.removeAllRanges();
+		            sel.addRange(savedSelectionRange);
+		        } else if (document.selection && savedSelectionRange.select) {
+		            savedSelectionRange.select();
+		        }
+			}
+			savedSelectionRange = null;
+		}
+
+		// Dialog Inputs
+		function ShowAddLinkDialog(e) {
+			savedSelectionRange = SaveSelection();
+			$.ajax({
+				url: "dialogs/addLink.php",
+				success: function(result) {
+					if (savedSelectionRange != null) {
+						OpenDialog(e, "Add Link", result);
+					} else {
+						DisplayMessage("Cannot add link, select text first");
+					}
+				}
+			});
+		}
+
+		function ApplyLinkToSelection() {
+			var url = $("#di-anchor-link").val();
+			$("#di-anchor-link").val("");
+			if (url == "") {
+				document.execCommand("unlink", false, false);
+				CloseDialog();
+				return;
+			}
+			RestoreSelection();
+			if ($("#di-anchor-new-tab").is(":checked")) {
+				var linkText = window.getSelection();
+				document.execCommand("inserthtml", false, "<a href='" + url + "' target='_blank'>" + linkText + "</a>");
+			} else {
+				document.execCommand("inserthtml", false, "<a href='" + url + "'>" + linkText + "</a>");
+			}
+			CloseDialog();
+		}
+
 		function SaveWebpage(callback) {
 			workspace.contentWindow.postMessage({
 				header: "savePage",
@@ -364,7 +475,7 @@
             	if (this.readyState == 4 && this.status == 200) {
 					// Open preview link when generating preview completed
 					// Preview Link: this.responseText
-					window.open(this.responseText, '_blank');
+					window.open(this.responseText + "home/", '_blank');
             	}
         	};
 <?php

@@ -8,10 +8,10 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <button onclick="CloseWidgetPropertiesWindow();">Close</button>
+            <button onclick="CloseWidgetPropertiesWindow();"><span class="fa fa-close"></span> Close</button>
         </div>
         <div class="col-6">
-            <button onclick="DeleteSelectedWidget();">Delete</button>
+            <button onclick="DeleteSelectedWidget();"><span class="fa fa-trash"></span> Delete</button>
         </div>
     </div>
 </div>
@@ -123,7 +123,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <button onclick="ApplyChanges();">Apply Changes</button>
+            <button onclick="ApplyChanges();"><span class="fa fa-check"></span> Apply Changes</button>
         </div>
     </div>
 </div>

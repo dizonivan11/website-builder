@@ -2,7 +2,13 @@
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-label">Content</label>
-            <textarea id="wpw-text-content"></textarea>
+            <div>
+                <button class="richTextButton fa fa-bold" onclick="document.execCommand('bold')"></button>
+                <button class="richTextButton fa fa-italic" onclick="document.execCommand('italic')"></button>
+                <button class="richTextButton fa fa-underline" onclick="document.execCommand('underline')"></button>
+                <button class="richTextButton fa fa-link" onclick="ShowAddLinkDialog(this)"></button>
+            </div>
+            <div id="wpw-text-content" contenteditable="true" class="richTextEditor"></div>
         </div>
     </div>
 </div>

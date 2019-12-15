@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
+<html><head>
 	<title>Home Page</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -20,7 +18,7 @@
 </head>
 <body>
 	<header>
-		<div class="row-wrapper">
+		<div class="row-wrapper" id="2510">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -33,17 +31,26 @@
 			</div>
 		</div>
 	</header>
-	<div class="row-wrapper">
+	<div class="row-wrapper" id="2511">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					<div id="2518" class="widget-wrapper" widget-name="widgets/Headings" style="margin-bottom: 30px;">
+<div class="inner-wrapper">
+    <h3 class="main-headings">WYSIWYG Text Editor Testing</h3>
+</div></div><div id="2516" class="widget-wrapper" widget-name="widgets/Text" style="font-style: italic; text-decoration-line: underline;">
+<div class="inner-wrapper">
+    <p class="text-content"><a href="#">This link opens in this tab</a></p>
+</div></div><div id="2517" class="widget-wrapper" widget-name="widgets/Text">
+<div class="inner-wrapper">
+    <p class="text-content">Hello,&nbsp;<a href="#" target="_blank">this link opens in new tab</a>, try also the <b><u>other link</u></b> above which does nothing.<br></p>
+</div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<footer>
-		<div class="row-wrapper">
+		<div class="row-wrapper" id="2512">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -59,5 +66,5 @@
 			</div>
 		</div>
 	</footer>
-</body>
-</html>
+
+<div id="selected-element" data-flag="builder-element" style="left: 780px; top: 170px;"></div><div id="selected-element" data-flag="builder-element" style="left: 601px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 574px; top: 18px;"></div><div id="selected-element" data-flag="builder-element" style="left: 911px; top: 27px;"></div><div id="selected-element" data-flag="builder-element" style="left: 707px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1137px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1138px; top: 18px;"></div></body></html>

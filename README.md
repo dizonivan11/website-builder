@@ -3,6 +3,8 @@
 ***
 **Current TODO:**
 <ol>
+<li>Add More Buttons in WYSIWYG Text Editor</li>
+<li>Bind Link and New Tab option when opening Add Link Dialog</li>
 <li>Adding Rows</li>
 </ol>
 
@@ -12,7 +14,8 @@
 <li>[Realtime Saving] Save to webpage file upon value change in Widget Properties Window</li>
 <li>[Realtime Saving] Save to webpage file upon dropping new widget to column</li>
 <li>[Realtime Saving] Save to webpage file upon deleting widget</li>
-<li>Remove [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
+<li>Clean [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
+<li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
 <li>Color Pallete</li>
 <li>Widget Background Image</li>
 <li>Global Settings</li>
@@ -29,6 +32,7 @@
 
 **Done TODO**
 <ol>
+<li>Adding WYSIWYG Text Editors</li>
 <li>Deleting Widgets</li>
 <li>Saving website progress (Hard Save first, not Realtime yet) when clicking either publish or preview</li>
 <li>Previewing Site</li>
