@@ -4,6 +4,7 @@
 **Current TODO:**
 <ol>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
+<li>Make buttons in WYSIWYG Text Editor check first if the selected range is inside its parent editor to continue the operation to prevent editing any element outside its parent editor</li>
 <li>Bind Link and New Tab option when opening Add Link Dialog</li>
 <li>Adding Rows</li>
 </ol>
