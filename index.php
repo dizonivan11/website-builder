@@ -320,6 +320,7 @@
 		}
 
 		// Stores parameters to be process after clicking Apply Changes button
+		// Simply add the same input again to override something
 		var applyParameters = [
 		    // Load functions for default properties
 		    { mode: "css", selectorFormat: "#{0}", input: "wpw-default-margin-top", propertyName: "margin-top", valueFormat: "{0}px" },
@@ -428,7 +429,19 @@
 
 		// Dialog Inputs
 		function ShowAddLinkDialog(e) {
+			var element = $(e);
 			savedSelectionRange = SaveSelection();
+			var parent = savedSelectionRange.startContainer.parentNode;
+			// Confirm if the selection is valid by comparing the selection range's rich text editor's id to data-parent of button
+			while (parent.id != element.data("parent")) {
+				if (parent == null) {
+					// If by chance the parent is not found and make its way up to the root's parent (which is nothing)
+					// Dont show the add link dialog at all
+					savedSelectionRange = null;
+					return;
+				}
+				parent = parent.parentNode;
+			}
 			$.ajax({
 				url: "dialogs/addLink.php",
 				success: function(result) {
