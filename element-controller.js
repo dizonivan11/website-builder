@@ -17,12 +17,26 @@ function ApplyDropAndOpenEvent(e, ev) {
 	ev.stopPropagation();
 }
 
+function ApplyWidgetContextMenuOpenerEvent(e, ev) {
+	ev.preventDefault();
+	console.log(e.id);
+	// Avoid firing events to elements under this element (eg. parent of this element)
+	ev.stopPropagation();
+}
+
+function ApplyRowContextMenuOpenerEvent(e, ev) {
+	ev.preventDefault();
+	console.log(e.id);
+	// Avoid firing events to elements under this element (eg. parent of this element)
+	ev.stopPropagation();
+}
+
 window.onload = function() {
 	// Create and add selected element controller
 	selectedElement.id = "selected-element";
 	selectedElement.setAttribute("data-flag", "builder-element");
 	document.body.appendChild(selectedElement);
-
+	
 	// Validate if all widget wrappers have id, add id to widgets without id
 	// Async request turned off to avoid requesting the same id at the same time
 	// Add click events to display rows properties window excusively for rows
@@ -43,8 +57,12 @@ window.onload = function() {
 		}
 	}
 
-	// Add Drop click events in all widget-wrapper elements
+	// Add drop click events in all widget-wrapper elements
 	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent(this, event); });
+	// Add right click events in all widget-wrapper elements
+	$(".widget-wrapper").contextmenu(function() { ApplyWidgetContextMenuOpenerEvent(this, event); });
+	// Add right click events in all row-wrapper elements
+	$(".row-wrapper").contextmenu(function() { ApplyRowContextMenuOpenerEvent(this, event); });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {

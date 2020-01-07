@@ -3,6 +3,7 @@
 ***
 **Current TODO:**
 <ol>
+<li>Add Context Menu</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
 <li>Bind Link and New Tab option when opening Add Link Dialog</li>
 <li>Adding Rows</li>
@@ -16,6 +17,7 @@
 <li>[Realtime Saving] Save to webpage file upon deleting widget</li>
 <li>Clean [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
+<li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
 <li>Color Pallete</li>
 <li>Widget Background Image</li>
 <li>Global Settings</li>
@@ -32,6 +34,7 @@
 
 **Done TODO**
 <ol>
+<li>Add selected widget/row labels</li>
 <li>Make buttons in WYSIWYG Text Editor check first if the selected range is inside its parent editor to continue the operation to prevent editing any element outside its parent editor</li>
 <li>Adding WYSIWYG Text Editors</li>
 <li>Deleting Widgets</li>

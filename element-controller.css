@@ -19,14 +19,40 @@
 }
 .inner-wrapper {
 	pointer-events: none;
+	user-select: none;
+	min-height: 18px;
 }
-.widget-wrapper:hover {
-	outline: 2px solid #8dca23;
+.widget-wrapper:hover, .row-wrapper:hover {
+	outline: 2px solid #73a122;
 }
-.row-wrapper:hover {
-	outline: 2px dashed #8dca23;
+.widget-wrapper:hover::before, .row-wrapper:hover::before {
+	content: attr(widget-name);
+	padding: 0px 4px 2px 4px;
+	background-color: #73a122;
+	pointer-events: none;
+	user-select: none;
+	position: absolute;
+	color: white;
+	font-size: 12px;
+	float: left;
+	z-index: 99;
+}
+.widget-wrapper:hover::before {
+	content: attr(widget-name);
+}
+.row-wrapper:hover::before {
+	content: "Row";
 }
 #selected-element {
 	position: fixed;
 	pointer-events: none;
+	user-select: none;
+}
+#element-context {
+	position: absolute;
+	pointer-events: none;
+	user-select: none;
+	z-index: 100;
+	padding: 8px;
+	background-color: #282828;
 }

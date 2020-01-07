@@ -22,7 +22,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+						<div id="2536" class="widget-wrapper" widget-name="widgets/Image">
+<div class="inner-wrapper">
+    <img src="#">
+</div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
 						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
@@ -54,17 +57,49 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+						<div id="2530" class="widget-wrapper" widget-name="widgets/Headings">
+<div class="inner-wrapper">
+    <h3 class="main-headings">Headings Text</h3>
+</div></div><div id="2533" class="widget-wrapper" widget-name="widgets/Navigation Bar">
+<div class="inner-wrapper">
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="https://www.wikipedia.com">Wikipedia</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+						<div id="2531" class="widget-wrapper" widget-name="widgets/Headings">
+<div class="inner-wrapper">
+    <h3 class="main-headings">Headings Text</h3>
+</div></div><div id="2534" class="widget-wrapper" widget-name="widgets/Text">
+<div class="inner-wrapper">
+    <p class="text-content">Add Text</p>
+</div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+						<div id="2532" class="widget-wrapper" widget-name="widgets/Headings">
+<div class="inner-wrapper">
+    <h3 class="main-headings">Headings Text</h3>
+</div></div><div id="2535" class="widget-wrapper" widget-name="widgets/Form">
+<div class="inner-wrapper">
+    <form id="inner-form" action="#" method="POST">
+        <input type="text" name="fname" placeholder="First Name" required=""><br>
+        <input type="text" name="lname" placeholder="Last Name" required=""><br>
+        <input type="phone" name="phone" placeholder="Phone Number" required=""><br>
+        <input type="email" name="email" placeholder="Email Address" required=""><br>
+        <textarea form="inner-form" name="message" placeholder="Message"></textarea><br>
+        <input type="submit" name="submit" value="Send Message">
+    </form>
+</div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</footer>
 
-<div id="selected-element" data-flag="builder-element" style="left: 780px; top: 170px;"></div><div id="selected-element" data-flag="builder-element" style="left: 601px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 574px; top: 18px;"></div><div id="selected-element" data-flag="builder-element" style="left: 911px; top: 27px;"></div><div id="selected-element" data-flag="builder-element" style="left: 707px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1137px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1128px; top: 24px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1221px; top: 17px;"></div></body></html>
+<div id="selected-element" data-flag="builder-element" style="left: 780px; top: 170px;"></div><div id="selected-element" data-flag="builder-element" style="left: 601px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 574px; top: 18px;"></div><div id="selected-element" data-flag="builder-element" style="left: 911px; top: 27px;"></div><div id="selected-element" data-flag="builder-element" style="left: 707px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1137px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1128px; top: 24px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1221px; top: 17px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1149px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 682px; top: 247px;"></div></body></html>
