@@ -48,11 +48,3 @@
 	pointer-events: none;
 	user-select: none;
 }
-#element-context {
-	position: absolute;
-	pointer-events: none;
-	user-select: none;
-	z-index: 100;
-	padding: 8px;
-	background-color: #282828;
-}
