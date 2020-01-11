@@ -19,6 +19,7 @@ function ApplyDropAndOpenEvent(e, ev) {
 
 function ApplyWidgetContextMenuOpenerEvent(e, ev) {
 	ev.preventDefault();
+	// TODO: Display widget context menu here
 	console.log(e.id);
 	// Avoid firing events to elements under this element (eg. parent of this element)
 	ev.stopPropagation();
@@ -26,6 +27,7 @@ function ApplyWidgetContextMenuOpenerEvent(e, ev) {
 
 function ApplyRowContextMenuOpenerEvent(e, ev) {
 	ev.preventDefault();
+	// TODO: Display row context menu here
 	console.log(e.id);
 	// Avoid firing events to elements under this element (eg. parent of this element)
 	ev.stopPropagation();

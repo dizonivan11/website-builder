@@ -6,7 +6,7 @@ primaryApplyParameters.push({
 PreventHTMLPaste("#wpw-headings-content");
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-headings-text-align",
     propertyName: "text-align",
     valueFormat: "{0}"

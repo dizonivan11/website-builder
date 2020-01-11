@@ -2,13 +2,10 @@
     <div class="row">
         <div class="col-12">
             <label class="widget-properties-label">Content</label>
-            <div>
-                <button data-parent="wpw-text-content" class="richTextButton fa fa-bold" onclick="document.execCommand('bold')"></button>
-                <button data-parent="wpw-text-content" class="richTextButton fa fa-italic" onclick="document.execCommand('italic')"></button>
-                <button data-parent="wpw-text-content" class="richTextButton fa fa-underline" onclick="document.execCommand('underline')"></button>
-                <button data-parent="wpw-text-content" class="richTextButton fa fa-link" onclick="ShowAddLinkDialog(this)"></button>
-            </div>
-            <div id="wpw-text-content" contenteditable="true" class="richTextEditor"></div>
+<?php
+            $inputProperty = "content";
+            include('inputs/richTextEditor.php');
+?>
         </div>
     </div>
 </div>

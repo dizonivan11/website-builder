@@ -26,7 +26,6 @@
 	outline: 2px solid #73a122;
 }
 .widget-wrapper:hover::before, .row-wrapper:hover::before {
-	content: attr(widget-name);
 	padding: 0px 4px 2px 4px;
 	background-color: #73a122;
 	pointer-events: none;

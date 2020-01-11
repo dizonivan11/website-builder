@@ -3,6 +3,7 @@
 ***
 **Current TODO:**
 <ol>
+<li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
 <li>Add Context Menu</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
 <li>Bind Link and New Tab option when opening Add Link Dialog</li>
@@ -34,6 +35,7 @@
 
 **Done TODO**
 <ol>
+<li>Revise/Simplify Primary Properties input requests using predefined html with automatic assigning of its id</li>
 <li>Add selected widget/row labels</li>
 <li>Make buttons in WYSIWYG Text Editor check first if the selected range is inside its parent editor to continue the operation to prevent editing any element outside its parent editor</li>
 <li>Adding WYSIWYG Text Editors</li>

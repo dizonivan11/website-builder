@@ -3,6 +3,8 @@
     // After loading this layout, load its script in javascript's success callback
     include_once('../core.php');
     $wpp = $_POST['wpp'] . ".php";
+    $inputName = "wpw-" . strtolower(substr($_POST['wpp'], strpos($_POST['wpp'], "/") + 1));
+    $inputProperty = "";
 
     if (file_exists($wpp)) {
 ?>
