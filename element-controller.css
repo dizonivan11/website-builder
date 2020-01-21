@@ -8,6 +8,7 @@
 	font-size: 16px;
 	font-weight: bold;
 	box-shadow: 0px 0px 8px #aaa inset;
+	user-select: none;
 }
 .drop-zone:hover, .drop-zone-min:hover {
 	background-color: #8dca23;

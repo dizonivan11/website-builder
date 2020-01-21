@@ -7,11 +7,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<!-- Custom Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Changa&amp;display=swap" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Changa&amp;display=swap" rel="stylesheet" data-flag="builder-element">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" data-flag="builder-element">
+	
 	<!-- Inject Builder Element Controller Style & Script -->
 	<link rel="stylesheet" type="text/css" href="../../../element-controller.css" data-flag="builder-element">
 	<script type="text/javascript" src="../../../element-controller.js" data-flag="builder-element"></script>
+	<!-- JQuery Custom Context Menu -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.js" data-flag="builder-element"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.ui.position.min.js" data-flag="builder-element"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.css" data-flag="builder-element">
 	
 	<!-- Global Style -->
 	<link rel="stylesheet" type="text/css" href="../global.css">
@@ -22,9 +27,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-						<div id="2536" class="widget-wrapper" widget-name="widgets/Image">
+						<div id="2537" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
-    <img src="#">
+    <h3 class="main-headings">Art of Writing Softwares</h3>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -40,7 +45,7 @@
 				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 					<div id="2518" class="widget-wrapper" widget-name="widgets/Headings" style="margin-bottom: 30px;">
 <div class="inner-wrapper">
-    <h3 class="main-headings">WYSIWYG Text Editor Testing</h3>
+    <h3 class="main-headings">WYSIWYG Text Editor Test</h3>
 </div></div><div id="2516" class="widget-wrapper" widget-name="widgets/Text" style="font-style: italic; text-decoration-line: underline;">
 <div class="inner-wrapper">
     <p class="text-content"><a href="#">This link opens in this tab</a></p>
@@ -102,4 +107,4 @@
 		</div>
 	</footer>
 
-<div id="selected-element" data-flag="builder-element" style="left: 780px; top: 170px;"></div><div id="selected-element" data-flag="builder-element" style="left: 601px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 574px; top: 18px;"></div><div id="selected-element" data-flag="builder-element" style="left: 911px; top: 27px;"></div><div id="selected-element" data-flag="builder-element" style="left: 707px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1137px; top: 16px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1128px; top: 24px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1221px; top: 17px;"></div><div id="selected-element" data-flag="builder-element" style="left: 1149px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 682px; top: 247px;"></div><div id="selected-element" data-flag="builder-element" style="left: 585px; top: 15px;"></div><div id="selected-element" data-flag="builder-element" style="left: 561px; top: 16px;"></div></body></html>
+<div id="selected-element" data-flag="builder-element" style="left: 1116px; top: 19px;"></div><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Row Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Column</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Row</span></li></ul><ul class="context-menu-list context-menu-root" style="width: 208px; top: 49px; left: 412px; z-index: 1; display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Widget Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-up"><span>Move Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-down"><span>Move Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Widget</span></li></ul></body></html>

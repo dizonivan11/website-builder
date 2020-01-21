@@ -3,15 +3,16 @@
 ***
 **Current TODO:**
 <ol>
-<li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
-<li>Add Context Menu</li>
-<li>Add More Buttons in WYSIWYG Text Editor</li>
-<li>Bind Link and New Tab option when opening Add Link Dialog</li>
-<li>Adding Rows</li>
+<li>Fix selected-element and auto generated context menu at the end of the html file being saved which causes duplicated content</li>
 </ol>
 
 **TODO List:**
 <ol>
+<li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
+<li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
+<li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
+<li>Add More Buttons in WYSIWYG Text Editor</li>
+<li>Bind Link and New Tab option when opening Add Link Dialog</li>
 <li>Save Changes upon value change in Widget Properties Window (no Apply Changes button anymore)</li>
 <li>[Realtime Saving] Save to webpage file upon value change in Widget Properties Window</li>
 <li>[Realtime Saving] Save to webpage file upon dropping new widget to column</li>
@@ -22,9 +23,6 @@
 <li>Color Pallete</li>
 <li>Widget Background Image</li>
 <li>Global Settings</li>
-<li>Deleting Rows</li>
-<li>Sorting Rows</li>
-<li>Adding Columns</li>
 <li>Site Map</li>
 <li>Adding Pages</li>
 <li>Sorting Pages</li>
@@ -35,6 +33,7 @@
 
 **Done TODO**
 <ol>
+<li>Add Context Menu</li>
 <li>Revise/Simplify Primary Properties input requests using predefined html with automatic assigning of its id</li>
 <li>Add selected widget/row labels</li>
 <li>Make buttons in WYSIWYG Text Editor check first if the selected range is inside its parent editor to continue the operation to prevent editing any element outside its parent editor</li>

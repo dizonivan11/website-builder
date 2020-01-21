@@ -1,34 +1,12 @@
 var selectedElement = document.createElement("div");
 var selectedElementOffset = 15;
+var customContextMenu;
 
 function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
 		// If there is selected widget, function as drop zone
 		DropElement(e, ev);
-	} else {
-		// Else, open properties window
-		window.top.postMessage({
-			header: "open-widget-properties",
-			widgetID: e.id,
-			widgetPropertiesPath: e.getAttribute("widget-name")
-		});
 	}
-	// Avoid firing events to elements under this element (eg. parent of this element)
-	ev.stopPropagation();
-}
-
-function ApplyWidgetContextMenuOpenerEvent(e, ev) {
-	ev.preventDefault();
-	// TODO: Display widget context menu here
-	console.log(e.id);
-	// Avoid firing events to elements under this element (eg. parent of this element)
-	ev.stopPropagation();
-}
-
-function ApplyRowContextMenuOpenerEvent(e, ev) {
-	ev.preventDefault();
-	// TODO: Display row context menu here
-	console.log(e.id);
 	// Avoid firing events to elements under this element (eg. parent of this element)
 	ev.stopPropagation();
 }
@@ -61,16 +39,69 @@ window.onload = function() {
 
 	// Add drop click events in all widget-wrapper elements
 	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent(this, event); });
-	// Add right click events in all widget-wrapper elements
-	$(".widget-wrapper").contextmenu(function() { ApplyWidgetContextMenuOpenerEvent(this, event); });
-	// Add right click events in all row-wrapper elements
-	$(".row-wrapper").contextmenu(function() { ApplyRowContextMenuOpenerEvent(this, event); });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
 		selectedElement.style.left = (e.clientX + selectedElementOffset) + "px";
 		selectedElement.style.top = (e.clientY + selectedElementOffset) + "px";
 	};
+	
+	// Add context menu element and its event to all rows
+	$.contextMenu({
+        selector: '.row-wrapper', 
+        callback: function(key, opt) {
+			var rid = "#" + opt.$trigger.attr("id");
+			switch (key) {
+				case "edit":
+					window.top.postMessage({ header: "open-row-properties", rid: rid });
+					break;
+			}
+        },
+        items: {
+			"edit": {name: "Edit Row Design", icon: "fa-edit"},
+			"sep1": "----------",
+            "addup": {name: "Add Row Above", icon: "fa-plus"},
+			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
+			"sep2": "----------",
+			"addcol": {name: "Add Column", icon: "fa-plus"},
+			"sep3": "----------",
+            "delete": {name: "Delete Row", icon: "fa-trash"}
+        }
+	});
+	
+	// Add context menu element and its event to all widgets
+	$.contextMenu({
+        selector: '.widget-wrapper', 
+        callback: function(key, opt) {
+			switch (key) {
+				case "edit":
+					// Open properties window for selected widget
+					window.top.postMessage({
+						header: "open-widget-properties",
+						widgetID: opt.$trigger.attr("id"),
+						widgetPropertiesPath: opt.$trigger.attr("widget-name")
+					});
+					break;
+				case "delete":
+					// Delete selected widget
+					var wid = "#" + opt.$trigger.attr("id");
+					var parent = $(wid).parent();
+					$(wid).remove();
+					// Maximize drop zone if the deleted widget was the last widget in column
+					if (parent.children().length == 1) MaximizeDropZone(parent.children()[0]);
+					window.top.postMessage({ header: "deleteWidget", selector: wid });
+					break;
+			}
+        },
+        items: {
+			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
+			"sep1": "----------",
+            "addup": {name: "Move Above", icon: "fa-arrow-up"},
+			"addbottom": {name: "Move Below", icon: "fa-arrow-down"},
+			"sep2": "----------",
+            "delete": {name: "Delete Widget", icon: "fa-trash"}
+        }
+    });
 }
 
 // Process messages coming from builder
@@ -78,13 +109,6 @@ window.onmessage = function (e) {
 	switch (e.data.header) {
 		case "selectWidget":
 			selectedElement.innerHTML = e.data.message;
-			break;
-		case "deleteWidget":
-			var parent = $(e.data.selector).parent();
-			$(e.data.selector).remove();
-			// Maximize drop zone if the deleted widget was the last widget in column
-			if (parent.children().length == 1) MaximizeDropZone(parent.children()[0]);
-			window.top.postMessage({ header: "deleteWidget", selector: e.data.selector });
 			break;
 		case "clearCSS":
 			var l = e.data.elementSelectors.length;
