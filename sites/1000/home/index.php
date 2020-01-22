@@ -26,42 +26,44 @@
 		<div class="row-wrapper" id="2510">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div class="col-wrapper col">
 						<div id="2537" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Art of Writing Softwares</h3>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div class="col-wrapper col">
 						<button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
+	<div class="site-content">
 	<div class="row-wrapper" id="2511">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="col-wrapper col">
 					<div id="2518" class="widget-wrapper" widget-name="widgets/Headings" style="margin-bottom: 30px;">
 <div class="inner-wrapper">
     <h3 class="main-headings">WYSIWYG Text Editor Test</h3>
+</div></div><div id="2517" class="widget-wrapper" widget-name="widgets/Text">
+<div class="inner-wrapper">
+    <p class="text-content">Hello,&nbsp;<a href="#" target="_blank">this link opens in new tab</a>, try also the <b><u>other link</u></b> below which does nothing.<br></p>
 </div></div><div id="2516" class="widget-wrapper" widget-name="widgets/Text" style="font-style: italic; text-decoration-line: underline;">
 <div class="inner-wrapper">
     <p class="text-content"><a href="#">This link opens in this tab</a></p>
-</div></div><div id="2517" class="widget-wrapper" widget-name="widgets/Text">
-<div class="inner-wrapper">
-    <p class="text-content">Hello,&nbsp;<a href="#" target="_blank">this link opens in new tab</a>, try also the <b><u>other link</u></b> above which does nothing.<br></p>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
 	<footer>
 		<div class="row-wrapper" id="2512">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+					<div class="col-wrapper col">
 						<div id="2530" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
@@ -77,7 +79,7 @@
     </nav>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+					<div class="col-wrapper col">
 						<div id="2531" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
@@ -86,7 +88,7 @@
     <p class="text-content">Add Text</p>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+					<div class="col-wrapper col">
 						<div id="2532" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
@@ -107,4 +109,4 @@
 		</div>
 	</footer>
 
-<div id="selected-element" data-flag="builder-element" style="left: 1116px; top: 19px;"></div><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Row Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Column</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Row</span></li></ul><ul class="context-menu-list context-menu-root" style="width: 208px; top: 49px; left: 412px; z-index: 1; display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Widget Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-up"><span>Move Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-down"><span>Move Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Widget</span></li></ul></body></html>
+<div id="selected-element" data-flag="builder-element" style="left: 1051px; top: 20px;"></div><div id="row-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="width: 208px; top: 224px; left: 236px; z-index: 1; display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Row Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Row</span></li></ul></div><div id="widget-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="width: 208px; top: 329px; left: 659px; z-index: 1; display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Widget Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-up"><span>Move Up Widget</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-down"><span>Move Down Widget</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Widget</span></li></ul></div><div id="col-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="width: 228px; top: 296px; left: 69px; z-index: 1; display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Column Design</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Left Column</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Right Column</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-left"><span>Move Column To Left</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-right"><span>Move Column To Right</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Column</span></li></ul></div></body></html>

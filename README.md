@@ -3,12 +3,11 @@
 ***
 **Current TODO:**
 <ol>
-<li>Fix selected-element and auto generated context menu at the end of the html file being saved which causes duplicated content</li>
+<li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
 </ol>
 
 **TODO List:**
 <ol>
-<li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
 <li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
@@ -33,6 +32,8 @@
 
 **Done TODO**
 <ol>
+<li>Add Access to Columns</li>
+<li>Fix selected-element and auto generated context menu at the end of the html file being saved which causes duplicated content</li>
 <li>Add Context Menu</li>
 <li>Revise/Simplify Primary Properties input requests using predefined html with automatic assigning of its id</li>
 <li>Add selected widget/row labels</li>

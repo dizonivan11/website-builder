@@ -1,6 +1,8 @@
-var selectedElement = document.createElement("div");
+var selectedElement = null;
+var rowContextMenu = null;
+var colContextMenu = null;
+var widgetContextMenu;
 var selectedElementOffset = 15;
-var customContextMenu;
 
 function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
@@ -11,11 +13,26 @@ function ApplyDropAndOpenEvent(e, ev) {
 	ev.stopPropagation();
 }
 
+function ValidateOrCreateBuilderElement(id) {
+	// Check if [id] builder element was already created.
+	// If not present, create new [id] builder element.
+	var element = document.getElementById(id);
+	if (element === null) {
+		element = document.createElement("div");
+		element.id = id;
+		element.setAttribute("data-flag", "builder-element");
+		document.body.appendChild(element);
+	}
+	// Always clear content to prepare for fresh session. Some element must be recreated to apply its custom scripts.
+	element.innerHTML = "";
+	return element;
+}
+
 window.onload = function() {
-	// Create and add selected element controller
-	selectedElement.id = "selected-element";
-	selectedElement.setAttribute("data-flag", "builder-element");
-	document.body.appendChild(selectedElement);
+	selectedElement = ValidateOrCreateBuilderElement("selected-element");
+	rowContextMenu = ValidateOrCreateBuilderElement("row-context-wrapper");
+	colContextMenu = ValidateOrCreateBuilderElement("col-context-wrapper");
+	widgetContextMenu = ValidateOrCreateBuilderElement("widget-context-wrapper");
 	
 	// Validate if all widget wrappers have id, add id to widgets without id
 	// Async request turned off to avoid requesting the same id at the same time
@@ -48,12 +65,40 @@ window.onload = function() {
 	
 	// Add context menu element and its event to all rows
 	$.contextMenu({
-        selector: '.row-wrapper', 
+		selector: '.row-wrapper',
+		appendTo: '#row-context-wrapper',
         callback: function(key, opt) {
-			var rid = "#" + opt.$trigger.attr("id");
 			switch (key) {
+				// Open properties window for selected row
 				case "edit":
-					window.top.postMessage({ header: "open-row-properties", rid: rid });
+					window.top.postMessage({ header: "open-row-properties", rid: opt.$trigger.attr("id") });
+					break;
+				case "addup":
+					$.ajax({
+						url: '../../../row-creator.php',
+						type: 'POST',
+						success: function(result) {
+							$(result).insertBefore(opt.$trigger);
+							window.top.postMessage({ header: "feedback", message: "New row added" });
+						}
+					});
+					break;
+				case "addbottom":
+					$.ajax({
+						url: '../../../row-creator.php',
+						type: 'POST',
+						success: function(result) {
+							$(result).insertAfter(opt.$trigger);
+							window.top.postMessage({ header: "feedback", message: "New row added" });
+						}
+					});
+					break;
+				case "delete":
+					// Delete row only if there is at least one sibling remains on its section after the process
+					if (opt.$trigger.parent().children().length > 1) {
+						opt.$trigger.remove();
+						window.top.postMessage({ header: "feedback", message: "Row #" + opt.$trigger.attr("id") + " deleted" });
+					} else window.top.postMessage({ header: "feedback", message: "Cannot remove the only row present on its section" });
 					break;
 			}
         },
@@ -63,15 +108,39 @@ window.onload = function() {
             "addup": {name: "Add Row Above", icon: "fa-plus"},
 			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
 			"sep2": "----------",
-			"addcol": {name: "Add Column", icon: "fa-plus"},
-			"sep3": "----------",
             "delete": {name: "Delete Row", icon: "fa-trash"}
         }
 	});
 	
+	// Add context menu element and its event to all columns
+	$.contextMenu({
+		selector: '.col-wrapper',
+		appendTo: '#col-context-wrapper',
+        callback: function(key, opt) {
+			switch (key) {
+				// Open properties window for selected column
+				case "edit":
+					window.top.postMessage({ header: "open-col-properties", cid: opt.$trigger.attr("id") });
+					break;
+			}
+        },
+        items: {
+			"edit": {name: "Edit Column Design", icon: "fa-edit"},
+			"sep1": "----------",
+            "addleft": {name: "Add Left Column", icon: "fa-plus"},
+			"addright": {name: "Add Right Column", icon: "fa-plus"},
+			"sep2": "----------",
+            "moveleft": {name: "Move Column To Left", icon: "fa-arrow-left"},
+			"moveright": {name: "Move Column To Right", icon: "fa-arrow-right"},
+			"sep3": "----------",
+            "delete": {name: "Delete Column", icon: "fa-trash"}
+        }
+	});
+
 	// Add context menu element and its event to all widgets
 	$.contextMenu({
-        selector: '.widget-wrapper', 
+		selector: '.widget-wrapper',
+		appendTo: '#widget-context-wrapper',
         callback: function(key, opt) {
 			switch (key) {
 				case "edit":
@@ -81,6 +150,22 @@ window.onload = function() {
 						widgetID: opt.$trigger.attr("id"),
 						widgetPropertiesPath: opt.$trigger.attr("widget-name")
 					});
+					break;
+				case "moveup":
+					if (opt.$trigger.prev().length < 1) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					$(opt.$trigger).insertBefore(opt.$trigger.prev());
+					window.top.postMessage({ header: "feedback", message: "Widget #" + opt.$trigger.attr("id") + " successfully moved up" });
+					break;
+				case "movedown":
+					if (opt.$trigger.next().hasClass("drop-zone-min") || opt.$trigger.next() === undefined) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					$(opt.$trigger).insertAfter(opt.$trigger.next());
+					window.top.postMessage({ header: "feedback", message: "Widget #" + opt.$trigger.attr("id") + " successfully moved down" });
 					break;
 				case "delete":
 					// Delete selected widget
@@ -96,8 +181,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
 			"sep1": "----------",
-            "addup": {name: "Move Above", icon: "fa-arrow-up"},
-			"addbottom": {name: "Move Below", icon: "fa-arrow-down"},
+            "moveup": {name: "Move Up Widget", icon: "fa-arrow-up"},
+			"movedown": {name: "Move Down Widget", icon: "fa-arrow-down"},
 			"sep2": "----------",
             "delete": {name: "Delete Widget", icon: "fa-trash"}
         }
@@ -139,16 +224,16 @@ window.onmessage = function (e) {
 			});
 			break;
 		case "savePage":
-				$.ajax({
-					url: '../../../page-saver.php',
-					type: 'POST',
-					// Pass array of 512 bytes string chunks containing whole HTML to file to server
-					// data: { fileContent: document.documentElement.outerHTML.match(/(.|[\r\n]){1,512}/g) }
-					data: { fileContent: document.documentElement.outerHTML, filePath: e.data.webPagePath },
-					success: function(result) {
-						window.top.postMessage({ header: "pageSaved", callback: e.data.successCallback, debug: result });
-					}
-				});
+			$.ajax({
+				url: '../../../page-saver.php',
+				type: 'POST',
+				// Pass array of 512 bytes string chunks containing whole HTML to file to server
+				// data: { fileContent: document.documentElement.outerHTML.match(/(.|[\r\n]){1,512}/g) }
+				data: { fileContent: document.documentElement.outerHTML, filePath: e.data.webPagePath },
+				success: function(result) {
+					window.top.postMessage({ header: "pageSaved", callback: e.data.successCallback, debug: result });
+				}
+			});
 			break;
 	}
 }
