@@ -1,9 +1,10 @@
 # website-builder
-**Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker**
+**Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker, jQuery Custom Context Menu (https://swisnl.github.io/jQuery-contextMenu/)**
 ***
 **Current TODO:**
 <ol>
-<li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
+<li>Allow dragging to resize columns</li>
+<li>Add Row and Column Properties Window</li>
 </ol>
 
 **TODO List:**
@@ -19,8 +20,9 @@
 <li>Clean [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
 <li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
+<li>Move content editing outside properties window and allow editing content of widget directly when clicked</li>
 <li>Color Pallete</li>
-<li>Widget Background Image</li>
+<li>Widget/Row/Column Background Image property</li>
 <li>Global Settings</li>
 <li>Site Map</li>
 <li>Adding Pages</li>
@@ -32,6 +34,8 @@
 
 **Done TODO**
 <ol>
+<li>Fix bug when breaking lines in text widget, this bug occurs because &lt;p> tag cannot contain &lt;div> tags</li>
+<li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
 <li>Add Access to Columns</li>
 <li>Fix selected-element and auto generated context menu at the end of the html file being saved which causes duplicated content</li>
 <li>Add Context Menu</li>

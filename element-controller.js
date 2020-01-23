@@ -1,7 +1,7 @@
 var selectedElement = null;
 var rowContextMenu = null;
 var colContextMenu = null;
-var widgetContextMenu;
+var widgetContextMenu = null;
 var selectedElementOffset = 15;
 
 function ApplyDropAndOpenEvent(e, ev) {
@@ -34,9 +34,8 @@ window.onload = function() {
 	colContextMenu = ValidateOrCreateBuilderElement("col-context-wrapper");
 	widgetContextMenu = ValidateOrCreateBuilderElement("widget-context-wrapper");
 	
-	// Validate if all widget wrappers have id, add id to widgets without id
+	// Validate if all row wrappers have id, add id to rows without id
 	// Async request turned off to avoid requesting the same id at the same time
-	// Add click events to display rows properties window excusively for rows
 	// Row Properties Window to be added later
 	var rws = $(".row-wrapper");
 	for (var r = 0; r < rws.length; r++) {
@@ -48,7 +47,24 @@ window.onload = function() {
 				async: false,
 				success: function(result) {
 					row.id = result;
-					row.onclick = function() { window.top.postMessage({ header: "open-row-properties", rid: result }); };
+				}
+			});
+		}
+	}
+
+	// Validate if all column wrappers have id, add id to columns without id
+	// Async request turned off to avoid requesting the same id at the same time
+	// Column Properties Window to be added later
+	var cws = $(".col-wrapper");
+	for (var r = 0; r < cws.length; r++) {
+		var col = cws[r];
+		if (col.id == "") {
+			$.ajax({
+				url: "../../../request-current-eid.php",
+				method: "POST",
+				async: false,
+				success: function(result) {
+					col.id = result;
 				}
 			});
 		}
@@ -122,6 +138,49 @@ window.onload = function() {
 				case "edit":
 					window.top.postMessage({ header: "open-col-properties", cid: opt.$trigger.attr("id") });
 					break;
+				case "addleft":
+					$.ajax({
+						url: '../../../col-creator.php',
+						type: 'POST',
+						success: function(result) {
+							$(result).insertBefore(opt.$trigger);
+							window.top.postMessage({ header: "feedback", message: "New column added" });
+						}
+					});
+					break;
+				case "addright":
+					$.ajax({
+						url: '../../../col-creator.php',
+						type: 'POST',
+						success: function(result) {
+							$(result).insertAfter(opt.$trigger);
+							window.top.postMessage({ header: "feedback", message: "New row added" });
+						}
+					});
+					break;
+				case "moveleft":
+					if (opt.$trigger.prev().length < 1) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					$(opt.$trigger).insertBefore(opt.$trigger.prev());
+					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved left" });
+					break;
+				case "moveright":
+					if (opt.$trigger.next().length < 1) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					$(opt.$trigger).insertAfter(opt.$trigger.next());
+					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved right" });
+					break;
+				case "delete":
+					// Delete column only if there is at least one sibling remains on its row after the process
+					if (opt.$trigger.parent().children().length > 1) {
+						opt.$trigger.remove();
+						window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " deleted" });
+					} else window.top.postMessage({ header: "feedback", message: "Cannot remove the only column present on its row" });
+					break;
 			}
         },
         items: {
@@ -160,7 +219,7 @@ window.onload = function() {
 					window.top.postMessage({ header: "feedback", message: "Widget #" + opt.$trigger.attr("id") + " successfully moved up" });
 					break;
 				case "movedown":
-					if (opt.$trigger.next().hasClass("drop-zone-min") || opt.$trigger.next() === undefined) {
+					if (opt.$trigger.next().hasClass("drop-zone-min")) {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
 						break;
 					}
@@ -203,6 +262,9 @@ window.onmessage = function (e) {
 		case "applyCSS":
 			$(e.data.selector).css(e.data.propertyName, e.data.propertyValue);
 			break;
+		case "applyATTR":
+			$(e.data.selector).attr(e.data.attributeName, e.data.attributeValue);
+			break;
 		case "applyHTML":
 			$(e.data.selector).html(e.data.propertyValue);
 			break;
@@ -213,6 +275,13 @@ window.onmessage = function (e) {
 				header: "bindCSS",
 				inlineValue: inlineCSS, // overriding value
 				defaultValue: globalCSS, // default value (placeholder)
+				input: e.data.input
+			});
+			break;
+		case "getATTR":
+			window.top.postMessage({
+				header: "bindATTR",
+				attributeValue: $(e.data.selector).attr(e.data.attributeName),
 				input: e.data.input
 			});
 			break;

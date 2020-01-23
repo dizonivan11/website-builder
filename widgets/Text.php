@@ -1,3 +1,3 @@
 <div class="inner-wrapper">
-    <p class="text-content">Add Text</p>
+    <div class="text-content">Add Text</div>
 </div>

@@ -1,6 +1,6 @@
 primaryApplyParameters.push({
     mode: "html",
-    selectorFormat: "#{0} > div.inner-wrapper > p.text-content",
+    selectorFormat: "#{0} > div.inner-wrapper > div.text-content",
     input: "wpw-text-content"
 });
 PreventHTMLPaste("#wpw-text-content");
@@ -13,7 +13,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-text-text-style-bold",
     propertyName: "font-weight",
     valueFormat: "{0}",
@@ -21,7 +21,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-text-text-style-italic",
     propertyName: "font-style",
     valueFormat: "{0}",
@@ -29,7 +29,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-text-text-style-underline",
     propertyName: "text-decoration-line",
     valueFormat: "{0}",

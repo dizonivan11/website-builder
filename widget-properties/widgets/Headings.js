@@ -13,7 +13,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-headings-text-style-bold",
     propertyName: "font-weight",
     valueFormat: "{0}",
@@ -21,7 +21,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-headings-text-style-italic",
     propertyName: "font-style",
     valueFormat: "{0}",
@@ -29,7 +29,7 @@ primaryApplyParameters.push({
 });
 primaryApplyParameters.push({
     mode: "css",
-    selectorFormat: "#{0}",
+    selectorFormat: "#{0} > div.inner-wrapper",
     input: "wpw-headings-text-style-underline",
     propertyName: "text-decoration-line",
     valueFormat: "{0}",

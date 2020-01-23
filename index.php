@@ -173,6 +173,15 @@
 						    input: "#" + parameter.input
 						});
 						break;
+					case "attr":
+						// Request to bind attribute of widget inside workspace to the input
+						workspace.contentWindow.postMessage({
+						    header: "getATTR",
+							selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
+							attributeName: parameter.attributeName,
+						    input: "#" + parameter.input
+						});
+						break;
 					case "html":
 						// Request to bind innerHTML of widget inside workspace to the input
 						workspace.contentWindow.postMessage({
@@ -198,6 +207,14 @@
 		    			    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
 		    			    propertyName: parameter.propertyName,
 		    			    propertyValue: parameter.valueFormat.format(document.getElementById(parameter.input).value)
+						});
+						break;
+					case "attr":
+						workspace.contentWindow.postMessage({
+							header: "applyATTR",
+		    			    selector: parameter.selectorFormat.format(widgetPropertiesSelectedId),
+		    			    attributeName: parameter.attributeName,
+		    			    attributeValue: parameter.valueFormat.format(document.getElementById(parameter.input).value)
 						});
 						break;
 					case "html":
@@ -248,9 +265,14 @@
 					widgetRequester.send("wpp=" + wpp);
 					break;
 				case "open-row-properties":
-					// Open Row Properties Window
+					// TODO: Open Row Properties Window
 					var rid = e.data.rid;
 					console.log(rid);
+					break;
+				case "open-col-properties":
+					// TODO: Open Column Properties Window
+					var cid = e.data.cid;
+					console.log(cid);
 					break;
 				case "deleteWidget":
 					DisplayMessage("Widget " + e.data.selector + " removed");
@@ -291,6 +313,10 @@
 				case "bindHTML":
 					// Get the Inner HTML result of selected widget then apply to target input
 					$(e.data.input).html(e.data.innerHtml);
+					break;
+				case "bindATTR":
+					// Get the attribute of selected widget then apply to target input
+					$(e.data.input).val(e.data.attributeValue);
 					break;
 				case "pageSaved":
 					DisplayMessage("Webpage saved");
