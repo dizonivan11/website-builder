@@ -390,8 +390,8 @@
 			AddSelectorsTo(applyParameters, selectors);
 			AddSelectorsTo(primaryApplyParameters, selectors);
 			workspace.contentWindow.postMessage({ header: "clearCSS", elementSelectors: selectors });
-			console.log("Apply Changes Selectors: ");
-			console.log(selectors);
+			// console.log("Apply Changes Selectors: ");
+			// console.log(selectors);
 		}
 
 		function CloseWidgetPropertiesWindow() {
