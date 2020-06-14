@@ -4,12 +4,13 @@
 **Current TODO:**
 <ol>
 <li>Allow dragging to resize columns</li>
-<li>Add Row and Column Properties Window</li>
 </ol>
 
 **TODO List:**
 <ol>
+<li>Copy/Paste Feature</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
+<li>Add Row and Column Properties Window</li>
 <li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
 <li>Bind Link and New Tab option when opening Add Link Dialog</li>

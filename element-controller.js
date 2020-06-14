@@ -71,8 +71,8 @@ window.onload = function() {
 	// Async request turned off to avoid requesting the same id at the same time
 	// Column Properties Window to be added later
 	var cws = $(".col-wrapper");
-	for (var r = 0; r < cws.length; r++) {
-		var col = cws[r];
+	for (var c = 0; c < cws.length; c++) {
+		var col = cws[c];
 		if (col.id == "") {
 			$.ajax({
 				url: "../../../request-current-eid.php",
@@ -82,6 +82,16 @@ window.onload = function() {
 					col.id = result;
 				}
 			});
+		}
+	}
+
+	// Validate if all column wrappers have resizers in between them, add resizers if none
+	for (var r = 0; r < rws.length; r++) {
+		var rcols = $(rws[r]).find(".col-wrapper");
+		for (var c = 1; c < rcols.length; c++) {
+			var colWrapper = $(rcols[c]);
+			if (colWrapper.find(".col-resizer").length < 1)
+				colWrapper.prepend("<div class='col-resizer' data-flag='builder-element'><span>‖</span></div>");
 		}
 	}
 
@@ -103,6 +113,12 @@ window.onload = function() {
 				// Open properties window for selected row
 				case "edit":
 					window.top.postMessage({ header: "open-row-properties", rid: opt.$trigger.attr("id") });
+					break;
+				case "copy":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					break;
+				case "paste":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
 					break;
 				case "addup":
 					$.ajax({
@@ -135,6 +151,8 @@ window.onload = function() {
         },
         items: {
 			"edit": {name: "Edit Row Design", icon: "fa-edit"},
+			"copy": {name: "Copy Row", icon: "fa-copy"},
+			"paste": {name: "Paste Row", icon: "fa-paste"},
 			"sep1": "----------",
             "addup": {name: "Add Row Above", icon: "fa-plus"},
 			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
@@ -152,6 +170,12 @@ window.onload = function() {
 				// Open properties window for selected column
 				case "edit":
 					window.top.postMessage({ header: "open-col-properties", cid: opt.$trigger.attr("id") });
+					break;
+				case "copy":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					break;
+				case "paste":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
 					break;
 				case "addleft":
 					$.ajax({
@@ -214,6 +238,8 @@ window.onload = function() {
         },
         items: {
 			"edit": {name: "Edit Column Design", icon: "fa-edit"},
+			"copy": {name: "Copy Column", icon: "fa-copy"},
+			"paste": {name: "Paste Column", icon: "fa-paste"},
 			"sep1": "----------",
             "addleft": {name: "Add New Column To Left", icon: "fa-plus"},
 			"addright": {name: "Add New Column To Right", icon: "fa-plus"},
@@ -239,6 +265,12 @@ window.onload = function() {
 						widgetPropertiesPath: opt.$trigger.attr("widget-name")
 					});
 					break;
+				case "copy":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					break;
+				case "paste":
+					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					break;
 				case "moveup":
 					if (opt.$trigger.prev().length < 1) {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
@@ -261,13 +293,15 @@ window.onload = function() {
 					var parent = $(wid).parent();
 					$(wid).remove();
 					// Maximize drop zone if the deleted widget was the last widget in column
-					if (parent.children().length == 1) MaximizeDropZone(parent.children()[0]);
+					if (parent.find(".widget-wrapper").length == 0) MaximizeDropZone(parent.find(".drop-zone-min")[0]);
 					window.top.postMessage({ header: "deleteWidget", selector: wid });
 					break;
 			}
         },
         items: {
 			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
+			"copy": {name: "Copy Widget", icon: "fa-copy"},
+			"paste": {name: "Paste Widget", icon: "fa-paste"},
 			"sep1": "----------",
             "moveup": {name: "Move Up Widget", icon: "fa-arrow-up"},
 			"movedown": {name: "Move Down Widget", icon: "fa-arrow-down"},
@@ -356,7 +390,7 @@ function DropElement(e, ev) {
 		selectedElement.innerHTML = "";
 		
 		// Inform builder to display a message in feedback box
-		window.top.postMessage({ header: "feedback", message: "Selected widget dropped" });
+		window.top.postMessage({ header: "feedback", message: "Widget added" });
 	} else {
 		// Inform builder to display a message in feedback box
 		window.top.postMessage({ header: "feedback", message: "No selected widget" });
