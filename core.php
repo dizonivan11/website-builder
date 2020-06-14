@@ -8,11 +8,8 @@
 	// Create and connect database object to source
 	function db() {
 		return new Medoo([
-			'database_type' => 'mysql',
-			'database_name' => 'website_builder',
-			'server' => 'localhost',
-			'username' => 'root',
-			'password' => '',
+			'database_type' => 'sqlite',
+			'database_file' => 'core.db'
 		]);
 	}
 

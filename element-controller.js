@@ -186,8 +186,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Column Design", icon: "fa-edit"},
 			"sep1": "----------",
-            "addleft": {name: "Add Left Column", icon: "fa-plus"},
-			"addright": {name: "Add Right Column", icon: "fa-plus"},
+            "addleft": {name: "Add New Column To Left", icon: "fa-plus"},
+			"addright": {name: "Add New Column To Right", icon: "fa-plus"},
 			"sep2": "----------",
             "moveleft": {name: "Move Column To Left", icon: "fa-arrow-left"},
 			"moveright": {name: "Move Column To Right", icon: "fa-arrow-right"},
