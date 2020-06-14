@@ -3,6 +3,21 @@ var rowContextMenu = null;
 var colContextMenu = null;
 var widgetContextMenu = null;
 var selectedElementOffset = 15;
+var maxColSize = 12;
+var maxColInARow = 4;
+var possibleColSizes = [
+	"col-lg-12", "col-lg-11", "col-lg-10", "col-lg-9",
+	"col-lg-8", "col-lg-7", "col-lg-6", "col-lg-5",
+	"col-lg-4", "col-lg-3", "col-lg-2.4", "col-lg-2", "col-lg-1",
+
+	"col-md-12", "col-md-11", "col-md-10", "col-md-9",
+	"col-md-8", "col-md-7", "col-md-6", "col-md-5",
+	"col-md-4", "col-md-3", "col-md-2.4", "col-md-2", "col-md-1",
+
+	"col-sm-12", "col-sm-11", "col-sm-10", "col-sm-9",
+	"col-sm-8", "col-sm-7", "col-sm-6", "col-sm-5",
+	"col-sm-4", "col-sm-3", "col-sm-2.4", "col-sm-2", "col-sm-1"
+];
 
 function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
@@ -143,8 +158,14 @@ window.onload = function() {
 						url: '../../../col-creator.php',
 						type: 'POST',
 						success: function(result) {
-							$(result).insertBefore(opt.$trigger);
-							window.top.postMessage({ header: "feedback", message: "New column added" });
+							var cols = opt.$trigger.parent().find(".col");
+							if (cols.length >= maxColInARow) {
+								window.top.postMessage({ header: "feedback", message: "Reached maximum number of columns in a row" });
+							} else {
+								$(result).insertBefore(opt.$trigger);
+								RecalculateColumnSizes(opt.$trigger.parent());
+								window.top.postMessage({ header: "feedback", message: "New column added" });
+							}
 						}
 					});
 					break;
@@ -153,8 +174,14 @@ window.onload = function() {
 						url: '../../../col-creator.php',
 						type: 'POST',
 						success: function(result) {
-							$(result).insertAfter(opt.$trigger);
-							window.top.postMessage({ header: "feedback", message: "New row added" });
+							var cols = opt.$trigger.parent().find(".col");
+							if (cols.length >= maxColInARow) {
+								window.top.postMessage({ header: "feedback", message: "Reached maximum number of columns in a row" });
+							} else {
+								$(result).insertAfter(opt.$trigger);
+								RecalculateColumnSizes(opt.$trigger.parent());
+								window.top.postMessage({ header: "feedback", message: "New column added" });
+							}
 						}
 					});
 					break;
@@ -177,7 +204,9 @@ window.onload = function() {
 				case "delete":
 					// Delete column only if there is at least one sibling remains on its row after the process
 					if (opt.$trigger.parent().children().length > 1) {
+						var colParent = opt.$trigger.parent();
 						opt.$trigger.remove();
+						RecalculateColumnSizes(colParent);
 						window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " deleted" });
 					} else window.top.postMessage({ header: "feedback", message: "Cannot remove the only column present on its row" });
 					break;
@@ -344,4 +373,22 @@ function MinimizeDropZone(dz) {
 function MaximizeDropZone(dz) {
 	dz.className = "drop-zone";
 	dz.innerHTML = "Add Selected Element";
+}
+
+function RecalculateColumnSizes(parentRow) {
+	var cols = parentRow.find(".col");
+	possibleColSizes.forEach(possibleColSize => {
+		for (let c = 0; c < cols.length; c++) {
+			const col = $(cols[c]);
+			if (col.hasClass(possibleColSize))
+				col.removeClass(possibleColSize);
+		}
+	});
+	for (let c = 0; c < cols.length; c++) {
+		const col = $(cols[c]);
+		var newSize = maxColSize / cols.length;
+		col.addClass("col-lg-" + newSize);
+		col.addClass("col-md-" + newSize);
+		col.addClass("col-sm-12");
+	}
 }
