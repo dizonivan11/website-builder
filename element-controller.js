@@ -4,7 +4,7 @@ var colContextMenu = null;
 var widgetContextMenu = null;
 var selectedElementOffset = 15;
 var selectedColResizer = null;
-const colResizeDistance = 100; // The target distance (in pixel) of dragging to successfully resize a column
+const colResizeDistance = 80; // The target distance (in pixel) of dragging to successfully resize a column
 var colResizeAnchor = 0;
 var colCurrentResizeDistance = 0;
 var maxColSize = 12;
@@ -171,7 +171,21 @@ window.onload = function() {
 		var rcols = $(rws[r]).find(".col-wrapper");
 		for (var c = 1; c < rcols.length; c++) {
 			var colWrapper = $(rcols[c]);
-			if (colWrapper.find(".col-resizer-wrapper").length < 1) InsertColumnResizerBefore(colWrapper);
+			var colResizerWrapper = colWrapper.prev();
+			if (!colResizerWrapper.hasClass("col-resizer-wrapper")) {
+				InsertColumnResizerBefore(colWrapper);
+			} else {
+				colResizerWrapper.find(".col-resizer").mousedown(function() {
+					selectedColResizer = $(this);
+					colResizeAnchor = parseInt(selectedColResizer.css("left").replace(/[^-\d\.]/g, ''));
+					event.stopPropagation();
+				});
+				colResizerWrapper.find(".col-resizer").mouseup(function() {
+					selectedColResizer = null;
+					colResizeAnchor = 0;
+					event.stopPropagation();
+				});
+			}
 		}
 	}
 

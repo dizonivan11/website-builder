@@ -26,19 +26,19 @@
 		<div class="row-wrapper" id="2510">
 			<div class="container">
 				<div class="row">
-					<div class="col-wrapper col col-lg-3 col-md-3 col-sm-12" id="2647">
+					<div class="col-wrapper col col-md-3 col-sm-12 col-lg-2" id="2647">
 						<div id="2661" class="widget-wrapper" widget-name="widgets/Image">
 <div class="inner-wrapper">
     <img src="https://pbs.twimg.com/profile_images/1116825930/windows98od1_400x400.jpg">
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-wrapper col col-lg-3 col-md-3 col-sm-12" id="2648">
+					<div class="col-resizer-wrapper" data-flag="builder-element"><div class="col-resizer"><span>‖</span></div></div><div class="col-wrapper col col-md-3 col-sm-12 col-lg-4" id="2648">
 						<div id="2663" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Windows 98</h3>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
-					</div><div id="2664" class="col-wrapper col col-lg-3 col-md-3 col-sm-12">    <button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
-</div><div id="4801" class="col-wrapper col col-lg-3 col-md-3 col-sm-12">    <button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+					</div><div class="col-resizer-wrapper" data-flag="builder-element"><div class="col-resizer"><span>‖</span></div></div><div id="2664" class="col-wrapper col col-md-3 col-sm-12 col-lg-3">    <button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+</div><div class="col-resizer-wrapper" data-flag="builder-element"><div class="col-resizer"><span>‖</span></div></div><div id="4801" class="col-wrapper col col-md-3 col-sm-12 col-lg-3">    <button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
 </div>
 				</div>
 			</div>
@@ -62,7 +62,13 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div><div id="4875" class="row-wrapper">    <div class="container">
+        <div class="row">
+<div id="4876" class="col-wrapper col">                <button class="drop-zone" onclick="DropElement(this, event);" data-flag="builder-element">Add Selected Element</button>
+            </div>
+        </div>
+    </div>
+</div>
 	</div>
 	<footer>
 		<div class="row-wrapper" id="2512">
@@ -84,7 +90,7 @@
     </nav>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-wrapper col col-lg-4 col-md-4 col-sm-12" id="2651">
+					<div class="col-resizer-wrapper" data-flag="builder-element"><div class="col-resizer"><span>‖</span></div></div><div class="col-wrapper col col-lg-4 col-md-4 col-sm-12" id="2651">
 						<div id="2531" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
@@ -93,7 +99,7 @@
     <div class="text-content"><b>Phone:</b> 0999-999-9999<div><b>Fax:</b>&nbsp;0123-456-7890</div><div><b>Email:</b> noreply@email.com<br><div><b>Address:</b> #123 Street, City, Province, Country</div></div></div>
 </div></div><button class="drop-zone-min" onclick="DropElement(this, event);" data-flag="builder-element">+</button>
 					</div>
-					<div class="col-wrapper col col-lg-4 col-md-4 col-sm-12" id="2652">
+					<div class="col-resizer-wrapper" data-flag="builder-element"><div class="col-resizer"><span>‖</span></div></div><div class="col-wrapper col col-lg-4 col-md-4 col-sm-12" id="2652">
 						<div id="2532" class="widget-wrapper" widget-name="widgets/Headings">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
@@ -114,4 +120,4 @@
 		</div>
 	</footer>
 
-<div id="selected-element" data-flag="builder-element" style="left: 1618px; top: 18px;"></div><div id="row-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Row Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Row</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Row</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Row</span></li></ul></div><div id="widget-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Widget Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Widget</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Widget</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrows"><span>Move Widget</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Widget</span></li></ul></div><div id="col-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Column Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Column</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Column</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add New Column To Left</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add New Column To Right</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-left"><span>Move Column To Left</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-right"><span>Move Column To Right</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Column</span></li></ul></div></body></html>
+<div id="selected-element" data-flag="builder-element" style="left: 1754px; top: 16px;"></div><div id="row-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Row Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Row</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Row</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Above</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add Row Below</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Row</span></li></ul></div><div id="widget-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Widget Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Widget</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Widget</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrows"><span>Move Widget</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Widget</span></li></ul></div><div id="col-context-wrapper" data-flag="builder-element"><ul class="context-menu-list context-menu-root" style="display: none;"><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-edit"><span>Edit Column Design</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-copy"><span>Copy Column</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-paste"><span>Paste Column</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add New Column To Left</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-plus"><span>Add New Column To Right</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-left"><span>Move Column To Left</span></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-arrow-right"><span>Move Column To Right</span></li><li class="context-menu-item context-menu-separator context-menu-not-selectable"></li><li class="context-menu-item context-menu-icon context-menu-icon--fa fa fa-trash"><span>Delete Column</span></li></ul></div></body></html>
