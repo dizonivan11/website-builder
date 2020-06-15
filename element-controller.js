@@ -3,20 +3,24 @@ var rowContextMenu = null;
 var colContextMenu = null;
 var widgetContextMenu = null;
 var selectedElementOffset = 15;
+var selectedColResizer = null;
+const colResizeDistance = 100; // The target distance (in pixel) of dragging to successfully resize a column
+var colResizeAnchor = 0;
+var colCurrentResizeDistance = 0;
 var maxColSize = 12;
 var maxColInARow = 4;
 var possibleColSizes = [
 	"col-lg-12", "col-lg-11", "col-lg-10", "col-lg-9",
 	"col-lg-8", "col-lg-7", "col-lg-6", "col-lg-5",
-	"col-lg-4", "col-lg-3", "col-lg-2.4", "col-lg-2", "col-lg-1",
+	"col-lg-4", "col-lg-3", "col-lg-2", "col-lg-1",
 
 	"col-md-12", "col-md-11", "col-md-10", "col-md-9",
 	"col-md-8", "col-md-7", "col-md-6", "col-md-5",
-	"col-md-4", "col-md-3", "col-md-2.4", "col-md-2", "col-md-1",
+	"col-md-4", "col-md-3", "col-md-2", "col-md-1",
 
 	"col-sm-12", "col-sm-11", "col-sm-10", "col-sm-9",
 	"col-sm-8", "col-sm-7", "col-sm-6", "col-sm-5",
-	"col-sm-4", "col-sm-3", "col-sm-2.4", "col-sm-2", "col-sm-1"
+	"col-sm-4", "col-sm-3", "col-sm-2", "col-sm-1"
 ];
 
 function ApplyDropAndOpenEvent(e, ev) {
@@ -26,6 +30,83 @@ function ApplyDropAndOpenEvent(e, ev) {
 	}
 	// Avoid firing events to elements under this element (eg. parent of this element)
 	ev.stopPropagation();
+}
+
+function InsertColumnResizerBefore(colWrapper) {
+	var newColResizer = $("<div class='col-resizer-wrapper' data-flag='builder-element'><div class='col-resizer'><span>‖</span></div></div>");
+	newColResizer.insertBefore(colWrapper);
+	newColResizer.find(".col-resizer").mousedown(function() {
+		selectedColResizer = $(this);
+		colResizeAnchor = parseInt(selectedColResizer.css("left").replace(/[^-\d\.]/g, ''));
+		event.stopPropagation();
+	});
+	newColResizer.find(".col-resizer").mouseup(function() {
+		selectedColResizer = null;
+		colResizeAnchor = 0;
+		event.stopPropagation();
+	});
+}
+
+function DeleteColumnResizerBefore(colWrapper) {
+	var colResizerToDelete = null;
+	if (colWrapper.index() == 0) {
+		// If the column to delete is the first column in its row
+		colResizerToDelete = colWrapper.next();
+	} else {
+		// If the column to delete is not the first column in its row
+		colResizerToDelete = colWrapper.prev();
+	}
+	if (colResizerToDelete != null && colResizerToDelete.hasClass("col-resizer-wrapper"))
+		colResizerToDelete.remove();
+}
+
+function ResizeColumnEvent(ev) {
+	if (selectedColResizer != null) {
+		if (selectedColResizer.css("opacity") < 1) {
+			selectedColResizer = null;
+			colResizeAnchor = 0;
+			return;
+		}
+		colCurrentResizeDistance = ev.pageX - colResizeAnchor;
+		var left = selectedColResizer.parent().prev();
+		var right = selectedColResizer.parent().next();
+
+		if (left != null && right != null) {
+			if (colCurrentResizeDistance <= -colResizeDistance)
+				ExpandColumn(right, left);
+			else if (colCurrentResizeDistance >= colResizeDistance)
+				ExpandColumn(left, right);
+		}
+	}
+}
+
+function ExpandColumn(expandingColumn, contractingColumn) {
+	var canChange = false;
+	for (let s = 0; s < possibleColSizes.length; s++) {
+		const currentColSize = possibleColSizes[s];
+		if (currentColSize != "col-lg-1" &&
+			!currentColSize.includes("col-md-") &&
+			!currentColSize.includes("col-sm-") &&
+			contractingColumn.hasClass(currentColSize)) {
+				contractingColumn.removeClass(currentColSize);
+				contractingColumn.addClass(possibleColSizes[s + 1]);
+				canChange = true;
+				break;
+		}
+	}
+	if (!canChange) return;
+	for (let s = 0; s < possibleColSizes.length; s++) {
+		const currentColSize = possibleColSizes[s];
+		if (currentColSize != "col-lg-12" &&
+			!currentColSize.includes("col-md-") &&
+			!currentColSize.includes("col-sm-") &&
+			expandingColumn.hasClass(currentColSize)) {
+				expandingColumn.removeClass(currentColSize);
+				expandingColumn.addClass(possibleColSizes[s - 1]);
+				break;
+		}
+	}
+	colResizeAnchor += colCurrentResizeDistance;
 }
 
 function ValidateOrCreateBuilderElement(id) {
@@ -90,13 +171,15 @@ window.onload = function() {
 		var rcols = $(rws[r]).find(".col-wrapper");
 		for (var c = 1; c < rcols.length; c++) {
 			var colWrapper = $(rcols[c]);
-			if (colWrapper.find(".col-resizer").length < 1)
-				colWrapper.prepend("<div class='col-resizer' data-flag='builder-element'><span>‖</span></div>");
+			if (colWrapper.find(".col-resizer-wrapper").length < 1) InsertColumnResizerBefore(colWrapper);
 		}
 	}
 
 	// Add drop click events in all widget-wrapper elements
 	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent(this, event); });
+
+	// Add necessary column resizer event
+	$(document).mousemove(function(event) { ResizeColumnEvent(event) });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
@@ -188,6 +271,7 @@ window.onload = function() {
 							} else {
 								$(result).insertBefore(opt.$trigger);
 								RecalculateColumnSizes(opt.$trigger.parent());
+								InsertColumnResizerBefore(opt.$trigger);
 								window.top.postMessage({ header: "feedback", message: "New column added" });
 							}
 						}
@@ -202,8 +286,10 @@ window.onload = function() {
 							if (cols.length >= maxColInARow) {
 								window.top.postMessage({ header: "feedback", message: "Reached maximum number of columns in a row" });
 							} else {
-								$(result).insertAfter(opt.$trigger);
+								var newColumn = $(result);
+								newColumn.insertAfter(opt.$trigger);
 								RecalculateColumnSizes(opt.$trigger.parent());
+								InsertColumnResizerBefore(newColumn);
 								window.top.postMessage({ header: "feedback", message: "New column added" });
 							}
 						}
@@ -214,7 +300,7 @@ window.onload = function() {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
 						break;
 					}
-					$(opt.$trigger).insertBefore(opt.$trigger.prev());
+					opt.$trigger.insertBefore(opt.$trigger.prev());
 					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved left" });
 					break;
 				case "moveright":
@@ -222,13 +308,14 @@ window.onload = function() {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
 						break;
 					}
-					$(opt.$trigger).insertAfter(opt.$trigger.next());
+					opt.$trigger.insertAfter(opt.$trigger.next());
 					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved right" });
 					break;
 				case "delete":
 					// Delete column only if there is at least one sibling remains on its row after the process
 					if (opt.$trigger.parent().children().length > 1) {
 						var colParent = opt.$trigger.parent();
+						DeleteColumnResizerBefore(opt.$trigger);
 						opt.$trigger.remove();
 						RecalculateColumnSizes(colParent);
 						window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " deleted" });
@@ -271,27 +358,19 @@ window.onload = function() {
 				case "paste":
 					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
 					break;
-				case "moveup":
-					if (opt.$trigger.prev().length < 1) {
-						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
-						break;
-					}
-					$(opt.$trigger).insertBefore(opt.$trigger.prev());
-					window.top.postMessage({ header: "feedback", message: "Widget #" + opt.$trigger.attr("id") + " successfully moved up" });
-					break;
-				case "movedown":
-					if (opt.$trigger.next().hasClass("drop-zone-min")) {
-						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
-						break;
-					}
-					$(opt.$trigger).insertAfter(opt.$trigger.next());
-					window.top.postMessage({ header: "feedback", message: "Widget #" + opt.$trigger.attr("id") + " successfully moved down" });
+				case "move":
+					var parent = opt.$trigger.parent();
+					opt.$trigger.removeClass("context-menu-active");
+					opt.$trigger.remove();
+					// Maximize drop zone if the deleted widget was the last widget in column
+					if (parent.find(".widget-wrapper").length == 0) MaximizeDropZone(parent.find(".drop-zone-min")[0]);
+					selectedElement.innerHTML = opt.$trigger[0]["outerHTML"];
 					break;
 				case "delete":
 					// Delete selected widget
 					var wid = "#" + opt.$trigger.attr("id");
-					var parent = $(wid).parent();
-					$(wid).remove();
+					var parent = opt.$trigger.parent();
+					opt.$trigger.remove();
 					// Maximize drop zone if the deleted widget was the last widget in column
 					if (parent.find(".widget-wrapper").length == 0) MaximizeDropZone(parent.find(".drop-zone-min")[0]);
 					window.top.postMessage({ header: "deleteWidget", selector: wid });
@@ -303,8 +382,7 @@ window.onload = function() {
 			"copy": {name: "Copy Widget", icon: "fa-copy"},
 			"paste": {name: "Paste Widget", icon: "fa-paste"},
 			"sep1": "----------",
-            "moveup": {name: "Move Up Widget", icon: "fa-arrow-up"},
-			"movedown": {name: "Move Down Widget", icon: "fa-arrow-down"},
+            "move": {name: "Move Widget", icon: "fa-arrows"},
 			"sep2": "----------",
             "delete": {name: "Delete Widget", icon: "fa-trash"}
         }

@@ -48,20 +48,29 @@
 .row-wrapper:hover::before {
 	content: "Row";
 }
-.col-resizer {
+.col-resizer-wrapper {
+	height: 100%;
+	z-index: 5;
+}
+.col-resizer:not(:active) {
 	opacity: 0;
-	transition: opacity ease 0.25s;
-	transform: translateX(-150%);
+}
+.col-resizer {
+	cursor: grab;
+	transition: opacity 0.25s, background 0.25s;
+	transform: translateX(-50%);
 	position: absolute;
 	background-color: #73a122;
 	padding: 0px 4px 4px 4px;
 	user-select: none;
 	color: white !important;
-	height: 100%;
 	border-radius: 25px;
 }
 .col-resizer:hover {
 	opacity: 1;
+}
+.col-resizer:active {
+	background-color: #cccccc;
 }
 #selected-element {
 	position: fixed;

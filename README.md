@@ -3,12 +3,11 @@
 ***
 **Current TODO:**
 <ol>
-<li>Allow dragging to resize columns</li>
+<li>Copy/Paste Feature</li>
 </ol>
 
 **TODO List:**
 <ol>
-<li>Copy/Paste Feature</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
 <li>Add Row and Column Properties Window</li>
 <li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
@@ -35,6 +34,7 @@
 
 **Done TODO**
 <ol>
+<li>Allow dragging to resize columns</li>
 <li>Fix bug when breaking lines in text widget, this bug occurs because &lt;p> tag cannot contain &lt;div> tags</li>
 <li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>
 <li>Add Access to Columns</li>
