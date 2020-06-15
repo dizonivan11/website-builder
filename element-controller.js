@@ -37,7 +37,7 @@ function InsertColumnResizerBefore(colWrapper) {
 	newColResizer.insertBefore(colWrapper);
 	newColResizer.find(".col-resizer").mousedown(function() {
 		selectedColResizer = $(this);
-		colResizeAnchor = parseInt(selectedColResizer.css("left").replace(/[^-\d\.]/g, ''));
+		colResizeAnchor = selectedColResizer.offset().left;
 		event.stopPropagation();
 	});
 	newColResizer.find(".col-resizer").mouseup(function() {
@@ -177,7 +177,8 @@ window.onload = function() {
 			} else {
 				colResizerWrapper.find(".col-resizer").mousedown(function() {
 					selectedColResizer = $(this);
-					colResizeAnchor = parseInt(selectedColResizer.css("left").replace(/[^-\d\.]/g, ''));
+					colResizeAnchor = selectedColResizer.offset().left;
+					console.log(selectedColResizer.offset().left);
 					event.stopPropagation();
 				});
 				colResizerWrapper.find(".col-resizer").mouseup(function() {

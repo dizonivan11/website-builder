@@ -1,3 +1,6 @@
+.row {
+	position: relative;
+}
 .drop-zone, .drop-zone-min {
 	border: 1px solid #ccc;
 	background-color: #efefef;
@@ -49,7 +52,7 @@
 	content: "Row";
 }
 .col-resizer-wrapper {
-	height: 100%;
+	height: auto;
 	z-index: 5;
 }
 .col-resizer:not(:active) {
@@ -65,6 +68,15 @@
 	user-select: none;
 	color: white !important;
 	border-radius: 25px;
+	height: 100%;
+	width: 16px;
+}
+.col-resizer span {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
 }
 .col-resizer:hover {
 	opacity: 1;
