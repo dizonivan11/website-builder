@@ -34,6 +34,7 @@
 
 **Done TODO**
 <ol>
+<li>Fix Bug swapping columns (column resizers are also swapping)</li>
 <li>Allow dragging to resize columns</li>
 <li>Fix bug when breaking lines in text widget, this bug occurs because &lt;p> tag cannot contain &lt;div> tags</li>
 <li>Make all context menu options functional (Adding/Deleting Rows, Adding/Deleting Columns, Shift Widgets/Rows, etc.)</li>

@@ -311,19 +311,53 @@ window.onload = function() {
 					});
 					break;
 				case "moveleft":
+					// Invalid move
 					if (opt.$trigger.prev().length < 1) {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
 						break;
 					}
-					opt.$trigger.insertBefore(opt.$trigger.prev());
+					var firstColumnNeighbor = opt.$trigger.prev();
+					var secondColumn = firstColumnNeighbor;
+
+					// Iterate all previous element to find the nearest column skipping any element in between them
+					while (!secondColumn.hasClass("col-wrapper"))
+						secondColumn = secondColumn.prev();
+
+					// Invalid move
+					if (!secondColumn.hasClass("col-wrapper")) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+
+					// Do the swapping
+					opt.$trigger.insertBefore(secondColumn);
+					secondColumn.insertAfter(firstColumnNeighbor);
+
 					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved left" });
 					break;
 				case "moveright":
+					// Invalid move
 					if (opt.$trigger.next().length < 1) {
 						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
 						break;
 					}
-					opt.$trigger.insertAfter(opt.$trigger.next());
+					var firstColumnNeighbor = opt.$trigger.next();
+					var secondColumn = firstColumnNeighbor;
+
+					// Iterate all next element to find the nearest column skipping any element in between them
+					while (!secondColumn.hasClass("col-wrapper"))
+						secondColumn = secondColumn.next();
+
+					// Invalid move
+					if (!secondColumn.hasClass("col-wrapper")) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+
+					// Do the swapping
+					opt.$trigger.insertAfter(secondColumn);
+					secondColumn.insertBefore(firstColumnNeighbor);
+					
 					window.top.postMessage({ header: "feedback", message: "Column #" + opt.$trigger.attr("id") + " successfully moved right" });
 					break;
 				case "delete":
