@@ -5,6 +5,30 @@
 	// Using Medoo namespace
 	use Medoo\Medoo;
 
+	// Check if db does not exists, then create new one with no content yet
+	if (!file_exists("core.db")) {
+		file_put_contents("core.db", "");
+
+		// Create meta_data table
+		db()->create("meta_data", [
+			"meta_id" => [
+				"VARCHAR(32)",
+				"NOT NULL",
+				"PRIMARY KEY"
+			],
+			"meta_value" => [
+				"INT",
+				"NOT NULL"
+			]
+		]);
+
+		// Add meta data "current_eid" with seed 4700
+		db()->insert("meta_data",[
+			"meta_id" => "current_eid",
+			"meta_value" => 4700
+		]);
+	}
+
 	// Create and connect database object to source
 	function db() {
 		return new Medoo([
