@@ -9,6 +9,7 @@
 **TODO List:**
 <ol>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
+<li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 <li>Add Row and Column Properties Window</li>
 <li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
@@ -19,7 +20,6 @@
 <li>[Realtime Saving] Save to webpage file upon deleting widget</li>
 <li>Clean [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
-<li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
 <li>Move content editing outside properties window and allow editing content of widget directly when clicked</li>
 <li>Color Pallete</li>
 <li>Widget/Row/Column Background Image property</li>
@@ -30,6 +30,7 @@
 <li>Deleting Pages</li>
 <li>Uploading Images</li>
 <li>Publishing</li>
+<li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
 </ol>
 
 **Done TODO**
