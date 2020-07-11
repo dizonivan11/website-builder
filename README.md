@@ -3,14 +3,13 @@
 ***
 **Current TODO:**
 <ol>
-<li>Capability of moving the widgets to either top or bottom of selected element, not always inserting at top</li>
+<li>Add site creator that duplicates necessary files for file like [ core.php, request-current-eid.php, row-creator.php, col-creator.php, widget-loader.php ]. (For study first)</li>
+<li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
+<li>Revise meta value column to hold string data</li>
 </ol>
 
 **TODO List:**
 <ol>
-<li>Add site creator that duplicates necessary files for file like [ core.php, request-current-eid.php, row-creator.php, col-creator.php, widget-loader.php ]. (For study first)</li>
-<li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
-<li>Revise meta value column to hold string data</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
 <li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 <li>Add Row and Column Properties Window</li>
@@ -33,6 +32,7 @@
 <li>Deleting Pages</li>
 <li>Uploading Images</li>
 <li>Publishing</li>
+<li>Capability of moving the widgets to either top or bottom of selected element, not always inserting at top</li>
 <li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
 </ol>
 
