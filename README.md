@@ -1,4 +1,4 @@
-# BWB: Web Builder
+# BWB: Website Builder
 **Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker, jQuery Custom Context Menu (https://swisnl.github.io/jQuery-contextMenu/)**
 ***
 **Current TODO:**
