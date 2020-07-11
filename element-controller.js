@@ -22,6 +22,8 @@ var possibleColSizes = [
 	"col-sm-8", "col-sm-7", "col-sm-6", "col-sm-5",
 	"col-sm-4", "col-sm-3", "col-sm-2", "col-sm-1"
 ];
+var copiedElement = null;
+var copiedElementWrapper = "";
 
 function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
@@ -124,49 +126,44 @@ function ValidateOrCreateBuilderElement(id) {
 	return element;
 }
 
+function GetEID() {
+	var id = -1;
+	$.ajax({
+		url: "../../../request-current-eid.php",
+		method: "POST",
+		// Async request turned off to avoid requesting the same id at the same time
+		async: false,
+		success: function(result) { id = result; }
+	});
+	return id;
+}
+
+// For requesting new ID to all child element of copied element (deep scan)
+function RequestNewIDForChildren(newElement) {
+	var selector = "#" + newElement.attr("id") + " .widget-wrapper, #" + newElement.attr("id") +  " .col-wrapper, #" + newElement.attr("id") +  " .row-wrapper";
+	$(selector).each(function(index) {
+		$(this).attr("id", GetEID());
+	});
+}
+
 window.onload = function() {
 	selectedElement = ValidateOrCreateBuilderElement("selected-element");
 	rowContextMenu = ValidateOrCreateBuilderElement("row-context-wrapper");
 	colContextMenu = ValidateOrCreateBuilderElement("col-context-wrapper");
 	widgetContextMenu = ValidateOrCreateBuilderElement("widget-context-wrapper");
 	
-	// Validate if all row wrappers have id, add id to rows without id
-	// Async request turned off to avoid requesting the same id at the same time
-	// Row Properties Window to be added later
-	var rws = $(".row-wrapper");
-	for (var r = 0; r < rws.length; r++) {
-		var row = rws[r];
-		if (row.id == "") {
-			$.ajax({
-				url: "../../../request-current-eid.php",
-				method: "POST",
-				async: false,
-				success: function(result) {
-					row.id = result;
-				}
-			});
-		}
-	}
-
-	// Validate if all column wrappers have id, add id to columns without id
-	// Async request turned off to avoid requesting the same id at the same time
-	// Column Properties Window to be added later
-	var cws = $(".col-wrapper");
-	for (var c = 0; c < cws.length; c++) {
-		var col = cws[c];
-		if (col.id == "") {
-			$.ajax({
-				url: "../../../request-current-eid.php",
-				method: "POST",
-				async: false,
-				success: function(result) {
-					col.id = result;
-				}
-			});
+	// Validate if all row and column wrappers have id, add id to rows and columns without id
+	// Row and Column Properties Window to be added later
+	var ws = $(".row-wrapper, .col-wrapper");
+	for (var r = 0; r < ws.length; r++) {
+		var w = ws[r];
+		if (w.id == "") {
+			w.id = GetEID();
 		}
 	}
 
 	// Validate if all column wrappers have resizers in between them, add resizers if none
+	var rws = $(".row-wrapper");
 	for (var r = 0; r < rws.length; r++) {
 		var rcols = $(rws[r]).find(".col-wrapper");
 		for (var c = 1; c < rcols.length; c++) {
@@ -191,7 +188,7 @@ window.onload = function() {
 	}
 
 	// Add drop click events in all widget-wrapper elements
-	$(".widget-wrapper").click(function() { ApplyDropAndOpenEvent(this, event); });
+	$(document).on("click", ".widget-wrapper", function() { ApplyDropAndOpenEvent(this, event); });
 
 	// Add necessary column resizer event
 	$(document).mousemove(function(event) { ResizeColumnEvent(event) });
@@ -213,10 +210,33 @@ window.onload = function() {
 					window.top.postMessage({ header: "open-row-properties", rid: opt.$trigger.attr("id") });
 					break;
 				case "copy":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					copiedElement = opt.$trigger;
+					copiedElementWrapper = "row-wrapper";
+					window.top.postMessage({ header: "feedback", message: "Copied row #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					if (copiedElement == null) {
+						window.top.postMessage({ header: "feedback", message: "No copied element" });
+						break;
+					}
+					// Ensure that you are pasting to the same type of element
+					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
+						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-row element" });
+						break;
+					}
+					var newElement = copiedElement.clone(true, true);
+					newElement.attr("id", GetEID());
+
+					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
+					newElement.removeClass("context-menu-active");
+
+					// Paste the new row to the top of the selected row
+					$(newElement).insertBefore(opt.$trigger);
+
+					// Process all element's ID inside the new row
+					RequestNewIDForChildren(newElement);
+
+					window.top.postMessage({ header: "feedback", message: "Pasted row" });
 					break;
 				case "addup":
 					$.ajax({
@@ -270,10 +290,54 @@ window.onload = function() {
 					window.top.postMessage({ header: "open-col-properties", cid: opt.$trigger.attr("id") });
 					break;
 				case "copy":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					copiedElement = opt.$trigger;
+					copiedElementWrapper = "col-wrapper";
+					window.top.postMessage({ header: "feedback", message: "Copied column #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					if (copiedElement == null) {
+						window.top.postMessage({ header: "feedback", message: "No copied element" });
+						break;
+					}
+					// Ensure that you are pasting to the same type of element
+					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
+
+						// EXCEPTION: If the copied element is a widget, we can insert it to the bottom of the column
+						if (copiedElementWrapper == "widget-wrapper") {
+							var newElement = copiedElement.clone(true, true);
+							newElement.attr("id", GetEID());
+
+							// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
+							newElement.removeClass("context-menu-active");
+
+							// Paste the new widget to the top of the selected widget
+							$(newElement).insertAfter(opt.$trigger.children().last());
+
+							// Process all element's ID inside the new widget
+							RequestNewIDForChildren(newElement);
+
+							window.top.postMessage({ header: "feedback", message: "Appended widget to the column #" + opt.$trigger.attr("id") });
+							break;
+						}
+
+						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-column element" });
+						break;
+					}
+					var newElement = copiedElement.clone(true, true);
+					newElement.attr("id", GetEID());
+
+					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
+					newElement.removeClass("context-menu-active");
+
+					// Paste the new column to the left of the selected column
+					$(newElement).insertBefore(opt.$trigger);
+					RecalculateColumnSizes(opt.$trigger.parent());
+					InsertColumnResizerBefore(opt.$trigger);
+
+					// Process all element's ID inside the new column
+					RequestNewIDForChildren(newElement);
+
+					window.top.postMessage({ header: "feedback", message: "Pasted column" });
 					break;
 				case "addleft":
 					$.ajax({
@@ -402,10 +466,33 @@ window.onload = function() {
 					});
 					break;
 				case "copy":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					copiedElement = opt.$trigger;
+					copiedElementWrapper = "widget-wrapper";
+					window.top.postMessage({ header: "feedback", message: "Copied widget #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					window.top.postMessage({ header: "feedback", message: "Not yet implemented" });
+					if (copiedElement == null) {
+						window.top.postMessage({ header: "feedback", message: "No copied element" });
+						break;
+					}
+					// Ensure that you are pasting to the same type of element
+					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
+						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-widget element" });
+						break;
+					}
+					var newElement = copiedElement.clone(true, true);
+					newElement.attr("id", GetEID());
+
+					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
+					newElement.removeClass("context-menu-active");
+
+					// Paste the new widget to the top of the selected widget
+					$(newElement).insertBefore(opt.$trigger);
+
+					// Process all element's ID inside the new widget
+					RequestNewIDForChildren(newElement);
+
+					window.top.postMessage({ header: "feedback", message: "Pasted widget" });
 					break;
 				case "move":
 					var parent = opt.$trigger.parent();
@@ -511,9 +598,7 @@ function DropElement(e, ev) {
 		// widget-wrapper for opening menus not the elements of the widget.
 		// ----------
 		if (isEmpty) MinimizeDropZone(e);
-		var widgetWrapper = selectedElement.childNodes[0];
-		$(widgetWrapper).click(function() { ApplyDropAndOpenEvent(this, event); });
-		parent.insertBefore(widgetWrapper, e);
+		parent.insertBefore(selectedElement.childNodes[0], e);
 		selectedElement.innerHTML = "";
 		
 		// Inform builder to display a message in feedback box

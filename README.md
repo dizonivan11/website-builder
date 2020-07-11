@@ -3,11 +3,13 @@
 ***
 **Current TODO:**
 <ol>
-<li>Copy/Paste Feature</li>
+<li>Capability of moving the widgets to either top or bottom of selected widget, not always inserting to top</li>
 </ol>
 
 **TODO List:**
 <ol>
+<li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
+<li>Revise meta value column to hold string data</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
 <li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 <li>Add Row and Column Properties Window</li>
@@ -22,8 +24,9 @@
 <li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
 <li>Move content editing outside properties window and allow editing content of widget directly when clicked</li>
 <li>Color Pallete</li>
+<li>Color Pallete</li>
 <li>Widget/Row/Column Background Image property</li>
-<li>Global Settings</li>
+<li>Inner Rows</li>
 <li>Site Map</li>
 <li>Adding Pages</li>
 <li>Sorting Pages</li>
@@ -35,6 +38,8 @@
 
 **Done TODO**
 <ol>
+<li>Copy/Paste Feature for Rows, Columns, and Widgets</li>
+<li>Event Inject Only Once</li>
 <li>Fix Bug swapping columns (column resizers are also swapping)</li>
 <li>Allow dragging to resize columns</li>
 <li>Fix bug when breaking lines in text widget, this bug occurs because &lt;p> tag cannot contain &lt;div> tags</li>
