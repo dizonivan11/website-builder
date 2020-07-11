@@ -8,6 +8,7 @@
 
 **TODO List:**
 <ol>
+<li>Add site creator that duplicates necessary files for file like [ core.php, request-current-eid.php, row-creator.php, col-creator.php, widget-loader.php ]. (For study first)</li>
 <li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
 <li>Revise meta value column to hold string data</li>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
