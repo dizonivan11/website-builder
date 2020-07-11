@@ -53,7 +53,7 @@
 }
 .col-resizer-wrapper {
 	height: auto;
-	z-index: 5;
+	z-index: 100;
 }
 .col-resizer:not(:active) {
 	opacity: 0;
@@ -88,4 +88,7 @@
 	position: fixed;
 	pointer-events: none;
 	user-select: none;
+}
+#row-context-wrapper, #col-context-wrapper, #widget-context-wrapper {
+	z-index: 101;
 }

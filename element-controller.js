@@ -49,16 +49,6 @@ function ApplyDropAndOpenEvent(e, ev) {
 function InsertColumnResizerBefore(colWrapper) {
 	var newColResizer = $("<div class='col-resizer-wrapper' data-flag='builder-element'><div class='col-resizer'><span>‖</span></div></div>");
 	newColResizer.insertBefore(colWrapper);
-	newColResizer.find(".col-resizer").mousedown(function() {
-		selectedColResizer = $(this);
-		colResizeAnchor = selectedColResizer.offset().left;
-		event.stopPropagation();
-	});
-	newColResizer.find(".col-resizer").mouseup(function() {
-		selectedColResizer = null;
-		colResizeAnchor = 0;
-		event.stopPropagation();
-	});
 }
 
 function DeleteColumnResizerBefore(colWrapper) {
@@ -211,21 +201,8 @@ window.onload = function() {
 		for (var c = 1; c < rcols.length; c++) {
 			var colWrapper = $(rcols[c]);
 			var colResizerWrapper = colWrapper.prev();
-			if (!colResizerWrapper.hasClass("col-resizer-wrapper")) {
+			if (!colResizerWrapper.hasClass("col-resizer-wrapper"))
 				InsertColumnResizerBefore(colWrapper);
-			} else {
-				colResizerWrapper.find(".col-resizer").mousedown(function() {
-					selectedColResizer = $(this);
-					colResizeAnchor = selectedColResizer.offset().left;
-					console.log(selectedColResizer.offset().left);
-					event.stopPropagation();
-				});
-				colResizerWrapper.find(".col-resizer").mouseup(function() {
-					selectedColResizer = null;
-					colResizeAnchor = 0;
-					event.stopPropagation();
-				});
-			}
 		}
 	}
 
@@ -233,6 +210,17 @@ window.onload = function() {
 	$(document).on("click", ".widget-wrapper", function() { ApplyDropAndOpenEvent(this, event); });
 
 	// Add necessary column resizer event
+	$(document).on("mousedown", ".col-resizer", function() {
+		selectedColResizer = $(this);
+		colResizeAnchor = selectedColResizer.offset().left;
+		console.log(selectedColResizer.offset().left);
+		event.stopPropagation();
+	});
+	$(document).on("mouseup", ".col-resizer", function() {
+		selectedColResizer = null;
+		colResizeAnchor = 0;
+		event.stopPropagation();
+	});
 	$(document).mousemove(function(event) { ResizeColumnEvent(event) });
 
 	// selected element follows cursor
@@ -245,6 +233,7 @@ window.onload = function() {
 	$.contextMenu({
 		selector: '.row-wrapper',
 		appendTo: '#row-context-wrapper',
+		zIndex: 101,
         callback: function(key, opt) {
 			switch (key) {
 				// Open properties window for selected row
@@ -361,6 +350,7 @@ window.onload = function() {
 	$.contextMenu({
 		selector: '.col-wrapper',
 		appendTo: '#col-context-wrapper',
+		zIndex: 101,
         callback: function(key, opt) {
 			switch (key) {
 				// Open properties window for selected column
@@ -495,6 +485,7 @@ window.onload = function() {
 	$.contextMenu({
 		selector: '.widget-wrapper',
 		appendTo: '#widget-context-wrapper',
+		zIndex: 101,
         callback: function(key, opt) {
 			switch (key) {
 				case "edit":
