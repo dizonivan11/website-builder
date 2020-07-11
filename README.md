@@ -3,7 +3,7 @@
 ***
 **Current TODO:**
 <ol>
-<li>Capability of moving the widgets to either top or bottom of selected widget, not always inserting to top</li>
+<li>Capability of moving the widgets to either top or bottom of selected element, not always inserting at one top</li>
 </ol>
 
 **TODO List:**
@@ -24,7 +24,6 @@
 <li>Clean [document.getElementById] functions and use jQuery selectors instead for selector consistency</li>
 <li>Clean AJAX requests functions and use jQuery ajax instead for cleaner code and consistency</li>
 <li>Move content editing outside properties window and allow editing content of widget directly when clicked</li>
-<li>Color Pallete</li>
 <li>Color Pallete</li>
 <li>Widget/Row/Column Background Image property</li>
 <li>Inner Rows</li>

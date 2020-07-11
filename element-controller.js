@@ -25,6 +25,18 @@ var possibleColSizes = [
 var copiedElement = null;
 var copiedElementWrapper = "";
 
+function GetEID() {
+	var id = -1;
+	$.ajax({
+		url: "../../../request-current-eid.php",
+		method: "POST",
+		// Async request turned off to avoid requesting the same id at the same time
+		async: false,
+		success: function(result) { id = result; }
+	});
+	return id;
+}
+
 function ApplyDropAndOpenEvent(e, ev) {
 	if (selectedElement.innerHTML != "") {
 		// If there is selected widget, function as drop zone
@@ -126,16 +138,46 @@ function ValidateOrCreateBuilderElement(id) {
 	return element;
 }
 
-function GetEID() {
-	var id = -1;
-	$.ajax({
-		url: "../../../request-current-eid.php",
-		method: "POST",
-		// Async request turned off to avoid requesting the same id at the same time
-		async: false,
-		success: function(result) { id = result; }
-	});
-	return id;
+function CanAddColumn(row) { return row.find(".col-wrapper").length < maxColInARow; }
+
+function PasteElement(selectedElement, insertBefore = true, isColumn = false) {
+	if (isColumn && !CanAddColumn(selectedElement.parent())) {
+		window.top.postMessage({ header: "feedback", message: "Reached maximum number of columns in a row" });
+		return;
+	}
+	if (copiedElement == null) {
+		window.top.postMessage({ header: "feedback", message: "No copied element" });
+		return;
+	}
+	// Ensure that you are pasting to the same type of element
+	if (!selectedElement.hasClass(copiedElementWrapper)) {
+		window.top.postMessage({ header: "feedback", message: "Cannot paste to different type of element" });
+		return;
+	}
+	var newElement = copiedElement.clone(true, true);
+	newElement.attr("id", GetEID());
+
+	// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
+	newElement.removeClass("context-menu-active");
+
+	if (insertBefore)
+		// Paste the new element before the selected element
+		$(newElement).insertBefore(selectedElement);
+	else
+		// Paste the new element after the selected element
+		$(newElement).insertAfter(selectedElement);
+	
+	if (isColumn) {
+		RecalculateColumnSizes(selectedElement.parent());
+
+		if (insertBefore)
+			InsertColumnResizerBefore(selectedElement);
+		else
+			InsertColumnResizerBefore(newElement);
+	}
+
+	// Process all element's ID inside the new element
+	RequestNewIDForChildren(newElement);
 }
 
 // For requesting new ID to all child element of copied element (deep scan)
@@ -215,28 +257,10 @@ window.onload = function() {
 					window.top.postMessage({ header: "feedback", message: "Copied row #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					if (copiedElement == null) {
-						window.top.postMessage({ header: "feedback", message: "No copied element" });
-						break;
-					}
-					// Ensure that you are pasting to the same type of element
-					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
-						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-row element" });
-						break;
-					}
-					var newElement = copiedElement.clone(true, true);
-					newElement.attr("id", GetEID());
-
-					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
-					newElement.removeClass("context-menu-active");
-
-					// Paste the new row to the top of the selected row
-					$(newElement).insertBefore(opt.$trigger);
-
-					// Process all element's ID inside the new row
-					RequestNewIDForChildren(newElement);
-
-					window.top.postMessage({ header: "feedback", message: "Pasted row" });
+					PasteElement(opt.$trigger);
+					break;
+				case "paste2":
+					PasteElement(opt.$trigger, false);
 					break;
 				case "addup":
 					$.ajax({
@@ -270,7 +294,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Row Design", icon: "fa-edit"},
 			"copy": {name: "Copy Row", icon: "fa-copy"},
-			"paste": {name: "Paste Here", icon: "fa-paste"},
+			"paste": {name: "Paste To Top", icon: "fa-paste"},
+			"paste2": {name: "Paste To Bottom", icon: "fa-paste"},
 			"sep1": "----------",
             "addup": {name: "Add Row Above", icon: "fa-plus"},
 			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
@@ -295,49 +320,10 @@ window.onload = function() {
 					window.top.postMessage({ header: "feedback", message: "Copied column #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					if (copiedElement == null) {
-						window.top.postMessage({ header: "feedback", message: "No copied element" });
-						break;
-					}
-					// Ensure that you are pasting to the same type of element
-					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
-
-						// EXCEPTION: If the copied element is a widget, we can insert it to the bottom of the column
-						if (copiedElementWrapper == "widget-wrapper") {
-							var newElement = copiedElement.clone(true, true);
-							newElement.attr("id", GetEID());
-
-							// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
-							newElement.removeClass("context-menu-active");
-
-							// Paste the new widget to the top of the selected widget
-							$(newElement).insertAfter(opt.$trigger.children().last());
-
-							// Process all element's ID inside the new widget
-							RequestNewIDForChildren(newElement);
-
-							window.top.postMessage({ header: "feedback", message: "Appended widget to the column #" + opt.$trigger.attr("id") });
-							break;
-						}
-
-						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-column element" });
-						break;
-					}
-					var newElement = copiedElement.clone(true, true);
-					newElement.attr("id", GetEID());
-
-					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
-					newElement.removeClass("context-menu-active");
-
-					// Paste the new column to the left of the selected column
-					$(newElement).insertBefore(opt.$trigger);
-					RecalculateColumnSizes(opt.$trigger.parent());
-					InsertColumnResizerBefore(opt.$trigger);
-
-					// Process all element's ID inside the new column
-					RequestNewIDForChildren(newElement);
-
-					window.top.postMessage({ header: "feedback", message: "Pasted column" });
+					PasteElement(opt.$trigger, true, true);
+					break;
+				case "paste2":
+					PasteElement(opt.$trigger, false, true);
 					break;
 				case "addleft":
 					$.ajax({
@@ -439,7 +425,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Column Design", icon: "fa-edit"},
 			"copy": {name: "Copy Column", icon: "fa-copy"},
-			"paste": {name: "Paste Here", icon: "fa-paste"},
+			"paste": {name: "Paste To Left", icon: "fa-paste"},
+			"paste2": {name: "Paste To Right", icon: "fa-paste"},
 			"sep1": "----------",
             "addleft": {name: "Add New Column To Left", icon: "fa-plus"},
 			"addright": {name: "Add New Column To Right", icon: "fa-plus"},
@@ -471,28 +458,10 @@ window.onload = function() {
 					window.top.postMessage({ header: "feedback", message: "Copied widget #" + opt.$trigger.attr("id") });
 					break;
 				case "paste":
-					if (copiedElement == null) {
-						window.top.postMessage({ header: "feedback", message: "No copied element" });
-						break;
-					}
-					// Ensure that you are pasting to the same type of element
-					if (!opt.$trigger.hasClass(copiedElementWrapper)) {
-						window.top.postMessage({ header: "feedback", message: "Cannot paste to non-widget element" });
-						break;
-					}
-					var newElement = copiedElement.clone(true, true);
-					newElement.attr("id", GetEID());
-
-					// Ensure context-menu-active class is deleted as this prevents opening context menu when right-clicked
-					newElement.removeClass("context-menu-active");
-
-					// Paste the new widget to the top of the selected widget
-					$(newElement).insertBefore(opt.$trigger);
-
-					// Process all element's ID inside the new widget
-					RequestNewIDForChildren(newElement);
-
-					window.top.postMessage({ header: "feedback", message: "Pasted widget" });
+					PasteElement(opt.$trigger);
+					break;
+				case "paste2":
+					PasteElement(opt.$trigger, false);
 					break;
 				case "move":
 					var parent = opt.$trigger.parent();
@@ -516,7 +485,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
 			"copy": {name: "Copy Widget", icon: "fa-copy"},
-			"paste": {name: "Paste Here", icon: "fa-paste"},
+			"paste": {name: "Paste To Top", icon: "fa-paste"},
+			"paste2": {name: "Paste To Bottom", icon: "fa-paste"},
 			"sep1": "----------",
             "move": {name: "Move Widget", icon: "fa-arrows"},
 			"sep2": "----------",
