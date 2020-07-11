@@ -270,7 +270,7 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Row Design", icon: "fa-edit"},
 			"copy": {name: "Copy Row", icon: "fa-copy"},
-			"paste": {name: "Paste Row", icon: "fa-paste"},
+			"paste": {name: "Paste Here", icon: "fa-paste"},
 			"sep1": "----------",
             "addup": {name: "Add Row Above", icon: "fa-plus"},
 			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
@@ -439,7 +439,7 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Column Design", icon: "fa-edit"},
 			"copy": {name: "Copy Column", icon: "fa-copy"},
-			"paste": {name: "Paste Column", icon: "fa-paste"},
+			"paste": {name: "Paste Here", icon: "fa-paste"},
 			"sep1": "----------",
             "addleft": {name: "Add New Column To Left", icon: "fa-plus"},
 			"addright": {name: "Add New Column To Right", icon: "fa-plus"},
@@ -516,7 +516,7 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
 			"copy": {name: "Copy Widget", icon: "fa-copy"},
-			"paste": {name: "Paste Widget", icon: "fa-paste"},
+			"paste": {name: "Paste Here", icon: "fa-paste"},
 			"sep1": "----------",
             "move": {name: "Move Widget", icon: "fa-arrows"},
 			"sep2": "----------",
