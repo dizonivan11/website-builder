@@ -3,7 +3,7 @@
 ***
 **Current TODO:**
 <ol>
-<li>Capability of moving the widgets to either top or bottom of selected element, not always inserting at one top</li>
+<li>Capability of moving the widgets to either top or bottom of selected element, not always inserting at top</li>
 </ol>
 
 **TODO List:**
@@ -38,6 +38,7 @@
 
 **Done TODO**
 <ol>
+<li>Add Row Move Feature</li>
 <li>Copy/Paste Feature for Rows, Columns, and Widgets</li>
 <li>Event Inject Only Once</li>
 <li>Fix Bug swapping columns (column resizers are also swapping)</li>

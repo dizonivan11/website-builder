@@ -282,6 +282,56 @@ window.onload = function() {
 						}
 					});
 					break;
+				case "moveup":
+					// Invalid move
+					if (opt.$trigger.prev().length < 1) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					var firstRowNeighbor = opt.$trigger.prev();
+					var secondRow = firstRowNeighbor;
+
+					// Iterate all previous element to find the nearest row skipping any element in between them
+					while (!secondRow.hasClass("row-wrapper"))
+						secondRow = secondRow.prev();
+
+					// Invalid move
+					if (!secondRow.hasClass("row-wrapper")) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+
+					// Do the swapping
+					opt.$trigger.insertBefore(secondRow);
+					secondRow.insertAfter(firstRowNeighbor);
+
+					window.top.postMessage({ header: "feedback", message: "Row #" + opt.$trigger.attr("id") + " successfully moved up" });
+					break;
+				case "movedown":
+					// Invalid move
+					if (opt.$trigger.next().length < 1) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+					var firstRowNeighbor = opt.$trigger.next();
+					var secondRow = firstRowNeighbor;
+
+					// Iterate all next element to find the nearest row skipping any element in between them
+					while (!secondRow.hasClass("row-wrapper"))
+						secondRow = secondRow.next();
+
+					// Invalid move
+					if (!secondRow.hasClass("row-wrapper")) {
+						window.top.postMessage({ header: "feedback", message: "Cannot move further" });
+						break;
+					}
+
+					// Do the swapping
+					opt.$trigger.insertAfter(secondRow);
+					secondRow.insertBefore(firstRowNeighbor);
+
+					window.top.postMessage({ header: "feedback", message: "Row #" + opt.$trigger.attr("id") + " successfully moved down" });
+					break;
 				case "delete":
 					// Delete row only if there is at least one sibling remains on its section after the process
 					if (opt.$trigger.parent().children().length > 1) {
@@ -294,12 +344,15 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Row Design", icon: "fa-edit"},
 			"copy": {name: "Copy Row", icon: "fa-copy"},
-			"paste": {name: "Paste To Top", icon: "fa-paste"},
-			"paste2": {name: "Paste To Bottom", icon: "fa-paste"},
+			"paste": {name: "Paste Before This", icon: "fa-paste"},
+			"paste2": {name: "Paste After This", icon: "fa-paste"},
 			"sep1": "----------",
             "addup": {name: "Add Row Above", icon: "fa-plus"},
 			"addbottom": {name: "Add Row Below", icon: "fa-plus"},
 			"sep2": "----------",
+			"moveup": {name: "Move Row Above", icon: "fa-arrow-up"},
+			"movedown": {name: "Move Row Below", icon: "fa-arrow-down"},
+			"sep3": "----------",
             "delete": {name: "Delete Row", icon: "fa-trash"}
         }
 	});
@@ -425,11 +478,11 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Column Design", icon: "fa-edit"},
 			"copy": {name: "Copy Column", icon: "fa-copy"},
-			"paste": {name: "Paste To Left", icon: "fa-paste"},
-			"paste2": {name: "Paste To Right", icon: "fa-paste"},
+			"paste": {name: "Paste Before This", icon: "fa-paste"},
+			"paste2": {name: "Paste After This", icon: "fa-paste"},
 			"sep1": "----------",
-            "addleft": {name: "Add New Column To Left", icon: "fa-plus"},
-			"addright": {name: "Add New Column To Right", icon: "fa-plus"},
+            "addleft": {name: "Add Column To Left", icon: "fa-plus"},
+			"addright": {name: "Add Column To Right", icon: "fa-plus"},
 			"sep2": "----------",
             "moveleft": {name: "Move Column To Left", icon: "fa-arrow-left"},
 			"moveright": {name: "Move Column To Right", icon: "fa-arrow-right"},
@@ -485,8 +538,8 @@ window.onload = function() {
         items: {
 			"edit": {name: "Edit Widget Design", icon: "fa-edit"},
 			"copy": {name: "Copy Widget", icon: "fa-copy"},
-			"paste": {name: "Paste To Top", icon: "fa-paste"},
-			"paste2": {name: "Paste To Bottom", icon: "fa-paste"},
+			"paste": {name: "Paste Before This", icon: "fa-paste"},
+			"paste2": {name: "Paste After This", icon: "fa-paste"},
 			"sep1": "----------",
             "move": {name: "Move Widget", icon: "fa-arrows"},
 			"sep2": "----------",
