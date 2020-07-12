@@ -1,7 +1,7 @@
 <?php
 	if (isset($_GET["sid"])) {
 		$siteID = $_GET["sid"];
-		if (substr($siteID, strlen($siteID) - 1, 1) != '/') $siteID .= '/';
+		// if (substr($siteID, strlen($siteID) - 1, 1) != '/') $siteID .= '/';
 	} else {
 		$siteID = "empty.php";
 	}
@@ -61,9 +61,7 @@
 	</div>
 
 	<div id="workspace-container">
-<?php
-		echo("<iframe id='workspace' src='sites/" . $siteID . "home/index.php'></iframe>");
-?>
+	<?= "<iframe id='workspace' src='sites/$siteID/home/index.php'></iframe>" ?>
 	</div>
 	<script type="text/javascript">
 		var toolboxWidgets = document.getElementById('toolbox-widgets');
@@ -112,7 +110,7 @@
 					// Using the tool's filepath value
 					var filepath = this.value;
 					var widgetRequester = new XMLHttpRequest();
-					widgetRequester.open("POST", "widget-loader.php", true);
+					<?= "widgetRequester.open('POST', 'sites/$siteID/widget-loader.php', true);" ?>
 					widgetRequester.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 					widgetRequester.onreadystatechange = function() {
             			if (this.readyState == 4 && this.status == 200) {
@@ -523,9 +521,7 @@
 					window.open(this.responseText + "home/", '_blank');
             	}
         	};
-<?php
-			echo("previewRequester.send('sid=$siteID');");
-?>
+			<?= "previewRequester.send('sid=$siteID');" ?>
 		}
 	</script>
 </body>

@@ -6,6 +6,6 @@
     $filename_noext = substr($filename, 0, strpos($filename, "."));
     $eid = getEID();
     echo("<div id='$eid' class='widget-wrapper' widget-name='$filename_noext'>\n");
-    echo(file_get_contents($filename));
+    echo(file_get_contents(dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . $filename));
     echo("</div>\n");
 ?>

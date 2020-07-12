@@ -3,15 +3,12 @@
 ***
 **Current TODO:**
 <ol>
-<li>Add site creator that duplicates necessary files for file like [ core.php, request-current-eid.php, row-creator.php, col-creator.php, widget-loader.php ]. (For study first)</li>
-<li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
-<li>Revise meta value column to hold string data</li>
+<li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 </ol>
 
 **TODO List:**
 <ol>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
-<li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 <li>Add Row and Column Properties Window</li>
 <li>Convert all hard-coded input html and let the predefined html (widget-properties/inputs/) generate the html</li>
 <li>Add More Buttons in WYSIWYG Text Editor</li>
@@ -38,6 +35,9 @@
 
 **Done TODO**
 <ol>
+<li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
+<li>Revise meta value column to hold string data</li>
+<li>Add site creator that duplicates selected template and adding engine files</li>
 <li>Add Row Move Feature</li>
 <li>Copy/Paste Feature for Rows, Columns, and Widgets</li>
 <li>Event Inject Only Once</li>

@@ -1,14 +1,15 @@
+const selectedElementOffset = 15;
+const maxColSize = 12;
+const maxColInARow = 4;
+const colResizeDistance = 80; // The target distance (in pixel) of dragging to successfully resize a column
+
 var selectedElement = null;
 var rowContextMenu = null;
 var colContextMenu = null;
 var widgetContextMenu = null;
-var selectedElementOffset = 15;
 var selectedColResizer = null;
-const colResizeDistance = 80; // The target distance (in pixel) of dragging to successfully resize a column
 var colResizeAnchor = 0;
 var colCurrentResizeDistance = 0;
-var maxColSize = 12;
-var maxColInARow = 4;
 var possibleColSizes = [
 	"col-lg-12", "col-lg-11", "col-lg-10", "col-lg-9",
 	"col-lg-8", "col-lg-7", "col-lg-6", "col-lg-5",
@@ -28,11 +29,11 @@ var copiedElementWrapper = "";
 function GetEID() {
 	var id = -1;
 	$.ajax({
-		url: "../../../request-current-eid.php",
+		url: "../request-current-eid.php",
 		method: "POST",
 		// Async request turned off to avoid requesting the same id at the same time
 		async: false,
-		success: function(result) { id = result; }
+		success: function(result) { id = parseInt(result); }
 	});
 	return id;
 }
@@ -194,6 +195,19 @@ window.onload = function() {
 		}
 	}
 
+	// Add necessary column resizer event
+	$(document).on("mousedown", ".col-resizer", function() {
+		selectedColResizer = $(this);
+		colResizeAnchor = selectedColResizer.offset().left;
+		event.stopPropagation();
+	});
+	$(document).on("mouseup", ".col-resizer", function() {
+		selectedColResizer = null;
+		colResizeAnchor = 0;
+		event.stopPropagation();
+	});
+	$(document).mousemove(function(event) { ResizeColumnEvent(event) });
+
 	// Validate if all column wrappers have resizers in between them, add resizers if none
 	var rws = $(".row-wrapper");
 	for (var r = 0; r < rws.length; r++) {
@@ -208,20 +222,6 @@ window.onload = function() {
 
 	// Add drop click events in all widget-wrapper elements
 	$(document).on("click", ".widget-wrapper", function() { ApplyDropAndOpenEvent(this, event); });
-
-	// Add necessary column resizer event
-	$(document).on("mousedown", ".col-resizer", function() {
-		selectedColResizer = $(this);
-		colResizeAnchor = selectedColResizer.offset().left;
-		console.log(selectedColResizer.offset().left);
-		event.stopPropagation();
-	});
-	$(document).on("mouseup", ".col-resizer", function() {
-		selectedColResizer = null;
-		colResizeAnchor = 0;
-		event.stopPropagation();
-	});
-	$(document).mousemove(function(event) { ResizeColumnEvent(event) });
 
 	// selected element follows cursor
 	document.body.onmousemove = function (e) {
@@ -253,7 +253,7 @@ window.onload = function() {
 					break;
 				case "addup":
 					$.ajax({
-						url: '../../../row-creator.php',
+						url: '../row-creator.php',
 						type: 'POST',
 						success: function(result) {
 							$(result).insertBefore(opt.$trigger);
@@ -263,7 +263,7 @@ window.onload = function() {
 					break;
 				case "addbottom":
 					$.ajax({
-						url: '../../../row-creator.php',
+						url: '../row-creator.php',
 						type: 'POST',
 						success: function(result) {
 							$(result).insertAfter(opt.$trigger);
@@ -370,7 +370,7 @@ window.onload = function() {
 					break;
 				case "addleft":
 					$.ajax({
-						url: '../../../col-creator.php',
+						url: '../col-creator.php',
 						type: 'POST',
 						success: function(result) {
 							var cols = opt.$trigger.parent().find(".col");
@@ -387,7 +387,7 @@ window.onload = function() {
 					break;
 				case "addright":
 					$.ajax({
-						url: '../../../col-creator.php',
+						url: '../col-creator.php',
 						type: 'POST',
 						success: function(result) {
 							var cols = opt.$trigger.parent().find(".col");
