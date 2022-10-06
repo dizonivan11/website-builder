@@ -3,7 +3,7 @@ FIRST TIME SETUP
 2. If sqlite extension is not yet activated on "php.ini" file, uncomment sqlite extension to activate the extension.
 
 RUNNING THE SERVER
-To run the server, open up terminal or command prompt, type the command php - S localhost:8000
+To run the server, open up terminal or command prompt, type the command "php -S localhost:8000"
 
 CREATING NEW SITE
 To create new site, use this URL:
