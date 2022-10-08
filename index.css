@@ -9,6 +9,7 @@
     --toolbox-widgets-width: 200px;
     --widget-properties-width: 300px;
     font-family: 'Changa';
+    overflow: hidden;
 }
 .f-right {
     float: right;
@@ -109,7 +110,7 @@ hr {
 }
 #workspace-container {
     margin-left: var(--toolbox-width);
-    width: calc(100vw - var(--toolbox-width));
+    /* width: calc(100vw - var(--toolbox-width)); */
     height: calc(100vh - var(--menu-height));
 }
 #workspace {

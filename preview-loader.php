@@ -1,7 +1,7 @@
 <?php
     include_once("core.php");
 
-    $filetoExclude = array("core.php", "Medoo.php", "request-current-eid.php", "row-creator.php", "col-creator.php", "widget-loader.php", "phpliteadmin.php", "phpliteadmin.config.php");
+    $filetoExclude = array("core.php", "Medoo.php", "request-current-eid.php", "row-creator.php", "col-creator.php", "widget-loader.php", "phpliteadmin.php");
     $sid = $_POST["sid"];
     $pp = "previews/$sid/";
     if (file_exists($pp)) {
