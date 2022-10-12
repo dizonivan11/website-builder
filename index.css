@@ -16,10 +16,6 @@
 }
 
 /* strip header */
-#menu {
-    background-color: #f4f4f4;
-}
-
 .v-full {
     height: 100%;
 }
@@ -29,8 +25,8 @@
     transform: translateY(-50%);
 }
 #menu {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
     height: var(--menu-height);
 }
 #toolbox {
