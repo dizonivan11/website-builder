@@ -15,7 +15,10 @@
     float: right;
 }
 
-/* this is an example of comment in css */
+/* strip header */
+#menu {
+    background-color: #f4f4f4;
+}
 
 .v-full {
     height: 100%;
