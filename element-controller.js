@@ -25,6 +25,9 @@ var possibleColSizes = [
 ];
 var copiedElement = null;
 var copiedElementWrapper = "";
+var pn = window.location.pathname;
+var dir = pn.substring(0, pn.lastIndexOf('/'));
+var pageName = dir.substring(dir.lastIndexOf('/') + 1);
 
 function GetEID() {
 	var id = -1;
@@ -552,6 +555,15 @@ window.onmessage = function (e) {
 			break;
 		case "applyCSS":
 			$(e.data.selector).css(e.data.propertyName, e.data.propertyValue);
+
+			// Dynamic CSS file generator
+			if (!UrlExists(dir + "/" + pageName + ".css")) {
+				// Create the file first
+				var newCSS = new File([], pageName + ".css", {
+					type: "text/css",
+				});
+			}
+
 			break;
 		case "applyATTR":
 			$(e.data.selector).attr(e.data.attributeName, e.data.attributeValue);
@@ -651,4 +663,11 @@ function RecalculateColumnSizes(parentRow) {
 		col.addClass("col-md-" + newSize);
 		col.addClass("col-sm-12");
 	}
+}
+
+function UrlExists(url) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status!=404;
 }
