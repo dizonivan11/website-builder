@@ -49,7 +49,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-wrapper col col-md-6 col-sm-12 col-lg-9" id="7356">
-						<div id="7361" class="widget-wrapper" widget-name="widgets/Headings" style="margin-top: 40px;">
+						<br><div id="7361" class="widget-wrapper" widget-name="widgets/Headings" style="margin-top: 40px;">
 <div class="inner-wrapper">
     <h3 class="main-headings">Headings Text</h3>
 </div></div><div id="7362" class="widget-wrapper" widget-name="widgets/Text" style="margin-top: 30px; padding: 15px; border-style: dotted; background-color: rgb(12, 10, 92); color: rgb(255, 255, 255);">
@@ -59,7 +59,7 @@
 <div class="inner-wrapper">
     <button>Button Text</button>
 </div></div>
-					</div><div id="4748" class="col-wrapper col col-md-6 col-sm-12 col-lg-3">    <div id="4749" class="widget-wrapper" widget-name="widgets/Image" style="margin-top: 0px;">
+					</div><div id="4748" class="col-wrapper col col-md-6 col-sm-12 col-lg-3">    <div id="4749" class="widget-wrapper" widget-name="widgets/Image" style="margin-top: 0px; border-width: 5px; border-color: rgb(33, 8, 36); border-style: solid;">
 <div class="inner-wrapper">
     <img src="https://media.tenor.com/Laz4JhEERz4AAAAC/aquarium-fish.gif">
 </div></div>

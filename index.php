@@ -17,7 +17,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	
 	<!-- Default Builder Font and Icons -->
-	<link href="https://fonts.googleapis.com/css?family=Changa&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,700;1,800&display=swap" rel="stylesheet">
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 	<!-- HTML5Kelly Color Picker -->
@@ -35,16 +37,16 @@
 			<div class="col-6">
 				<div id="message-box" class="v-center">Feedbacks here....</div>
 			</div>
-			<div class="col-5">
+			<div class="col-5 m-feature-btn">
 				<button class="f-right v-center menu-button" onclick="SaveWebpage('publish');">Publish</button>
 				<button class="f-right v-center menu-button" onclick="SaveWebpage('preview');">Preview</button>
 			</div>
 		</div>
 	</div>
-	<div id="toolbox">
-		<button class="tool" onclick="DisplayMessage('Under construction');">Global Settings</button>
-		<button class="tool" onclick="DisplayMessage('Under construction');">Site Map</button>
-		<button class="tool" onclick="ToggleWidgetsMenu();">Widgets</button>
+	<div id="toolbox" class="col-1">
+		<button class="tool" onclick="DisplayMessage('Under construction');"><i class="fa fa-facebook"></i>Global Settings</button>
+		<button class="tool" onclick="DisplayMessage('Under construction');"><i class="fa fa-facebook"></i>Site Map</button>
+		<button class="tool" onclick="ToggleWidgetsMenu();"><i class="fa fa-facebook"></i>Widgets</button>
 	</div>
 
 	<!-- Floating Windows -->
