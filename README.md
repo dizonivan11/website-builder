@@ -13,7 +13,7 @@ To run the server, open up terminal or command prompt, type the command `php -S 
 ### CREATING NEW SITE
 To create new site, use this URL: `localhost:8000/create.php?sid=<SITE ID>&template=<TEMPLATE NAME>`
 <ol>
-<li>Replace <code>\<SITE ID\></code> with your desired site ID</li>
+<li>Replace <code><SITE ID></code> with your desired site ID</li>
 <li>Replace <code>TEMPLATE NAME</code> with your desired template</li>
 </ol>
 
