@@ -10,9 +10,7 @@ To run the server, open up terminal or command prompt, type the command `php -S 
 
 ### CREATING NEW SITE
 To create new site, use this URL: `localhost:8000/create.php?sid=<SITE ID>&template=<TEMPLATE NAME>`
-
 Replace <SITE ID> with your desired site ID
-
 Replace <TEMPLATE NAME> with your desired template
 
 #### Current Templates Available:
@@ -20,8 +18,7 @@ Replace <TEMPLATE NAME> with your desired template
 
 ### OPENING SITES
 To open sites, use this URL: `localhost:8000/?sid=<SITE ID>`
-
-* Replace <SITE ID> with your desired site ID
+Replace <SITE ID> with your desired site ID
 
 ## Current TODO:
 <ol>
