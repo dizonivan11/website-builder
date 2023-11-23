@@ -1,6 +1,6 @@
 # BWB: Website Builder
 **Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker, jQuery Custom Context Menu (https://swisnl.github.io/jQuery-contextMenu/)**
-***
+
 **FIRST TIME SETUP**
 1. Make sure PHP is installed on your device. (manually or automatically via XAMPP)
 2. If sqlite extension is not yet activated on "php.ini" file, uncomment sqlite extension to activate the extension.
@@ -21,7 +21,7 @@ Current Templates Available:
 To open sites, use this URL:
 > localhost:8000/?sid=<SITE ID>
 * Replace <SITE ID> with your desired site ID
-***
+
 **Current TODO:**
 <ol>
 <li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
