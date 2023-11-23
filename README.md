@@ -82,7 +82,7 @@ Replace <SITE ID> with your desired site ID
 <li>Widget Background Color</li>
 </ol>
 
-**Dropped TODO**
+### Dropped TODO
 <ol>
 <li>Create Modules for Widget Properties Window</li>
 </ol>
