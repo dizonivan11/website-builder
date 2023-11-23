@@ -1,31 +1,34 @@
 # BWB: Website Builder
 **Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker, jQuery Custom Context Menu (https://swisnl.github.io/jQuery-contextMenu/)**
 
-## FIRST TIME SETUP
+### FIRST TIME SETUP
 1. Make sure PHP is installed on your device. (manually or automatically via XAMPP)
 2. If sqlite extension is not yet activated on "php.ini" file, uncomment sqlite extension to activate the extension.
 
-## RUNNING THE SERVER
+### RUNNING THE SERVER
 To run the server, open up terminal or command prompt, type the command `php -S localhost:8000`
 
-## CREATING NEW SITE
+### CREATING NEW SITE
 To create new site, use this URL: `localhost:8000/create.php?sid=<SITE ID>&template=<TEMPLATE NAME>`
+
 Replace <SITE ID> with your desired site ID
+
 Replace <TEMPLATE NAME> with your desired template
 
-### Current Templates Available:
+#### Current Templates Available:
 1. blank
 
-## OPENING SITES
+### OPENING SITES
 To open sites, use this URL: `localhost:8000/?sid=<SITE ID>`
+
 * Replace <SITE ID> with your desired site ID
 
-**Current TODO:**
+## Current TODO:
 <ol>
 <li>Revise how CSS is injected to the element. Avoid Inline CSS and make all the CSS append to some file that links to the web page (ex. DUDA's Dev Mode)</li>
 </ol>
 
-**TODO List:**
+### TODO List:
 <ol>
 <li>Fix bug when the selected text becomes 'undefined' after using Add Link Dialog</li>
 <li>Add Row and Column Properties Window</li>
@@ -52,7 +55,7 @@ To open sites, use this URL: `localhost:8000/?sid=<SITE ID>`
 <li>Revise attribute [widget-name], remove "widget/" directory to display only the widget actual name in labels</li>
 </ol>
 
-**Done TODO**
+### Done TODO
 <ol>
 <li>Revise request-current-eid.php, dont rely on one DB to get ID. Give sites their own meta data db to read to support multiple request across sites.</li>
 <li>Revise meta value column to hold string data</li>
