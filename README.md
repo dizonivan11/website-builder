@@ -1,23 +1,23 @@
 # BWB: Website Builder
 **Languages/Technologies/Plugins Used: PHP, MYSQL, jQuery, AJAX, Medoo, HTMLKelly Color Picker, jQuery Custom Context Menu (https://swisnl.github.io/jQuery-contextMenu/)**
 
-**FIRST TIME SETUP**
+## FIRST TIME SETUP
 1. Make sure PHP is installed on your device. (manually or automatically via XAMPP)
 2. If sqlite extension is not yet activated on "php.ini" file, uncomment sqlite extension to activate the extension.
 
-**RUNNING THE SERVER**
+## RUNNING THE SERVER
 To run the server, open up terminal or command prompt, type the command "php -S localhost:8000"
 
-**CREATING NEW SITE**
+## CREATING NEW SITE
 To create new site, use this URL:
 > localhost:8000/create.php?sid=<SITE ID>&template=<TEMPLATE NAME>
 * Replace <SITE ID> with your desired site ID
 * Replace <TEMPLATE NAME> with your desired template
 
-Current Templates Available:
+### Current Templates Available:
 1. blank
 
-**OPENING SITES**
+## OPENING SITES
 To open sites, use this URL:
 > localhost:8000/?sid=<SITE ID>
 * Replace <SITE ID> with your desired site ID
